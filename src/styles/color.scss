@@ -15,3 +15,8 @@ $brand-orange: #f96d69;
 $brand-pink: #fe5493;
 
 $white-10-percent: #ffffff1a;
+
+body {
+  background: linear-gradient(90deg, $black-100 0%, $black-200 100%);
+  color: white;
+}

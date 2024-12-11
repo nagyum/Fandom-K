@@ -1,0 +1,52 @@
+.sponsor_section {
+  display: flex;
+  flex-direction: column;
+}
+
+.sponsor_title {
+  max-width: 1200px;
+}
+
+.card_list {
+  overflow: hidden;
+  max-width: 1200px;
+}
+
+.card_list::-webkit-scrollbar {
+  /* 스크롤바 숨기기 */
+  display: none;
+}
+
+.card_list_container {
+  display: flex;
+  gap: 24px;
+  transition: all 1s;
+}
+
+.card_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.card_handleButton {
+  width: 40px;
+  height: 78px;
+  background-color: #1b1b1b;
+  border-radius: 6.67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card_handleButton:hover {
+  background-color: #545454;
+}
+
+.card_handleButton_img {
+  width: 10px;
+  height: 20px;
+  object-fit: contain;
+}
