@@ -1,6 +1,7 @@
 const BASE_URL = "http://fandom-k-api.vercel.app";
 
-export async function getVoteData({ pageSize = 6 }) {
+// const k = 1;
+export async function getVoteData(pageSize = 6) {
   const query = `/12-9/idols?pageSize=${pageSize}`;
   const response = await fetch(`${BASE_URL}/${query}`);
   if (!response.ok) {
