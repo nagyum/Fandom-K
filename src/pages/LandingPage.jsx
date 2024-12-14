@@ -5,28 +5,45 @@ import logonobackground from "../assets/images/logonobackground.svg";
 import styles from "../components/LandingPage/LandingPageStyles.module.scss";
 import Section from "../components/LandingPage/Sections.jsx";
 import images from "../components/LandingPage/LandingPageImages.jsx";
+import CustomButton from "../components/CustomButtom/CustomButton.jsx";
+import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.background}>
-      <div className={styles.h1div}>
-        <h1 className={styles.white}>
-          내가 좋아하는 아이돌을 <br />
-          가장 <span className={styles["brand-orange"]}>쉽게 덕질</span> 하는
-          방법
-        </h1>
-      </div>
-      <div className={styles["image-container"]}>
-        <div>
-          <img src={logonobackground} alt="logo" />
+    <div>
+      <div className={styles.background}>
+        <div className={styles.h1div}>
+          <h1 className={styles.white}>
+            내가 좋아하는 아이돌을 <br />
+            가장 <span className={styles["brand-orange"]}>쉽게 덕질</span> 하는
+            방법
+          </h1>
+        </div>
+        <div className={styles["image-container"]}>
+          <div>
+            <img src={logonobackground} alt="logo" />
+          </div>
+          <div>
+            <img src={images.bgimg1} alt="bg1" />
+          </div>
         </div>
         <div>
-          <img src={images.bgimg1} alt="bg1" />
+          <CustomButton
+            onClick={() => {
+              navigate("/list");
+            }}
+            className={styles.button}
+            width={477}
+            height={48}
+          >
+            지금 시작하기
+          </CustomButton>
         </div>
-      </div>
-      <div>{/* <button></button>*/}</div>
-      <div className={styles["gradient-bar"]}>
+
         <div className={styles.page2}>
+          <div className={styles["gradient-bar"]}></div>
           <Section
             donate="후원하기"
             title={
