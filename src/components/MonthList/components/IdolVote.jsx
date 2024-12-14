@@ -1,27 +1,24 @@
 import styles from "./IdolVote.module.scss";
 
-export default function IdolVote({ imgUrl, group, name, totalVotes, rank }) {
+export default function IdolChart({ imgUrl, group, name, totalVotes, rank }) {
   return (
     <li>
-      <div style={{ width: "588px", height: "70px" }}>
-        <div className={styles.chartContents}>
-          <div>
-            <img className={styles.img} src={imgUrl} alt={`${group}-이미지`} />
-          </div>
-          <div>
-            <p className={styles.rank}>{rank}</p>
-          </div>
-          <div>
-            <div className={styles.chartGroup}>
-              <p>{group}</p>
-              <p>{name}</p>
-            </div>
-            <p>{totalVotes}표</p>
-          </div>
+      <div
+        className={styles.chartContents}
+        style={{ width: "477px", height: "70px" }}
+      >
+        <img className={styles.img} src={imgUrl} alt={`${group}-이미지`} />
 
-          <div>
-            <input type="checkbox"></input>
+        <div className={styles.chartInfo}>
+          <div className={styles.chartGroup}>
+            <p className={styles.rank}>{rank}</p>
+            <p>{group}</p>
+            <p>{name}</p>
+            <div className={styles.chartVoteNum}>
+              <p>{totalVotes}표</p>
+            </div>
           </div>
+          <input type="checkbox" />
         </div>
       </div>
     </li>
