@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header/Header";
 import MonthsList from "../components/MonthList/MonthsList";
 import MyCredit from "../components/MyCredit/MyCredit";
@@ -19,6 +19,18 @@ function ListPage() {
   const [pageSize, setPageSize] = useState(10);
   useScrollTop();
 
+  // 모달 상태에 따라 배경 스크롤 비활성화
+  useEffect(() => {
+    if (isModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModal]);
+
   //후원 모달 팝업 띄우기
   const handleSponsorModal = (data) => {
     setIsModal(true);
@@ -30,9 +42,6 @@ function ListPage() {
   };
 
   //투표 모달 팝업 띄우기
-  // data - sortedIdols
-  // data로 이미 api get 해온걸 넘겨줌
-  // 더보기 때문에 pageSize 필요해서 여기서 변수로 선언해줌
   const handleVoteModal = (data) => {
     setIsModal(true);
     setVoteData(data);
@@ -70,11 +79,10 @@ function ListPage() {
       <MyCredit />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal && (
-        <ModalWrap
-          style={{ opacity: `${modalOpacity}%` }}
-          handleDeleteModal={handleDeleteModal}
-        >
-          <ModalContents modalContents={modalContents} />
+        <ModalWrap handleDeleteModal={handleDeleteModal}>
+          <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
+            <ModalContents modalContents={modalContents} />
+          </div>
         </ModalWrap>
       )}
       <MonthsList
