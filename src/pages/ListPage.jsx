@@ -7,6 +7,7 @@ import useScrollTop from "../hooks/useScrollTop";
 import SponsorshipModal from "../components/SponsorshipList/SponsorshipModal";
 import ModalWrap from "../components/Modal/ModalWrap";
 import VoteModal from "../components/MonthList/components/VoteModal";
+import Footer from "../components/Footer/Footer";
 
 function ListPage() {
   const [modalContents, setModalContents] = useState(); // 1,2,3,4
@@ -15,6 +16,7 @@ function ListPage() {
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
   const [pageSize, setPageSize] = useState(10);
+  const [gender, setGender] = useState("female");
   useScrollTop();
 
   // 모달 상태에 따라 배경 스크롤 비활성화
@@ -56,7 +58,13 @@ function ListPage() {
       case 1: //후원하기
         return <SponsorshipModal data={sponsorData} />;
       case 2: //투표하기
-        return <VoteModal data={voteData} setPageSize={setPageSize} />;
+        return (
+          <VoteModal
+            data={voteData}
+            setPageSize={setPageSize}
+            gender={gender}
+          />
+        );
       default:
         break;
     }
@@ -65,7 +73,6 @@ function ListPage() {
   return (
     <div>
       <Header />
-      <div>리스트 페이지</div>
       <MyCredit />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal && (
@@ -79,7 +86,10 @@ function ListPage() {
         handleVoteModal={handleVoteModal}
         pageSize={pageSize}
         setPageSize={setPageSize}
+        gender={gender}
+        setGender={setGender}
       />
+      <Footer />
     </div>
   );
 }

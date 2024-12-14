@@ -5,9 +5,15 @@ import chartIMG from "../../assets/icons/Chart.svg";
 import styles from "./MonthsList.module.scss";
 import IdolChart from "./components/IdolChart";
 
-function MonthsList({ handleVoteModal, pageSize, setPageSize }) {
+function MonthsList({
+  handleVoteModal,
+  pageSize,
+  setPageSize,
+  gender,
+  setGender,
+}) {
   const [idolList, setIdolList] = useState([]);
-  const [gender, setGender] = useState("female");
+  // const [gender, setGender] = useState("female");
   // const [pageSize, setPageSize] = useState(10);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,7 +23,6 @@ function MonthsList({ handleVoteModal, pageSize, setPageSize }) {
     setGender(selectedGender);
     setPageSize(10);
   };
-
   //더보기 누를때
   const handleMore = () => {
     setPageSize((prevPageSize) => prevPageSize + 10);
@@ -94,11 +99,13 @@ function MonthsList({ handleVoteModal, pageSize, setPageSize }) {
           />
         ))}
       </ul>
-      <div className={styles.moreBtn}>
-        <CustomButton isMoreButton onClick={handleMore}>
-          더보기
-        </CustomButton>
-      </div>
+      {sortedIdols.length >= pageSize && (
+        <div className={styles.moreBtn}>
+          <CustomButton isMoreButton onClick={handleMore}>
+            더보기
+          </CustomButton>
+        </div>
+      )}
 
       {error && <p>{error}</p>}
     </div>
