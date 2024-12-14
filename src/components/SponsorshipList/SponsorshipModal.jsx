@@ -2,12 +2,32 @@ import { useState } from "react";
 import credit from "../../assets/icons/credit.png";
 import styles from "./SponsorshipModal.module.scss";
 import CustomButton from "../CustomButtom/CustomButton";
+import { postDonation } from "../../api";
 
 function SponsorshipModal({ data }) {
   const [input, setInput] = useState("");
 
   const handleInput = (e) => {
     setInput(e.target.value);
+  };
+
+  //후원하기 버튼 클릭시 금액후원
+  const onclickCreditBtn = async () => {
+    if (input === "") {
+      console.log(`숫자를 입력해주세요.`);
+      return;
+    }
+    try {
+      const result = await postDonation({ id: data.id, amount: input });
+      console.log(`후원되었습니다.`);
+      data.receivedDonations = Number(data.receivedDonations) + Number(input);
+      setInput("");
+    } catch (e) {
+      return;
+    } finally {
+      //로딩 false
+    }
+    //금액 후원 후 모달창 닫기
   };
 
   return (
@@ -47,7 +67,7 @@ function SponsorshipModal({ data }) {
           갖고 있는 크레딧보다 더 많이 후원할 수 없어요
         </p>
       </div>
-      <CustomButton width={295} height={42}>
+      <CustomButton width={295} height={42} onClick={onclickCreditBtn}>
         후원하기
       </CustomButton>
     </div>
