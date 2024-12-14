@@ -1,0 +1,46 @@
+@use "../../../styles/color.scss" as *;
+
+//idolChart에서 사용하는 scss
+.chartContents {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding-top: 24px;
+}
+
+.img {
+  width: 60px;
+  height: 60px;
+  top: 5px;
+  left: 5px;
+  gap: 8px;
+  border-radius: 40px;
+  opacity: 0px;
+  object-fit: cover;
+}
+
+.chartInfo {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.chartGroup {
+  display: flex;
+  gap: 5px;
+  justify-content: space-around;
+  align-items: center;
+  .rank {
+    color: $brand-orange;
+  }
+}
+
+.chartVoteNum {
+  display: flex;
+  justify-content: flex-end;
+  color: rgba(255, 255, 255, 0.6);
+}

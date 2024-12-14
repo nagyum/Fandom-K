@@ -5,24 +5,27 @@ import chartIMG from "../../assets/icons/Chart.svg";
 import styles from "./MonthsList.module.scss";
 import IdolChart from "./components/IdolChart";
 
-function MonthsList({ handleVoteModal }) {
+function MonthsList({ handleVoteModal, pageSize, setPageSize }) {
   const [idolList, setIdolList] = useState([]);
   const [gender, setGender] = useState("female");
-  const [pageSize, setPageSize] = useState(10);
+  // const [pageSize, setPageSize] = useState(10);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  //탭 전환
   const handleTabClick = (selectedGender) => {
     setGender(selectedGender);
     setPageSize(10);
   };
 
+  //더보기 누를때
   const handleMore = () => {
     setPageSize((prevPageSize) => prevPageSize + 10);
   };
 
+  //투표하기 버튼 클릭시 모달창 띄우기
   const onclickVoteBtn = () => {
-    handleVoteModal();
+    handleVoteModal(sortedIdols);
   };
 
   useEffect(() => {
