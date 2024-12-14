@@ -7,18 +7,21 @@
   right: 0;
   top: 0;
   bottom: 0;
-  position: absolute;
+  position: fixed; /* 배경도 고정 */
 }
 
 .modal {
-  position: absolute;
-  top: 30%;
+  position: fixed; /* 화면에 고정 */
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%); /* 모달을 수직, 수평으로 중앙 정렬 */
   border-radius: 8px;
   padding: 24px 16px 32px;
   background-color: $black-100;
   z-index: 1;
+  max-width: 90%; /* 반응형: 너무 넓지 않도록 제한 */
+  max-height: 80%; /* 반응형: 너무 높지 않도록 제한 */
+  overflow: hidden;
 }
 
 .modal_deleteBtn {
@@ -27,5 +30,6 @@
   object-fit: cover;
   position: absolute;
   right: 16px;
+  top: 16px;
   cursor: pointer;
 }
