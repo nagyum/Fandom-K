@@ -16,6 +16,7 @@ function ListPage() {
   //데이터 상태관리
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
+  const [pageSize, setPageSize] = useState(10);
   useScrollTop();
 
   //후원 모달 팝업 띄우기
@@ -29,6 +30,9 @@ function ListPage() {
   };
 
   //투표 모달 팝업 띄우기
+  // data - sortedIdols
+  // data로 이미 api get 해온걸 넘겨줌
+  // 더보기 때문에 pageSize 필요해서 여기서 변수로 선언해줌
   const handleVoteModal = (data) => {
     setIsModal(true);
     setVoteData(data);
@@ -54,7 +58,7 @@ function ListPage() {
       case 1: //후원하기
         return <SponsorshipModal data={sponsorData} />;
       case 2: //투표하기
-        return <VoteModal />;
+        return <VoteModal data={voteData} setPageSize={setPageSize} />;
       default:
         break;
     }
@@ -73,7 +77,11 @@ function ListPage() {
           <ModalContents modalContents={modalContents} />
         </ModalWrap>
       )}
-      <MonthsList handleVoteModal={handleVoteModal} />
+      <MonthsList
+        handleVoteModal={handleVoteModal}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+      />
     </div>
   );
 }

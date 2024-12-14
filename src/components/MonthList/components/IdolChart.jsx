@@ -1,4 +1,4 @@
-import styles from "../MonthsList.module.scss";
+import styles from "./IdolChart.module.scss";
 
 export default function IdolChart({ imgUrl, group, name, totalVotes, rank }) {
   return (

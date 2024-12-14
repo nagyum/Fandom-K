@@ -1,0 +1,23 @@
+@use "../../../styles/color.scss" as *;
+
+.img {
+  width: 60px;
+  height: 60px;
+  top: 5px;
+  left: 5px;
+  gap: 8px;
+  border-radius: 40px;
+  opacity: 0px;
+  object-fit: cover;
+}
+
+.chartContents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chartGroup {
+  display: flex;
+  align-items: center;
+}

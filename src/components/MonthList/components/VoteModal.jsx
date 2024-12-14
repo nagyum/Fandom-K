@@ -1,31 +1,12 @@
-import { getVoteData } from "../../../api";
 import React, { useState, useEffect } from "react";
-import IdolChart from "../components/IdolChart";
+import IdolVote from "../components/IdolVote";
 import CustomButton from "../../CustomButtom/CustomButton";
 import CreditModal from "../../Modal/LackingCredit";
+import styles from "../MonthsList.module.scss";
 
-function VoteModal() {
-  const [IdolChart, setIdolChart] = useState([]);
-  const [pageSize, setPageSize] = useState(6);
+function VoteModal({ data: idolList, setPageSize }) {
   const [error, setError] = useState(null);
   const [isCreditModalOpen, setIsCreditModalOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getVoteData({ pageSize });
-        return data;
-      } catch (err) {
-        console.error("데이터를 가져오는 데 실패했습니다:", err);
-        setError("데이터를 가져오는 데 실패했습니다.");
-      }
-    };
-
-    fetchData().then((res) => {
-      setIdolChart(res?.idols || []);
-      setError(null);
-    });
-  }, [pageSize]);
 
   const handleVoteClick = () => {
     const userCredits = 0;
@@ -44,11 +25,12 @@ function VoteModal() {
     <>
       <div>
         <h1>이달의 여자 아이돌</h1>
-        {IdolChart?.length > 0 ? (
+        {idolList?.length > 0 ? (
           <ul>
-            {IdolChart.map((idol, index) => (
-              <IdolChart
+            {idolList.map((idol, index) => (
+              <IdolVote
                 key={`${idol.id}-${index}`}
+                rank={index + 1}
                 imgUrl={idol.profilePicture}
                 group={idol.group}
                 name={idol.name}
@@ -59,6 +41,9 @@ function VoteModal() {
         ) : (
           <p>{error || "데이터가 없습니다."}</p>
         )}
+        <div>
+          <CustomButton isMoreButton>더보기</CustomButton>
+        </div>
         <CustomButton width={128} height={32} onClick={handleVoteClick}>
           <span>투표하기</span>
         </CustomButton>
