@@ -44,8 +44,13 @@ function VoteModal({ data: idolList, setPageSize }) {
         <div>
           <CustomButton isMoreButton>더보기</CustomButton>
         </div>
-        <CustomButton width={128} height={32} onClick={handleVoteClick}>
-          <span>투표하기</span>
+        <CustomButton
+          className={styles.voteBtn}
+          width={128}
+          height={32}
+          onClick={handleVoteClick}
+        >
+          <span>차트 투표하기</span>
         </CustomButton>
         <div>투표하는데 1000 크레딧이 소모됩니다.</div>
       </div>
