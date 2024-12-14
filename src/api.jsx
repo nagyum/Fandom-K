@@ -51,7 +51,10 @@ export async function postDonation({ id, amount }) {
   const response = await fetch(
     `https://fandom-k-api.vercel.app/12-9/donations/${id}/contribute`,
     {
-      method: "POST",
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         amount: amount,
       }),

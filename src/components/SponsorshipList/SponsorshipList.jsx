@@ -10,7 +10,7 @@ function SponsorshipList({ handleSponsorModal }) {
   const [loadingError, setLoadingError] = useState(null);
   const [translateX, setTranslateX] = useState(0);
 
-  const handleLoad = async () => {
+  const handleLoadSponsor = async () => {
     try {
       //로딩 true
       setLoadingError(null);
@@ -38,7 +38,7 @@ function SponsorshipList({ handleSponsorModal }) {
   };
 
   useEffect(() => {
-    handleLoad();
+    handleLoadSponsor();
   }, []);
 
   return (
