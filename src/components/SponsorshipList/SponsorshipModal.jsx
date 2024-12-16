@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import credit from "../../assets/icons/credit.png";
 import styles from "./SponsorshipModal.module.scss";
 import CustomButton from "../CustomButtom/CustomButton";
@@ -34,6 +34,7 @@ function SponsorshipModal({ data }) {
   };
 
   const credit_error = error ? `${styles.error}` : ``;
+  const submitBtn = input ? `` : `${styles.button_disable}`;
 
   return (
     <div className={styles.card}>
@@ -70,7 +71,12 @@ function SponsorshipModal({ data }) {
         </div>
         {error && <p className={styles.error_mes}>{error}</p>}
       </div>
-      <CustomButton width={295} height={42} onClick={onclickCreditBtn}>
+      <CustomButton
+        className={submitBtn}
+        width={295}
+        height={42}
+        onClick={onclickCreditBtn}
+      >
         후원하기
       </CustomButton>
     </div>

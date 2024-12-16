@@ -7,21 +7,22 @@ import rightIcon from "../../assets/icons/righticon.png";
 
 function SponsorshipList({ handleSponsorModal }) {
   const [items, setItems] = useState([]);
-  const [loadingError, setLoadingError] = useState(null);
+  const [error, setError] = useState(null);
+  const [IsLoading, setIsloading] = useState(false);
   const [translateX, setTranslateX] = useState(0);
 
   const handleLoadSponsor = async () => {
     try {
-      //로딩 true
-      setLoadingError(null);
+      setError(null);
+      setIsloading(true);
       const result = await getSponsershipData();
       const { list } = result;
       setItems(list);
     } catch (e) {
-      setLoadingError(e);
+      setError(e);
       return;
     } finally {
-      //로딩 false
+      setIsloading(false);
     }
   };
 
@@ -55,7 +56,8 @@ function SponsorshipList({ handleSponsorModal }) {
           />
         </div>
         <div className={styles.card_list}>
-          {loadingError?.message && <span>{loadingError.message}</span>}
+          {IsLoading && <p>로딩중...</p>}
+          {error?.message && <span>{error.message}</span>}
           <div
             className={styles.card_list_container}
             style={{ transform: style }}
