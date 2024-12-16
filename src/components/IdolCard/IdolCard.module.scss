@@ -13,8 +13,20 @@
     }
   }
 
+  &_image_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 128px;
+    height: 128px;
+    background: linear-gradient(to bottom, $brand-orange, $brand-pink);
+  }
+
   &_image {
     border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
     &.big {
       width: 128px;
       height: 128px;
@@ -24,6 +36,14 @@
       height: 100px;
     }
   }
+  &_image_clicked {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 128px;
+    height: 128px;
+    cursor: pointer;
+  }
+
   &_p__container {
     text-align: center;
     margin-top: 8px;
@@ -51,4 +71,11 @@
     opacity: 0.8;
     cursor: pointer;
   }
+}
+
+.click_icon {
+  position: absolute;
+  width: 52.27px;
+  height: 52.27px;
+  pointer-events: none; // 아이콘이 클릭을 방해하지 않도록 함
 }
