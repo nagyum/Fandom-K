@@ -2,6 +2,7 @@ import styles from "./ModalWrap.module.scss";
 import deleteBtn from "../../assets/icons/btn_delete.png";
 
 function ModalWrap({ children, handleDeleteModal }) {
+  //X버튼 혹은 뒷배경 클릭시 팝업창 닫기
   const onclickDeleteBtn = () => {
     handleDeleteModal();
   };
@@ -17,7 +18,7 @@ function ModalWrap({ children, handleDeleteModal }) {
         />
         {children}
       </div>
-      <div className={styles.modal_background}></div>
+      <div className={styles.modal_background} onClick={onclickDeleteBtn}></div>
     </div>
   );
 }
