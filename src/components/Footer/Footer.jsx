@@ -1,5 +1,9 @@
 function Footer() {
-  return <div></div>;
+  return (
+    <>
+      <div>@codeit-Team 12</div>
+    </>
+  );
 }
 
 export default Footer;

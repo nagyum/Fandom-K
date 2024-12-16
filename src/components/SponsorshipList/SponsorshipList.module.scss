@@ -1,10 +1,22 @@
-.sponsor_section {
+@import "../../styles/color.scss";
+
+.sponsor_wrap {
   display: flex;
   flex-direction: column;
+  gap: 32px;
 }
 
 .sponsor_title {
   max-width: 1200px;
+  flex-grow: 1;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.sponsor_title_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card_list {
@@ -31,8 +43,7 @@
 }
 
 .card_handleButton {
-  width: 40px;
-  height: 78px;
+  padding: 30px 15px;
   background-color: #1b1b1b;
   border-radius: 6.67px;
   display: flex;

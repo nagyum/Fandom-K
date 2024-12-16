@@ -1,12 +1,8 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
+@import "../../styles/color.scss";
 
 .card {
   width: 282px;
   height: 402px;
-  background-color: black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,12 +30,22 @@
   left: 0;
   right: 0;
   height: 293px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 58.9%, #000000 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 58.9%, $black-200 100%);
 }
 
 .card_button {
   position: absolute;
   bottom: 20px;
+  width: 234px;
+  height: 40px;
+}
+
+.card_button_disable {
+  position: absolute;
+  bottom: 20px;
+  width: 234px;
+  height: 40px;
+  background: $gray-cool-100;
 }
 
 /* 카드 글 컨테이너 */
@@ -49,15 +55,23 @@
   gap: 24px;
 }
 
-.card_advertising {
+.card_title_container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card_subtitle {
   font-size: 16px;
-  color: #ffffff;
+  color: $white;
   opacity: 40%;
+  line-height: 100%;
 }
 
 .card_title {
   font-size: 18px;
-  color: #f7f7f8;
+  color: $white-150;
+  line-height: 100%;
 }
 
 /* 카드 크레딧 */
@@ -78,21 +92,21 @@
 
 .card_credit_count {
   font-size: 12px;
-  color: #f96d69;
+  color: $brand-orange;
 }
 
 .card_deadline {
-  color: #f7f7f8;
+  color: $white-150;
 }
 
 /* 진행도 */
 .card_goal {
   height: 1px;
-  background-color: #ffffff;
+  background-color: $white;
 }
 
 .card_progress {
   height: 1px;
   width: 56px;
-  background-color: #f96d69;
+  background-color: $brand-orange;
 }

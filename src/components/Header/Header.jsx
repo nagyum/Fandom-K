@@ -1,5 +1,5 @@
 import useDevice from "../../hooks/useDevice";
-import logoImage from "../../assets/images/logoImage.png";
+import logoImage from "../../assets/images/logoImage.svg";
 import userImage from "../../assets/images/userImage.png";
 import styles from "./Header.module.scss";
 import { useNavigate } from "react-router-dom";

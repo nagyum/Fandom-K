@@ -1,0 +1,67 @@
+.black-200 {
+  background-color: #02000e;
+  width: 1920px; /* 화면 전체 크기 */
+  height: 1080px; /* 화면 전체 크기 */
+  position: relative; /* 이미지 정렬 기준 */
+  margin: 0 auto;
+}
+
+.brand-orange {
+  color: #f96d69;
+}
+
+.h1div {
+  position: absolute; /* 위치 설정 */
+  top: 140px; /* 텍스트 위치 */
+  left: 50%; /* 화면 가운데 정렬 */
+  transform: translateX(-50%); /* 수평 중앙 맞춤 */
+  width: 311px;
+  height: auto; /* 텍스트 크기에 맞게 높이 자동 조정 */
+  z-index: 3;
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 26px;
+  }
+}
+
+.image-container {
+  position: relative;
+  margin: 0 auto;
+  width: 1920px; /* 컨테이너 크기 */
+  height: 1080px; /* 컨테이너 크기 */
+}
+
+.image-container div {
+  position: absolute;
+  width: 100%; /* 부모 크기에 맞게 확장 */
+  height: 100%; /* 부모 크기에 맞게 확장 */
+  top: 0;
+  left: 0;
+}
+
+.image-container img {
+  object-fit: cover; /* 이미지가 비율에 맞게 잘림 */
+  display: block;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+.image-container div:nth-child(1) {
+  z-index: 2; /* bgimg1 이미지 아래 */
+  width: 509px; /* bgimg1 크기 */
+  height: 97px; /* bgimg1 크기 */
+  top: 231px; /* bgimg1 위치 */
+  left: 708px;
+  opacity: 1; /* 이미지 표시 */
+}
+
+.image-container div:nth-child(2) {
+  z-index: 1; /* logo 이미지 위로 */
+  width: 932.4px; /* logo 크기 */
+  height: 781.2px; /* logo 크기 */
+  top: 95.4px; /* logo 위치 */
+  left: 493.8px;
+  opacity: 1; /* 이미지 표시 */
+}

@@ -1,31 +1,32 @@
 import React from "react";
 import "../styles/color.scss";
 import "../styles/font.scss";
-import "../styles/LandingPageStyles.css";
-import logo from "../assets/images/logoImage.png";
-import Section from "./Sections.jsx";
-import images from "./LPimages.js";
+import logonobackground from "../assets/images/logonobackground.svg";
+import styles from "../components/LandingPage/LandingPageStyles.module.scss";
+import Section from "../components/LandingPage/Sections.jsx";
+import images from "../components/LandingPage/LandingPageImages.jsx";
 
 function LandingPage() {
   return (
-    <div className="black-200">
-      <div className="h1div">
-        <h1 className="white">
+    <div className={styles.background}>
+      <div className={styles.h1div}>
+        <h1 className={styles.white}>
           내가 좋아하는 아이돌을 <br />
-          가장 <span className="brand-orange">쉽게 덕질</span> 하는 방법
+          가장 <span className={styles["brand-orange"]}>쉽게 덕질</span> 하는
+          방법
         </h1>
       </div>
-      <div className="image-container">
+      <div className={styles["image-container"]}>
         <div>
-          <img src={logo} alt="logo" />
+          <img src={logonobackground} alt="logo" />
         </div>
         <div>
           <img src={images.bgimg1} alt="bg1" />
         </div>
       </div>
       <div>{/* <button></button>*/}</div>
-      <div className="gradient-bar">
-        <div className="page2">
+      <div className={styles["gradient-bar"]}>
+        <div className={styles.page2}>
           <Section
             donate="후원하기"
             title={
@@ -37,7 +38,7 @@ function LandingPage() {
             screenimg={images.screen1}
           />
         </div>
-        <div className="page3">
+        <div className={styles.page3}>
           <Section
             donate="이달의 아티스트"
             title={
@@ -49,7 +50,7 @@ function LandingPage() {
             screenimg={images.screen2}
           />
         </div>
-        <div className="page4">
+        <div className={styles.page4}>
           <Section
             donate="나만의 아티스트"
             title={

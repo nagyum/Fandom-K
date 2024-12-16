@@ -1,0 +1,32 @@
+@import "../../styles/color.scss";
+
+.modal_background {
+  background-color: $black-200;
+  opacity: 80%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.modal {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 8px;
+  padding: 24px 16px 32px;
+  background-color: $black-100;
+  z-index: 1;
+}
+
+.modal_deleteBtn {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
+  z-index: 1;
+}
