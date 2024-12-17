@@ -1,0 +1,63 @@
+@import "../../styles/color.scss";
+
+.sponsor_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sponsor_title {
+  max-width: 1200px;
+  flex-grow: 1;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.sponsor_title_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_list {
+  overflow: hidden;
+  max-width: 1200px;
+}
+
+.card_list::-webkit-scrollbar {
+  /* 스크롤바 숨기기 */
+  display: none;
+}
+
+.card_list_container {
+  display: flex;
+  gap: 24px;
+  transition: all 1s;
+}
+
+.card_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.card_handleButton {
+  padding: 30px 15px;
+  background-color: #1b1b1b;
+  border-radius: 6.67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card_handleButton:hover {
+  background-color: #545454;
+}
+
+.card_handleButton_img {
+  width: 10px;
+  height: 20px;
+  object-fit: contain;
+}

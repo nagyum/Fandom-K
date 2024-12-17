@@ -1,0 +1,102 @@
+@import "../../styles/color.scss";
+
+.mypage__main {
+  max-width: 1360px;
+  margin: 0 auto;
+  margin-top: 76px;
+}
+
+.section__title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 26px;
+  margin-top: 40px;
+}
+
+.favorite {
+  &__container {
+    max-width: 1260px;
+    margin: 0 auto;
+    margin-top: 40px;
+    min-height: 144px;
+  }
+  &__empty_image {
+    width: 120px;
+    height: 23px;
+  }
+  &__empty_text {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+.card_handleButton {
+  width: 29px;
+  height: 135px;
+  background-color: #1b1b1b;
+  border-radius: 6.67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+
+  // disabled 상태가 아닐 때만 hover 효과 적용
+  &:hover:not(:disabled) {
+    background-color: #545454;
+  }
+
+  &:disabled {
+    cursor: not-allowed; //금지표시
+    background-color: #1b1b1b;
+    opacity: 0.5;
+  }
+
+  &_img {
+    width: 10px;
+    height: 20px;
+    object-fit: contain;
+  }
+}
+
+.add_idol {
+  &_wrap {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  &_list {
+    margin-top: 32px;
+  }
+  &__container {
+    min-height: 183px;
+    width: 128px;
+  }
+  &_list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 24px;
+  }
+  &_image {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+  }
+  &_p__container {
+    text-align: center;
+    margin-top: 8px;
+  }
+  &_name {
+    font-weight: 700;
+    font-size: 16px;
+    color: $white-200;
+  }
+  &_group {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba($white, 0.6);
+  }
+}

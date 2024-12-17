@@ -1,0 +1,54 @@
+@import "../../styles/color.scss";
+
+.add_idol {
+  &__container {
+    position: relative;
+    &.big {
+      min-height: 183px;
+      width: 128px;
+    }
+    &.small {
+      min-height: 150px;
+      width: 98px;
+    }
+  }
+
+  &_image {
+    border-radius: 50%;
+    &.big {
+      width: 128px;
+      height: 128px;
+    }
+    &.small {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  &_p__container {
+    text-align: center;
+    margin-top: 8px;
+  }
+  &_name {
+    font-weight: 700;
+    font-size: 16px;
+    color: $white-200;
+  }
+  &_group {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba($white, 0.6);
+  }
+}
+
+.delete_icon {
+  width: 31.43px;
+  height: 31.43px;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,82 @@
+@import "../../styles/color.scss";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 18px;
+}
+
+//아이돌 카드
+.card_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card_img {
+  width: 158px;
+  height: 206px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.card_subtitle {
+  font-size: 12px;
+  opacity: 40%;
+}
+
+.card_title {
+  font-size: 14px;
+}
+
+// 크레딧 input
+.credit_container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.credit_input_container {
+  position: relative;
+}
+
+.credit_input {
+  border-radius: 8px;
+  border: 1px solid $white;
+  background-color: #272f3d;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  color: $white;
+}
+
+.credit_input::placeholder {
+  color: $gray-cool-300;
+  font-size: 20px;
+}
+
+//input 화살표 지우기
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.credit_logo {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.input_error {
+  font-size: 12px;
+  color: #ff2626;
+}
