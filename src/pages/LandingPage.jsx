@@ -10,13 +10,10 @@ import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
   const navigate = useNavigate();
-
-
-  
-
   return (
     <div>
       <div className={styles.background}>
+      <div className={styles["gradient-bar"]}></div>
         <div className={styles.page1}>
           <div className={styles.title}>
             <h1>
@@ -44,7 +41,6 @@ function LandingPage() {
         </div>
 
         <div className={styles.page2}>
-          
           <Section
             donate="후원하기"
             title={
@@ -80,7 +76,7 @@ function LandingPage() {
             screenimg={images.screen3}
           />
         </div>
-        <div className={styles["gradient-bar"]}></div>
+        
       </div>
     </div>
   );

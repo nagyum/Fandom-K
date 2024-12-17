@@ -1,20 +1,23 @@
+main{
+  position: relative;
+  
+}
 .section {
     background-color: #02000e;
     width: 100%;
     max-width: 1920px; /* 화면 전체 크기 */
-    height: 1200px; /* 화면 전체 크기 */
-    position: relative; /* 이미지 정렬 기준 */
+    height: 100vh; /* 화면 전체 크기 */
     margin: 0 auto;
     overflow: hidden;
     z-index: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-  
+
 }
 
 .section-header{
-    position: relative;
+    position: absolute;
     width: 311px;
     height: 93px;
     top: 160px;
@@ -28,6 +31,7 @@
     
 
 
+
 }
 
 .section-header p {
@@ -38,13 +42,14 @@
     margin-bottom: 8px;
   
 
+
 }
 
 .section-header h1{
     color: white;
     font-size: 28px;
     font-weight: bold;
-    margin: 0;
+    
     
     
 }
@@ -67,16 +72,17 @@
 }
 
 .image-container1 .background-image img {
-    object-fit: cover; /* 이미지가 컨테이너 크기에 맞게 조정되며 잘릴 수 있음 */
+    object-fit: cover; 
     width: 1200px;
+
     height: 100%;
     z-index: 2;
     position: absolute; /* 컨테이너를 기준으로 위치 조정 */
     top: 50%; /* 수직으로 가운데 */
     left: 50%; /* 수평으로 가운데 */
     transform: translate(-50%, -50%); /* 중심점을 기준으로 위치 조정 */
-}
 
+}
 .image-container1 .foreground-image img {
   object-fit: contain;
   width: 320px;

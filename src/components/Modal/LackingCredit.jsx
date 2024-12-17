@@ -1,7 +1,7 @@
 import React from "react";
 import credit from "../../assets/icons/credit.png";
 import CustomButton from "../CustomButtom/CustomButton";
-import styles from "./Modal.module.scss";
+import styles from "./LackingCredit.module.scss";
 
 function CreditModal({ isOpen, onClose }) {
   if (!isOpen) return null;

@@ -1,3 +1,4 @@
+
 .background{
   position: relative;
   display: flex;
@@ -12,15 +13,21 @@
   position: relative; /* 이미지 정렬 기준 */
   margin: 0 auto;
    
+
 }
+
+
+
 
 .brand-orange {
   color: #f96d69;
 }
 
+
 .title {
   position: relative; /* 위치 설정 */
   justify-content: center; /* 화면 가운데 정렬 */ 
+
   height: auto; /* 텍스트 크기에 맞게 높이 자동 조정 */
   z-index: 3;
   text-align: center;
@@ -29,8 +36,11 @@
     font-weight: 700;
     font-size: 26px;
   }
+
   top: 140px;
+
 }
+
 
 .image-container {
   position: relative;
