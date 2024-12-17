@@ -57,11 +57,11 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-input {
+.inputBtn {
   display: none;
 }
 
-input + label {
+.inputBtn + .labelBtn {
   /* 체크박스 만들기 */
   width: 16px;
   height: 16px;
@@ -73,7 +73,7 @@ input + label {
   user-select: none; /* 드래그 금지 */
 }
 
-input:checked + label {
+.inputBtn:checked + .labelBtn {
   /* 체크되었을 때 */
   background: white;
 }
