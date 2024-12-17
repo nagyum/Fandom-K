@@ -7,7 +7,12 @@ import useScrollTop from "../hooks/useScrollTop";
 import SponsorshipModal from "../components/SponsorshipList/SponsorshipModal";
 import ModalWrap from "../components/Modal/ModalWrap";
 import VoteModal from "../components/MonthList/components/VoteModal";
+
+import ChargeCreditModal from "../components/Modal/ChargeCreditModal";
+
+
 import Footer from "../components/Footer/Footer";
+
 
 function ListPage() {
   const [modalContents, setModalContents] = useState(); // 1,2,3,4
@@ -18,8 +23,12 @@ function ListPage() {
   //데이터 상태관리
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
+
+  const [myCreditData, setMyCreditData] = useState();
+
   const [pageSize, setPageSize] = useState(10);
   const [gender, setGender] = useState("female");
+
   useScrollTop();
 
   // 모달 상태에 따라 배경 스크롤 비활성화
@@ -53,6 +62,21 @@ function ListPage() {
       setModalOpacity(100);
     }, 0);
   };
+  //크레딧 충전 모달 팝업 띄우기
+  const handleMyCreditModal = (data) => {
+    setIsModal(true);
+    setMyCreditData(data);
+    setModalContents(4);
+  };
+  //충전 크레딧 업데이트
+  const handleCharge = (amount) => {
+    setMyCreditData((prev)=> prev + amount);
+    setIsModal(false);
+  }
+
+
+
+
 
   //모달 팝업 X버튼 클릭시 닫기
   const handleDeleteModal = () => {
@@ -70,6 +94,11 @@ function ListPage() {
       case 1: //후원하기
         return <SponsorshipModal data={sponsorData} />;
       case 2: //투표하기
+
+        return <VoteModal />;
+      case 4: //크레딧 충전
+        return <ChargeCreditModal onCharge={handleCharge} />;
+
         return (
           <VoteModal
             data={voteData}
@@ -77,6 +106,7 @@ function ListPage() {
             gender={gender}
           />
         );
+
       default:
         break;
     }
@@ -85,7 +115,11 @@ function ListPage() {
   return (
     <div>
       <Header />
+
+      <MyCredit handleMyCreditModal={handleMyCreditModal} myCreditData={myCreditData} />
+
       <MyCredit />
+
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal && (
 
