@@ -48,7 +48,7 @@ export async function getSponsershipData() {
 
 export async function postDonation({ id, amount }) {
   const response = await fetch(`${BASE_URL}/12-9/donations/${id}/contribute`, {
-    method: "POST",
+    method: "PUT",
     body: JSON.stringify({
       amount: amount,
     }),
