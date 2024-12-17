@@ -42,12 +42,13 @@ export default function IdolVote({
 
           {/* 라디오 버튼 */}
           <input
+            className={styles.inputBtn}
             type="radio"
             name="idolSelect" // 동일 그룹으로 설정
             id={`ckb-${rank}`}
             onChange={(e) => onSelect(idolId, e.target.checked)}
           />
-          <label htmlFor={`ckb-${rank}`}></label>
+          <label className={styles.labelBtn} htmlFor={`ckb-${rank}`}></label>
         </div>
       </div>
     </li>
