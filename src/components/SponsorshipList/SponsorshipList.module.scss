@@ -42,7 +42,7 @@
   gap: 40px;
 }
 
-.card_handleButton {
+.card_handleButton_l {
   padding: 30px 15px;
   background-color: #1b1b1b;
   border-radius: 6.67px;
@@ -50,6 +50,18 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: all 1s;
+}
+
+.card_handleButton_r {
+  padding: 30px 15px;
+  background-color: #1b1b1b;
+  border-radius: 6.67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 1s;
 }
 
 .card_handleButton:hover {

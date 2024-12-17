@@ -10,6 +10,9 @@ function SponsorshipList({ handleSponsorModal }) {
   const [error, setError] = useState(null);
   const [IsLoading, setIsloading] = useState(false);
   const [translateX, setTranslateX] = useState(0);
+  //버튼 컴포넌트 opacity 애니메이션
+  const [leftBtnOpa, setLeftBtnOpa] = useState(100);
+  const [rightBtnOpa, setRightBtnOpa] = useState(100);
 
   const handleLoadSponsor = async () => {
     try {
@@ -38,9 +41,27 @@ function SponsorshipList({ handleSponsorModal }) {
     setTranslateX((pre) => pre - 306);
   };
 
+  const btnOpacity = () => {
+    if (translateX >= 0) {
+      setLeftBtnOpa(0);
+      setRightBtnOpa(100);
+    } else if (0 > translateX > -612) {
+      setLeftBtnOpa(100);
+      setRightBtnOpa(100);
+    } else if (-612 >= translateX) {
+      setLeftBtnOpa(100);
+      setRightBtnOpa(0);
+      //오른쪽 버튼 안됨... 수정중..
+    }
+  };
+
   useEffect(() => {
     handleLoadSponsor();
   }, []);
+
+  useEffect(() => {
+    btnOpacity();
+  }, [translateX]);
 
   return (
     <div className={styles.sponsor_wrap}>
@@ -48,7 +69,11 @@ function SponsorshipList({ handleSponsorModal }) {
         <h1 className={styles.sponsor_title}>후원을 기다리는 조공</h1>
       </div>
       <div className={styles.card_wrap}>
-        <div className={styles.card_handleButton} onClick={onclickLeftButton}>
+        <div
+          style={{ opacity: `${leftBtnOpa}%` }}
+          className={styles.card_handleButton_l}
+          onClick={onclickLeftButton}
+        >
           <img
             className={styles.card_handleButton_img}
             src={leftIcon}
@@ -73,7 +98,11 @@ function SponsorshipList({ handleSponsorModal }) {
             })}
           </div>
         </div>
-        <div className={styles.card_handleButton} onClick={onclickRightButton}>
+        <div
+          style={{ opacity: `${rightBtnOpa}%` }}
+          className={styles.card_handleButton_r}
+          onClick={onclickRightButton}
+        >
           <img
             className={styles.card_handleButton_img}
             src={rightIcon}
