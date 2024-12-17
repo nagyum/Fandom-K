@@ -46,6 +46,11 @@
   width: 234px;
   height: 40px;
   background: $gray-cool-100;
+  cursor: default;
+}
+
+.card_button_disable:hover {
+  opacity: 1;
 }
 
 /* 카드 글 컨테이너 */
