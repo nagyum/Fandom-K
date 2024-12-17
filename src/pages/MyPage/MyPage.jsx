@@ -70,6 +70,7 @@ function MyPage() {
   };
 
   /** x버튼 누를 때 */
+  //TODO : localStorage에서 관심있는 아이돌 지워주기.
   const handleDelete = (id) => {
     setIdolList((prevList) => prevList.filter((idol) => idol.id !== id));
   };
@@ -86,6 +87,7 @@ function MyPage() {
   };
 
   /** 추가하기 버튼 누를 때 */
+  // TODO : localstorage에 관심있는 아이돌 넣어주기
   const handleAddClick = () => {};
 
   return (

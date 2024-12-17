@@ -6,7 +6,7 @@ function IdolCard({
   imageUrl,
   name,
   group,
-  isbig = true,
+  isbig = true, //isbig이 true면 프로필 크기가 128*183, false면 98*150
   onDelete, // x표시 있는 사진
   isClicked, //사진 선택되었는지
   onClick,
@@ -18,8 +18,7 @@ function IdolCard({
       }`}
     >
       {" "}
-      {/** isbig이 true면 프로필 크기가 128*183, false면 98*150 */}
-      {/** isClicked가 true면 클릭된 핑크색 배경 이미지, false면 그대로*/}
+      {/** isClicked가 true면 선택이미지, false면 그대로*/}
       {isClicked ? (
         <div className={styles.add_idol_image_container}>
           <img src={clickIcon} className={styles.click_icon} />
