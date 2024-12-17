@@ -18,20 +18,16 @@ function LandingPage() {
     <div>
       <div className={styles.background}>
         <div className={styles.page1}>
-          <div className={styles.h1div}>
-            <h1 className={styles.white}>
+          <div className={styles.title}>
+            <h1>
               내가 좋아하는 아이돌을 <br />
-              가장<span className={styles["brand-orange"]}>쉽게 덕질</span> 하는
+              가장<span className={styles["brand-orange"]}> 쉽게 덕질</span> 하는
               방법
             </h1>
           </div>
           <div className={styles["image-container"]}>
-            <div>
-              <img src={logonobackground} alt="logo" />
-            </div>
-            <div>
-              <img src={images.bgimg1} alt="bg1" />
-            </div>
+              <img className={styles.logo} src={logonobackground} alt="logo" />
+              <img className={styles.backgroundimg} src={images.bgimg1} alt="bg1" />
           </div>
           <div className={styles.buttondiv}>
             <CustomButton
@@ -48,7 +44,7 @@ function LandingPage() {
         </div>
 
         <div className={styles.page2}>
-          <div className={styles["gradient-bar"]}></div>
+          
           <Section
             donate="후원하기"
             title={
@@ -84,6 +80,7 @@ function LandingPage() {
             screenimg={images.screen3}
           />
         </div>
+        <div className={styles["gradient-bar"]}></div>
       </div>
     </div>
   );

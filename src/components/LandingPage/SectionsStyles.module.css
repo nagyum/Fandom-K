@@ -17,9 +17,8 @@
     position: relative;
     width: 311px;
     height: 93px;
-
+    top: 160px;
     text-align: center;
-    padding-top: 40px;
     z-index: 4;
     display: flex;
     flex-direction: column;
@@ -54,7 +53,6 @@
     position: relative;
     width: 100%; /* 부모 크기에 맞게 확장 */
     height: 100%; /* 부모 크기에 맞게 확장 */
-    top: -313px;
     left: 0;
 
 }
@@ -71,8 +69,8 @@
 .image-container1 .background-image img {
     object-fit: cover; /* 이미지가 컨테이너 크기에 맞게 조정되며 잘릴 수 있음 */
     width: 1200px;
-    height: 1200px;
-    z-index: 1;
+    height: 100%;
+    z-index: 2;
     position: absolute; /* 컨테이너를 기준으로 위치 조정 */
     top: 50%; /* 수직으로 가운데 */
     left: 50%; /* 수평으로 가운데 */
@@ -92,5 +90,5 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3; /* 위로 배치 */
+  z-index: 4; /* 위로 배치 */
 }
