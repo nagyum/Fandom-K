@@ -11,6 +11,7 @@ import Footer from "../components/Footer/Footer";
 
 function ListPage() {
   const [modalContents, setModalContents] = useState(); // 1,2,3,4
+  //모달이 열렸는지
   const [isModal, setIsModal] = useState(false);
   //opacity로 modal 애니메이션주기
   const [modalOpacity, setModalOpacity] = useState(100);

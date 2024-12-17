@@ -4,11 +4,11 @@
 .chartContents {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 10px;
+  margin: 0 auto;
 
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding: 40px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 

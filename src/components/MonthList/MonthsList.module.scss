@@ -2,11 +2,11 @@
 
 //monthlist에서 사용중인 scss
 .chartNav {
-  margin: 0 auto;
+  margin: 10px auto;
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
-  width: 1200px;
+  max-width: 1200px;
   h2 {
     margin: 80px 0 0 0;
   }
@@ -58,7 +58,7 @@
 
 .moreBtn {
   margin: 0 auto;
-  width: 1200px;
+  max-width: 1200px;
   display: flex;
   justify-content: center;
   padding-top: 51px;
@@ -103,4 +103,26 @@
   text-align: center;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
+}
+
+/* 미디어 쿼리 Tablet: 768px 이상 ~ 1199px 이하 */
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .LankingChart {
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .LankingChart {
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
