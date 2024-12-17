@@ -22,12 +22,11 @@ main{
     height: 93px;
     top: 160px;
     text-align: center;
-    z-index: 4;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+    z-index: 100;
     
 
 
