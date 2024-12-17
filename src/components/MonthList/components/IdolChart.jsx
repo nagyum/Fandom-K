@@ -5,7 +5,7 @@ export default function IdolChart({ imgUrl, group, name, totalVotes, rank }) {
     <li>
       <div
         className={styles.chartContents}
-        style={{ width: "588px", height: "70px" }}
+        style={{ maxWidth: "800px", height: "70px" }}
       >
         <img className={styles.img} src={imgUrl} alt={`${group}-이미지`} />
 
