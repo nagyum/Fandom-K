@@ -1,9 +1,16 @@
-.black-200 {
+.background{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.page1 {
   background-color: #02000e;
-  width: 1920px; /* 화면 전체 크기 */
+  width: 100%;
+  max-width: 1920px; /* 화면 전체 크기 */
   height: 1080px; /* 화면 전체 크기 */
   position: relative; /* 이미지 정렬 기준 */
   margin: 0 auto;
+   
 }
 
 .brand-orange {
@@ -11,13 +18,11 @@
 }
 
 .h1div {
-  position: absolute; /* 위치 설정 */
-  top: 140px; /* 텍스트 위치 */
-  left: 50%; /* 화면 가운데 정렬 */
-  transform: translateX(-50%); /* 수평 중앙 맞춤 */
-  width: 311px;
+  position: relative; /* 위치 설정 */
+  justify-content: center; /* 화면 가운데 정렬 */ 
   height: auto; /* 텍스트 크기에 맞게 높이 자동 조정 */
   z-index: 3;
+  text-align: center;
   h1 {
     text-align: center;
     font-weight: 700;
@@ -28,8 +33,8 @@
 .image-container {
   position: relative;
   margin: 0 auto;
-  width: 1920px; /* 컨테이너 크기 */
-  height: 1080px; /* 컨테이너 크기 */
+  width: 100%; /* 컨테이너 크기 */
+  height: 100%; /* 컨테이너 크기 */
 }
 
 .image-container div {
@@ -64,4 +69,26 @@
   top: 95.4px; /* logo 위치 */
   left: 493.8px;
   opacity: 1; /* 이미지 표시 */
+}
+
+.buttondiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  bottom: 120px;
+  transform: translateX(-50%)
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 26px;
+  z-index: 500;
+  left: 50%;
+  bottom: 120px;
 }
