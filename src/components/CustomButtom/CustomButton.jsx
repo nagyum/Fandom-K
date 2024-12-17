@@ -14,7 +14,7 @@ export default function CustomButton({
     <button
       onClick={onClick}
       className={`${className} ${styles.button} ${
-        isRoundButton ? styles.roundedButon : ""
+        isRoundButton ? styles.roundedButton : ""
       } ${isMoreButton ? styles.moreButton : ""}`}
       style={{ width: `${width}px`, height: `${height}px` }}
     >

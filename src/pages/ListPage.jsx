@@ -88,6 +88,7 @@ function ListPage() {
       <MyCredit />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal && (
+
         <ModalWrap
           style={{ opacity: `${modalOpacity}%` }}
           handleDeleteModal={handleDeleteModal}

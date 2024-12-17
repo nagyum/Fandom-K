@@ -34,7 +34,7 @@
 .card_handleButton {
   width: 29px;
   height: 135px;
-  background-color: #1b1b1b;
+  background-color: $black-neutral;
   border-radius: 6.67px;
   display: flex;
   justify-content: center;
@@ -44,12 +44,12 @@
 
   // disabled 상태가 아닐 때만 hover 효과 적용
   &:hover:not(:disabled) {
-    background-color: #545454;
+    background-color: $gray-neutral;
   }
 
   &:disabled {
     cursor: not-allowed; //금지표시
-    background-color: #1b1b1b;
+    background-color: $black-neutral;
     opacity: 0.5;
   }
 
@@ -98,5 +98,22 @@
     font-weight: 400;
     font-size: 14px;
     color: rgba($white, 0.6);
+  }
+  &_button_content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+  }
+  &_button_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 48px;
+    margin-bottom: 81px;
+  }
+  &_button_text {
+    font-weight: 700;
+    font-size: 16px;
   }
 }
