@@ -13,6 +13,8 @@ function ListPage() {
   const [modalContents, setModalContents] = useState(); // 1,2,3,4
   //모달이 열렸는지
   const [isModal, setIsModal] = useState(false);
+  //opacity로 modal 애니메이션주기
+  const [modalOpacity, setModalOpacity] = useState(100);
   //데이터 상태관리
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
@@ -37,6 +39,9 @@ function ListPage() {
     setIsModal(true);
     setSponsorData(data);
     setModalContents(1);
+    setTimeout(() => {
+      setModalOpacity(100);
+    }, 0);
   };
 
   //투표 모달 팝업 띄우기
@@ -44,13 +49,19 @@ function ListPage() {
     setIsModal(true);
     setVoteData(data);
     setModalContents(2);
+    setTimeout(() => {
+      setModalOpacity(100);
+    }, 0);
   };
 
   //모달 팝업 X버튼 클릭시 닫기
   const handleDeleteModal = () => {
-    setIsModal(false);
-    setSponsorData();
-    setVoteData();
+    setModalOpacity(0);
+    setTimeout(() => {
+      setIsModal(false);
+      setSponsorData();
+      setVoteData();
+    }, 200);
   };
 
   //1번 후원하기, 2번 투표하기, 3번 크레딧 부족, 4번 크레딧 충전
@@ -77,7 +88,10 @@ function ListPage() {
       <MyCredit />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal && (
-        <ModalWrap handleDeleteModal={handleDeleteModal}>
+        <ModalWrap
+          style={{ opacity: `${modalOpacity}%` }}
+          handleDeleteModal={handleDeleteModal}
+        >
           <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
             <ModalContents modalContents={modalContents} />
           </div>
