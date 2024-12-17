@@ -1,7 +1,9 @@
+import styles from "./Footer.module.scss";
+
 function Footer() {
   return (
     <>
-      <div>@codeit-Team 12</div>
+      <div className={styles.teamName}>@codeit-Team 12</div>
     </>
   );
 }
