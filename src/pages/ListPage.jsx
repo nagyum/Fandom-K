@@ -88,7 +88,11 @@ function ListPage() {
       <MyCredit />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal && (
-        <ModalWrap handleDeleteModal={handleDeleteModal}>
+
+        <ModalWrap
+          style={{ opacity: `${modalOpacity}%` }}
+          handleDeleteModal={handleDeleteModal}
+        >
           <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
             <ModalContents modalContents={modalContents} />
           </div>
