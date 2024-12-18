@@ -18,6 +18,7 @@ function MyPage() {
   const [currentPage, setCurrentPage] = useState(0); //현재 페이지
   const [nextCursor, setNextCursor] = useState(null); //다음 페이지 커서
   const [isClicked, setIsClicked] = useState(false);
+  const [selectedIdols, setSelectedIdols] = useState([]); // 선택된 아이돌
 
   /** cursor 없이 호출하면 자동으로 null, cursor와 함께 호출하면 cursor 값 사용 */
   const fetchIdolList = async (cursor = null) => {
@@ -71,24 +72,53 @@ function MyPage() {
 
   /** x버튼 누를 때 */
   //TODO : localStorage에서 관심있는 아이돌 지워주기.
+  // FavoriteIdolList 에서 같은 id 지워주고, localStoage 에 넣어주기.
   const handleDelete = (id) => {
-    setIdolList((prevList) => prevList.filter((idol) => idol.id !== id));
+    setFavoriteIdolList((prev) => prev.filter((idol) => idol.id !== id));
+
+    const storedData = localStorage.getItem("favoriteIdol");
+    if (storedData) {
+      const storedIdols = JSON.parse(storedData);
+      const updateIdols = storedIdols.filter((idol) => idol.id !== id);
+      localStorage.setItem("favoriteIdol", JSON.stringify(updateIdols));
+    }
   };
 
   /** 이미지 누를 때 클릭핸들러 */
   // TODO : 이미지를 클릭할 때 해당아이돌의 배경색이 바뀌게 해야함.
   // 해당 아이돌의 id를 가져와서 그 아이돌의 상태를 바꿔야함.
-  const handleClick = () => {
-    if (isClicked === true) {
-      setIsClicked(false);
-    } else {
-      setIsClicked(true);
-    }
+  const handleClick = (idol) => {
+    setSelectedIdols((prev) => {
+      //이미 선택된 아이돌이면 제거
+      if (prev.includes(idol.id)) {
+        // selectedIdols에서 해당 id 제거
+        return prev.filter((id) => id !== idol.id);
+      }
+      return [...prev, idol.id];
+    });
   };
 
   /** 추가하기 버튼 누를 때 */
   // TODO : localstorage에 관심있는 아이돌 넣어주기
-  const handleAddClick = () => {};
+  const handleAddClick = () => {
+    const selectedIdolsData = idolList.filter((idol) =>
+      selectedIdols.includes(idol.id)
+    );
+    localStorage.setItem("favoriteIdol", JSON.stringify(selectedIdolsData));
+    setFavoriteIdolList((prev) => {
+      const newList = [...prev];
+      selectedIdolsData.forEach((idol) => {
+        //배열.some() 메소드로 중복제거하고, 새로운건 추가해주기.
+        if (!newList.some((item) => item.id === idol.id)) {
+          newList.push(idol);
+        }
+      });
+
+      return newList;
+    });
+    //선택된 아이돌 초기화
+    setSelectedIdols([]);
+  };
 
   return (
     <div>
@@ -107,7 +137,7 @@ function MyPage() {
                 좋아하는 아이돌을 추가해보세요.
               </p> */}
               <ul className={`${styles.add_idol_list} ${styles[mode]}`}>
-                {idolList.map((idol) => (
+                {favoriteIdolList.map((idol) => (
                   <li key={idol.id}>
                     <IdolCard
                       imageUrl={idol.profilePicture}
@@ -149,8 +179,8 @@ function MyPage() {
                     name={idol.name}
                     group={idol.group}
                     isbig={true}
-                    onClick={handleClick}
-                    isClicked={isClicked}
+                    onClick={() => handleClick(idol)}
+                    isClicked={selectedIdols.includes(idol.id)}
                   />
                 </li>
               ))}
