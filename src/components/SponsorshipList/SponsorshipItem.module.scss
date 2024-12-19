@@ -5,7 +5,7 @@
   height: 402px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
 }
 
 /* 카드 이미지 컨테이너 */
@@ -70,7 +70,7 @@
   font-size: 16px;
   color: $white;
   opacity: 40%;
-  line-height: 100%;
+  line-height: 118%;
 }
 
 .card_title {
@@ -80,6 +80,12 @@
 }
 
 /* 카드 크레딧 */
+.card_sponsor_container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
 .card_credit_container {
   display: flex;
   justify-content: space-between;
@@ -102,6 +108,7 @@
 
 .card_deadline {
   color: $white-150;
+  font-size: 12px;
 }
 
 /* 진행도 */
@@ -114,4 +121,58 @@
   height: 1px;
   width: 56px;
   background-color: $brand-orange;
+}
+
+@media (max-width: 767px) {
+  .card {
+    width: 158px;
+    height: 303px;
+    gap: 10px;
+  }
+
+  .card_img {
+    width: 158px;
+    height: 206px;
+  }
+
+  .card_img_grdiant {
+    height: 206px;
+  }
+
+  .card_button {
+    width: 142px;
+    height: 31px;
+    font-size: 13px;
+    padding: 0;
+    bottom: 8px;
+  }
+
+  .card_button_disable {
+    width: 142px;
+    height: 31px;
+    padding: 0;
+    bottom: 8px;
+  }
+
+  .card_description_container {
+    gap: 20px;
+  }
+
+  .card_title_container {
+    gap: 6px;
+  }
+
+  .card_subtitle {
+    font-size: 12px;
+  }
+
+  .card_title {
+    font-size: 14px;
+  }
+
+  .card_sponsor_container {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
 }

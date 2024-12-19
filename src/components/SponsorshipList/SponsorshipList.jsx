@@ -4,6 +4,7 @@ import styles from "./SponsorshipList.module.scss";
 import { getSponsershipData } from "../../api";
 import leftIcon from "../../assets/icons/lefticon.png";
 import rightIcon from "../../assets/icons/righticon.png";
+import useDevice from "../../hooks/useDevice";
 
 function SponsorshipList({ handleSponsorModal }) {
   const [items, setItems] = useState([]);
@@ -11,8 +12,18 @@ function SponsorshipList({ handleSponsorModal }) {
   const [IsLoading, setIsloading] = useState(false);
   const [translateX, setTranslateX] = useState(0);
   //버튼 컴포넌트 opacity 애니메이션
-  const [leftBtnOpa, setLeftBtnOpa] = useState(100);
+  const [leftBtnOpa, setLeftBtnOpa] = useState(0);
   const [rightBtnOpa, setRightBtnOpa] = useState(100);
+  const [isBtn, setIsBtn] = useState(true);
+  const { mode } = useDevice();
+
+  useEffect(() => {
+    if (mode === "desktop") {
+      setIsBtn(true);
+    } else if (mode === "tablet" || mode === "mobile") {
+      setIsBtn(false);
+    }
+  }, [mode]);
 
   const handleLoadSponsor = async () => {
     try {
@@ -32,36 +43,28 @@ function SponsorshipList({ handleSponsorModal }) {
   // 캐러셀, 282px(카드 크기) + 24px(여백 크기) = 306px씩 이동
   let style = `translateX(${translateX}px)`;
   const onclickLeftButton = () => {
-    if (translateX === 0) return;
+    if (translateX === 0) {
+      return;
+    } else if (translateX === -306) {
+      setLeftBtnOpa(0);
+    }
+    setRightBtnOpa(100);
     setTranslateX((pre) => pre + 306);
   };
 
   const onclickRightButton = () => {
-    if (translateX === -612) return;
-    setTranslateX((pre) => pre - 306);
-  };
-
-  const btnOpacity = () => {
-    if (translateX >= 0) {
-      setLeftBtnOpa(0);
-      setRightBtnOpa(100);
-    } else if (0 > translateX > -612) {
-      setLeftBtnOpa(100);
-      setRightBtnOpa(100);
-    } else if (-612 >= translateX) {
-      setLeftBtnOpa(100);
+    if (translateX === -612) {
+      return;
+    } else if (translateX === -306) {
       setRightBtnOpa(0);
-      //오른쪽 버튼 안됨... 수정중..
     }
+    setLeftBtnOpa(100);
+    setTranslateX((pre) => pre - 306);
   };
 
   useEffect(() => {
     handleLoadSponsor();
   }, []);
-
-  useEffect(() => {
-    btnOpacity();
-  }, [translateX]);
 
   return (
     <div className={styles.sponsor_wrap}>
@@ -69,17 +72,19 @@ function SponsorshipList({ handleSponsorModal }) {
         <h1 className={styles.sponsor_title}>후원을 기다리는 조공</h1>
       </div>
       <div className={styles.card_wrap}>
-        <div
-          style={{ opacity: `${leftBtnOpa}%` }}
-          className={styles.card_handleButton_l}
-          onClick={onclickLeftButton}
-        >
-          <img
-            className={styles.card_handleButton_img}
-            src={leftIcon}
-            alt="왼쪽 버튼"
-          />
-        </div>
+        {isBtn && (
+          <div
+            style={{ opacity: `${leftBtnOpa}%` }}
+            className={styles.card_handleButton}
+            onClick={onclickLeftButton}
+          >
+            <img
+              className={styles.card_handleButton_img}
+              src={leftIcon}
+              alt="왼쪽 버튼"
+            />
+          </div>
+        )}
         <div className={styles.card_list}>
           {IsLoading && <p>로딩중...</p>}
           {error?.message && <span>{error.message}</span>}
@@ -98,17 +103,19 @@ function SponsorshipList({ handleSponsorModal }) {
             })}
           </div>
         </div>
-        <div
-          style={{ opacity: `${rightBtnOpa}%` }}
-          className={styles.card_handleButton_r}
-          onClick={onclickRightButton}
-        >
-          <img
-            className={styles.card_handleButton_img}
-            src={rightIcon}
-            alt="오른쪽 버튼"
-          />
-        </div>
+        {isBtn && (
+          <div
+            style={{ opacity: `${rightBtnOpa}%` }}
+            className={styles.card_handleButton}
+            onClick={onclickRightButton}
+          >
+            <img
+              className={styles.card_handleButton_img}
+              src={rightIcon}
+              alt="오른쪽 버튼"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
