@@ -8,17 +8,17 @@ const useCredit = () => {
     const addCredit = (value) => {
         setCredit((prev)=> prev+value);
     };
-    const subtreactCredit = (value) => {
+    const subtractCredit = (value) => {
         setCredit((prev) => prev-value);
     };
     useEffect(()=>{
-        localStorage.setItem("cerdit", credit);
+        localStorage.setItem("credit", credit);
     },[credit]);
 
     return{
         credit,
         addCredit,
-        subtreactCredit,
+        subtractCredit,
     };
 };
 

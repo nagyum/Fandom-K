@@ -1,5 +1,6 @@
-import styles from "./MyCredit.modul.scss";
+import styles from "./MyCredit.module.scss";
 import useCredit from "../../hooks/useCredit";
+import creditIcon from "../../assets/icons/credit.png"
 
 
 function MyCredit({handleMyCreditModal,}) {
@@ -9,11 +10,16 @@ function MyCredit({handleMyCreditModal,}) {
   };
 //레포지토리연결을 해야한다.
 
+
 const {credit} = useCredit();
 
  return (
-    <div>
-      <div>내크레딧:{credit.toLocaleString()}</div>
+    <div className={styles.credit_state}>
+      <div>
+        내크레딧
+        <img className={styles.creditIcon} src={creditIcon} alt="creditIcon" />
+        {credit.toLocaleString()}
+      </div>
       <button onClick={onClickAddBtn}>충전하기</button>
     </div>
   );

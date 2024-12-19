@@ -1,0 +1,15 @@
+@import "../../styles/color.scss";
+
+.creditIcon {
+  width: 16px;
+  height: 16px;
+ 
+}
+.credit_state{
+  border-radius: 7px ;
+  border : 1px solid $white;
+  margin: 10px auto;
+  max-width: 1200px;
+  display:flex;
+  
+}

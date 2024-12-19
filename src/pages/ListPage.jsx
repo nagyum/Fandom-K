@@ -56,12 +56,15 @@ function ListPage() {
       setModalOpacity(100);
     }, 0);
   };
-
-  // 크레딧 충전 모달 열기
-  const handleMyCreditModal = (data) => {
+  //크레딧 충전 모달 팝업 띄우기
+  const handleMyCreditModal = () => {
     setIsModal(true);
-    setMyCreditData(data);
+
+    // setMyCreditData(data);
     setModalContents(4);
+    setTimeout(() => {
+      setModalOpacity(100);
+    }, 0);
   };
 
   // 크레딧 충전
@@ -70,7 +73,7 @@ function ListPage() {
     setIsModal(false);
   };
 
-  // 모달 닫기
+  //모달 팝업 X버튼 클릭시 닫기
   const handleDeleteModal = () => {
     setModalOpacity(0);
     setTimeout(() => {
@@ -108,28 +111,16 @@ function ListPage() {
         myCreditData={myCreditData}
       />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
-      {isModal &&
-        (modalContents === 2 && mode === "mobile" ? (
-          // VoteModal을 모바일 환경에서 MediaModalWrap으로 감싸기
-          <MediaModalWrap
-            style={{ opacity: `${modalOpacity}%` }}
-            handleDeleteModal={handleDeleteModal}
-          >
-            <div>
-              <ModalContents modalContents={modalContents} />
-            </div>
-          </MediaModalWrap>
-        ) : (
-          // 다른 모든 모달은 ModalWrap 사용
-          <ModalWrap
-            style={{ opacity: `${modalOpacity}%` }}
-            handleDeleteModal={handleDeleteModal}
-          >
-            <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
-              <ModalContents modalContents={modalContents} />
-            </div>
-          </ModalWrap>
-        ))}
+      {isModal && (
+        <ModalWrap
+          style={{ opacity: `${modalOpacity}%` }}
+          handleDeleteModal={handleDeleteModal}
+        >
+          <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
+            <ModalContents modalContents={modalContents} />
+          </div>
+        </ModalWrap>
+      )}
       <MonthsList
         handleVoteModal={handleVoteModal}
         pageSize={pageSize}
