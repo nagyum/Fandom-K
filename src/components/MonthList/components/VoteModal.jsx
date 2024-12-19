@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
 import { getChartData, postVote } from "../../../api";
 import IdolVote from "../components/IdolVote";
+
 import CustomButton from "../../CustomButtom/CustomButton";
 import CreditModal from "../../Modal/LackingCredit";
-import styles from "../MonthsList.module.scss";
-import useDevice from "../../../hooks/useDevice";
-import backbtn from "../../../assets/icons/arrow-left.svg";
+import styles from "./VoteModal.module.scss";
 
 function VoteModal({ data, gender, onVoteUpdate }) {
   const [error, setError] = useState(null);
   const [isCreditModalOpen, setIsCreditModalOpen] = useState(false);
   const [idolList, setIdolList] = useState(data);
-  const [pageSize, setPageSize] = useState(6);
-  const { mode } = useDevice(); // 미디어쿼리
+  const [pageSize, setPageSize] = useState(7);
   const [selectedIdolId, setSelectedIdolId] = useState(null); // 초기값 null
-
-  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSelect = (idolId, isChecked) => {
     if (isChecked) {
@@ -71,71 +66,12 @@ function VoteModal({ data, gender, onVoteUpdate }) {
 
   const sortedIdols = [...idolList].sort((a, b) => b.totalVotes - a.totalVotes);
 
-  if (mode === "mobile") {
-    return (
-      <div className={styles.voteModalMobile}>
-        {/* Back Button */}
-        <CustomButton
-          className={styles.backButton}
-          onClick={() => navigate("/list")} // Navigate to the ListPage
-        >
-          뒤로가기
-        </CustomButton>
-        <div className={styles.voteContentMobile}>
-          <span className={styles.voteTitle}>{modalTitle}</span>
-          {idolList?.length > 0 ? (
-            <ul>
-              {idolList.map((idol, index) => (
-                <IdolVote
-                  key={idol.id}
-                  rank={index + 1}
-                  idolId={idol.id} // idolId 전달
-                  imgUrl={idol.profilePicture}
-                  group={idol.group}
-                  name={idol.name}
-                  totalVotes={idol.totalVotes}
-                  onSelect={handleSelect} // 선택 핸들러 전달
-                />
-              ))}
-              <div>
-                {sortedIdols.length >= pageSize && (
-                  <CustomButton
-                    isMoreButton
-                    onClick={handleMore}
-                    className={styles.voteMore}
-                  >
-                    더보기
-                  </CustomButton>
-                )}
-              </div>
-              <CustomButton
-                className={styles.voteBtn}
-                height={42}
-                onClick={handleVoteClick}
-              >
-                <span>투표하기</span>
-              </CustomButton>
-              <div className={styles.voteCredit}>
-                투표하는 데{" "}
-                <span style={{ color: "#F96D69" }}>1000 크레딧</span>이
-                소모됩니다.
-              </div>
-            </ul>
-          ) : (
-            <p>{error || "데이터가 없습니다."}</p>
-          )}
-        </div>
-        <CreditModal isOpen={isCreditModalOpen} onClose={closeModal} />
-      </div>
-    );
-  }
-
   return (
     <>
       <div>
         <span className={styles.voteTitle}>{modalTitle}</span>
         {idolList?.length > 0 ? (
-          <ul>
+          <ul className={styles.scrollbar}>
             {idolList.map((idol, index) => (
               <IdolVote
                 key={idol.id}
@@ -167,8 +103,9 @@ function VoteModal({ data, gender, onVoteUpdate }) {
               <span>투표하기</span>
             </CustomButton>
             <div className={styles.voteCredit}>
-              투표하는 데 <span style={{ color: "#F96D69" }}>1000 크레딧</span>
-              이 소모됩니다.
+              투표하는 데 &nbsp;
+              <span style={{ color: "#F96D69" }}> 1000 크레딧</span>이
+              소모됩니다.
             </div>
           </ul>
         ) : (

@@ -1,5 +1,6 @@
 import styles from "./ModalWrap.module.scss";
 import deleteBtn from "../../assets/icons/btn_delete.png";
+import useDevice from "../../hooks/useDevice";
 
 function ModalWrap({ children, handleDeleteModal, style }) {
   //X버튼 혹은 뒷배경 클릭시 팝업창 닫기

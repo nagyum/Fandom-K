@@ -1,0 +1,36 @@
+@import "../../styles/color.scss";
+
+.modal {
+  position: fixed; /* 화면에 고정 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 모달을 수직, 수평으로 중앙 정렬 */
+  border-radius: 8px;
+  padding: 24px 16px 40px 16px;
+  margin-bottom: 20px;
+  background-color: $black-200;
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.modal_deleteBtn {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.modal_wrap {
+  transition: all 0.2s;
+}

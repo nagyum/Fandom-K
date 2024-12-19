@@ -1,5 +1,4 @@
-const BASE_URL = "http://fandom-k-api.vercel.app";
-
+const BASE_URL = "https://fandom-k-api.vercel.app";
 
 export async function getVoteData({ pageSize = 6 }) {
   const query = `/12-9/idols?pageSize=${pageSize}`;
@@ -48,7 +47,6 @@ export async function getSponsershipData() {
 }
 
 export async function postDonation({ id, amount }) {
-
   const response = await fetch(
     `https://fandom-k-api.vercel.app/12-9/donations/${id}/contribute`,
     {
@@ -71,7 +69,7 @@ export async function postDonation({ id, amount }) {
 export async function postVote(idolId) {
   if (!idolId) return;
 
-  const response = await fetch(`/12-9/votes`, {
+  const response = await fetch(`${BASE_URL}/12-9/votes`, {
     method: "POST",
     headers: {
       accept: "application/json",
