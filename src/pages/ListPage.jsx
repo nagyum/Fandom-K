@@ -7,11 +7,9 @@ import useScrollTop from "../hooks/useScrollTop";
 import SponsorshipModal from "../components/SponsorshipList/SponsorshipModal";
 import ModalWrap from "../components/Modal/ModalWrap";
 import VoteModal from "../components/MonthList/components/VoteModal";
-
 import ChargeCreditModal from "../components/Modal/ChargeCreditModal";
-
-
 import Footer from "../components/Footer/Footer";
+
 
 
 function ListPage() {
@@ -23,6 +21,11 @@ function ListPage() {
   //데이터 상태관리
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
+  //*네트워크 처리시 
+  //*1.성공하는 케이스
+  //*2.비어있는 케이스
+  //*3. 에러가 발생하는 케이스
+  //*4. 로딩중인 케이스
 
   const [myCreditData, setMyCreditData] = useState();
 
@@ -63,20 +66,20 @@ function ListPage() {
     }, 0);
   };
   //크레딧 충전 모달 팝업 띄우기
-  const handleMyCreditModal = (data) => {
+  const handleMyCreditModal = () => {
     setIsModal(true);
-    setMyCreditData(data);
+    
+    // setMyCreditData(data);
     setModalContents(4);
+    setTimeout(() => {
+      setModalOpacity(100);
+    }, 0);
   };
   //충전 크레딧 업데이트
   const handleCharge = (amount) => {
     setMyCreditData((prev)=> prev + amount);
     setIsModal(false);
   }
-
-
-
-
 
   //모달 팝업 X버튼 클릭시 닫기
   const handleDeleteModal = () => {
@@ -94,19 +97,15 @@ function ListPage() {
       case 1: //후원하기
         return <SponsorshipModal data={sponsorData} />;
       case 2: //투표하기
-
-        return <VoteModal />;
+      return (
+        <VoteModal
+          data={voteData}
+          setPageSize={setPageSize}
+          gender={gender}
+        />
+      );
       case 4: //크레딧 충전
         return <ChargeCreditModal onCharge={handleCharge} />;
-
-        return (
-          <VoteModal
-            data={voteData}
-            setPageSize={setPageSize}
-            gender={gender}
-          />
-        );
-
       default:
         break;
     }
@@ -115,14 +114,9 @@ function ListPage() {
   return (
     <div>
       <Header />
-
       <MyCredit handleMyCreditModal={handleMyCreditModal} myCreditData={myCreditData} />
-
-      <MyCredit />
-
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal && (
-
         <ModalWrap
           style={{ opacity: `${modalOpacity}%` }}
           handleDeleteModal={handleDeleteModal}
