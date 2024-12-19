@@ -7,6 +7,8 @@
   justify-content: flex-start;
   gap: 10px;
   margin-top: 10px;
+  width: 477px;
+  height: 70px;
 
   padding: 40px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -76,4 +78,13 @@
 .inputBtn:checked + .labelBtn {
   /* 체크되었을 때 */
   background: white;
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+}
+
+@media (max-width: 767px) {
+  .chartContents {
+    max-width: 390px;
+  }
 }

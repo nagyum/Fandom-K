@@ -17,12 +17,10 @@ export default function IdolVote({
       onSelect(idolId, true); // 아이돌 선택 상태 변경
     }
   };
+
   return (
     <li onClick={handleComponentClick}>
-      <div
-        className={styles.chartContents}
-        style={{ width: "477px", height: "70px" }}
-      >
+      <div className={styles.chartContents}>
         <img className={styles.img} src={imgUrl} alt={`${group}-이미지`} />
 
         <div className={styles.chartInfo}>
@@ -48,6 +46,7 @@ export default function IdolVote({
             id={`ckb-${rank}`}
             onChange={(e) => onSelect(idolId, e.target.checked)}
           />
+
           <label className={styles.labelBtn} htmlFor={`ckb-${rank}`}></label>
         </div>
       </div>
