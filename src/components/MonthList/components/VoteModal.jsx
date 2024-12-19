@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getChartData, postVote } from "../../../api";
 import IdolVote from "../components/IdolVote";
+
 import CustomButton from "../../CustomButtom/CustomButton";
 import CreditModal from "../../Modal/LackingCredit";
 import styles from "./VoteModal.module.scss";
@@ -102,8 +103,9 @@ function VoteModal({ data, gender, onVoteUpdate }) {
               <span>투표하기</span>
             </CustomButton>
             <div className={styles.voteCredit}>
-              투표하는 데 <span style={{ color: "#F96D69" }}>1000 크레딧</span>
-              이 소모됩니다.
+              투표하는 데 &nbsp;
+              <span style={{ color: "#F96D69" }}> 1000 크레딧</span>이
+              소모됩니다.
             </div>
           </ul>
         ) : (

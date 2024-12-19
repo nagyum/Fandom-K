@@ -15,8 +15,6 @@ function MonthsList({
   setGender,
 }) {
   const [idolList, setIdolList] = useState([]);
-  // const [gender, setGender] = useState("female");
-  // const [pageSize, setPageSize] = useState(10);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
