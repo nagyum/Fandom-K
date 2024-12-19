@@ -21,14 +21,8 @@ function ListPage() {
   //데이터 상태관리
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
-  //*네트워크 처리시 
-  //*1.성공하는 케이스
-  //*2.비어있는 케이스
-  //*3. 에러가 발생하는 케이스
-  //*4. 로딩중인 케이스
-
+  //크레딧 상태
   const [myCreditData, setMyCreditData] = useState();
-
   const [pageSize, setPageSize] = useState(10);
   const [gender, setGender] = useState("female");
 
