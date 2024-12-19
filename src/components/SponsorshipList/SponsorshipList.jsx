@@ -14,16 +14,9 @@ function SponsorshipList({ handleSponsorModal }) {
   //버튼 컴포넌트 opacity 애니메이션
   const [leftBtnOpa, setLeftBtnOpa] = useState(0);
   const [rightBtnOpa, setRightBtnOpa] = useState(100);
-  const [isBtn, setIsBtn] = useState(true);
-  const { mode } = useDevice();
-
-  useEffect(() => {
-    if (mode === "desktop") {
-      setIsBtn(true);
-    } else if (mode === "tablet" || mode === "mobile") {
-      setIsBtn(false);
-    }
-  }, [mode]);
+  //버튼 컴포넌트 pointer 없애기
+  const [leftBtnCursor, setLeftBtnCursor] = useState("none");
+  const [rightBtnCursor, setRightBtnCursor] = useState("auto");
 
   const handleLoadSponsor = async () => {
     try {
@@ -47,8 +40,10 @@ function SponsorshipList({ handleSponsorModal }) {
       return;
     } else if (translateX === -306) {
       setLeftBtnOpa(0);
+      setLeftBtnCursor("none");
     }
     setRightBtnOpa(100);
+    setRightBtnCursor("auto");
     setTranslateX((pre) => pre + 306);
   };
 
@@ -57,8 +52,10 @@ function SponsorshipList({ handleSponsorModal }) {
       return;
     } else if (translateX === -306) {
       setRightBtnOpa(0);
+      setRightBtnCursor("none");
     }
     setLeftBtnOpa(100);
+    setLeftBtnCursor("auto");
     setTranslateX((pre) => pre - 306);
   };
 
@@ -72,19 +69,17 @@ function SponsorshipList({ handleSponsorModal }) {
         <h1 className={styles.sponsor_title}>후원을 기다리는 조공</h1>
       </div>
       <div className={styles.card_wrap}>
-        {isBtn && (
-          <div
-            style={{ opacity: `${leftBtnOpa}%` }}
-            className={styles.card_handleButton}
-            onClick={onclickLeftButton}
-          >
-            <img
-              className={styles.card_handleButton_img}
-              src={leftIcon}
-              alt="왼쪽 버튼"
-            />
-          </div>
-        )}
+        <div
+          style={{ opacity: `${leftBtnOpa}%`, pointerEvents: leftBtnCursor }}
+          className={styles.card_handleButton}
+          onClick={onclickLeftButton}
+        >
+          <img
+            className={styles.card_handleButton_img}
+            src={leftIcon}
+            alt="왼쪽 버튼"
+          />
+        </div>
         <div className={styles.card_list}>
           {IsLoading && <p>로딩중...</p>}
           {error?.message && <span>{error.message}</span>}
@@ -103,19 +98,17 @@ function SponsorshipList({ handleSponsorModal }) {
             })}
           </div>
         </div>
-        {isBtn && (
-          <div
-            style={{ opacity: `${rightBtnOpa}%` }}
-            className={styles.card_handleButton}
-            onClick={onclickRightButton}
-          >
-            <img
-              className={styles.card_handleButton_img}
-              src={rightIcon}
-              alt="오른쪽 버튼"
-            />
-          </div>
-        )}
+        <div
+          style={{ opacity: `${rightBtnOpa}%`, pointerEvents: rightBtnCursor }}
+          className={styles.card_handleButton}
+          onClick={onclickRightButton}
+        >
+          <img
+            className={styles.card_handleButton_img}
+            src={rightIcon}
+            alt="오른쪽 버튼"
+          />
+        </div>
       </div>
     </div>
   );

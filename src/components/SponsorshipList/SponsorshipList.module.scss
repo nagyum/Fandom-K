@@ -50,7 +50,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 
 .card_handleButton:hover {
@@ -75,6 +75,10 @@
   .card_list_container {
     gap: 16px;
   }
+
+  .card_handleButton {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -88,5 +92,9 @@
 
   .card_list_container {
     gap: 8px;
+  }
+
+  .card_handleButton {
+    display: none;
   }
 }
