@@ -20,7 +20,10 @@ export default function IdolVote({
 
   return (
     <li onClick={handleComponentClick}>
-      <div className={styles.chartContents}>
+      <div
+        className={styles.chartContents}
+        style={{ idth: "477px", height: "70px" }}
+      >
         <img className={styles.img} src={imgUrl} alt={`${group}-이미지`} />
 
         <div className={styles.chartInfo}>
