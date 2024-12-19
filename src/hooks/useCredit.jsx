@@ -12,9 +12,10 @@ const useCredit = () => {
         setCredit((prev) => prev-value);
     };
     useEffect(()=>{
-        localStorage.setItem("credit", credit);
+        localStorage.setItem("credit", String(credit));
     },[credit]);
 
+    
     return{
         credit,
         addCredit,
