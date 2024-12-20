@@ -14,7 +14,7 @@
   }
 
   &_image_container {
-    position: relative;
+    position: relative; //before 요소의 기준점
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,8 +22,9 @@
     height: 128px;
     margin-bottom: 8px;
 
+    //이미지 컨테이너 위에 원형 오버레이 생성하기.
     &::before {
-      content: "";
+      content: ""; //가상 요소 생성
       position: absolute;
       top: 0;
       left: 0;
@@ -38,8 +39,6 @@
   }
 
   &_image {
-    object-fit: cover;
-
     border-radius: 50%;
     object-fit: cover;
     cursor: pointer;

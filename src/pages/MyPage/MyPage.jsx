@@ -10,6 +10,8 @@ import plusIcon from "../../assets/icons/plusIcon.png";
 import IdolCard from "../../components/IdolCard/IdolCard";
 import CustomButton from "../../components/CustomButtom/CustomButton";
 
+//TODO : 관심있는 아이돌 추가하면, idolList에 추가한만큼 getIdolData..?
+
 function MyPage() {
   const { mode } = useDevice();
   const [favoriteIdolList, setFavoriteIdolList] = useState([]); //관심있는 아이돌
@@ -34,6 +36,7 @@ function MyPage() {
         cursor: cursor,
       });
       if (idolData && idolData.list) {
+        //관심있는 아이돌 제외한 아이돌들 보여주기.
         const filteredList = idolData.list.filter(
           (idol) => !favoriteIdolList.some((favIdol) => favIdol.id === idol.id)
         );
@@ -57,6 +60,15 @@ function MyPage() {
     fetchIdolList();
   }, [mode, favoriteIdolList]);
 
+  // 렌더링시 favoriteIdolList에 localStorage값 넣어주기.
+  useEffect(() => {
+    const storedData = localStorage.getItem("favoriteIdol");
+    if (storedData) {
+      const storedIdols = JSON.parse(storedData);
+      setFavoriteIdolList(storedIdols);
+    }
+  }, []);
+
   /** 이전 페이지 누를 때 */
   const handlePrevPage = () => {
     if (currentPage > 0) {
@@ -76,10 +88,9 @@ function MyPage() {
   /** x버튼 누를 때 */
   //TODO : localStorage에서 관심있는 아이돌 지워주기.
   // FavoriteIdolList 에서 같은 id 지워주고, localStoage 에 넣어주기.
-  // 지운 아이돌은 다시 idolList에 추가해주기.
   const handleDelete = (id) => {
-    setFavoriteIdolList((prev) => prev.filter((idol) => idol.id !== id));
     const deletedIdol = favoriteIdolList.find((idol) => idol.id === id);
+    setFavoriteIdolList((prev) => prev.filter((idol) => idol.id !== id));
 
     const storedData = localStorage.getItem("favoriteIdol");
     if (storedData) {
@@ -87,13 +98,6 @@ function MyPage() {
       const updateIdols = storedIdols.filter((idol) => idol.id !== id);
       localStorage.setItem("favoriteIdol", JSON.stringify(updateIdols));
     }
-
-    setIdolList((prev) => {
-      if (!prev.some((idol) => idol.id !== id)) {
-        return [...prev, deletedIdol];
-      }
-      return prev;
-    });
   };
 
   /** 이미지 누를 때 클릭핸들러 */
@@ -101,11 +105,12 @@ function MyPage() {
   // 해당 아이돌의 id를 가져와서 그 아이돌의 상태를 바꿔야함.
   const handleClick = (idol) => {
     setSelectedIdols((prev) => {
-      //이미 선택된 아이돌이면 제거
+      //이미 선택된 아이돌이면
       if (prev.includes(idol.id)) {
-        // selectedIdols에서 해당 id 제거
+        // filter로 제거
         return prev.filter((id) => id !== idol.id);
       }
+      // 아니면 배열에 추가
       return [...prev, idol.id];
     });
   };
@@ -167,7 +172,7 @@ function MyPage() {
                   </p>
                 </div>
               )}
-              <ul className={`${styles.add_idol_list} ${styles[mode]}`}>
+              <ul className={`${styles.favorite_idol_list} ${styles[mode]}`}>
                 {favoriteIdolList.map((idol) => (
                   <li key={idol.id}>
                     <IdolCard
@@ -184,8 +189,9 @@ function MyPage() {
           </div>
         </section>
 
-        <hr className={styles.mypage__divider} aria-hidden="true" />
-
+        <div className={styles.mypage__divider_container}>
+          <hr className={styles.mypage__divider} aria-hidden="true" />
+        </div>
         <section className={styles.add_section}>
           <h2 className={styles.section__title}>
             관심 있는 아이돌을 추가해보세요.

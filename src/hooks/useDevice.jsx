@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useDevice = () => {
-  const [windowWidth, setWindowWidth] = useState();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   let mode = "desktop";
 

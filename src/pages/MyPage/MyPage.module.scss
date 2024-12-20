@@ -1,9 +1,19 @@
 @import "../../styles/color.scss";
 
-.mypage__main {
-  max-width: 1360px;
-  margin: 0 auto;
-  margin-top: 120px;
+.mypage {
+  &__main {
+    max-width: 1360px;
+    margin: 0 auto;
+    margin-top: 120px;
+  }
+  &__divider_container {
+    padding: 0 20px;
+
+    hr {
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
 }
 
 .section__title {
@@ -11,6 +21,7 @@
   font-size: 24px;
   line-height: 26px;
   margin-top: 40px;
+  margin-left: 20px;
 }
 
 .favorite {
@@ -26,6 +37,7 @@
     align-items: center;
     flex-direction: column;
     gap: 30px;
+    padding-top: 10px;
   }
   &__empty_image {
     width: 120px;
@@ -35,6 +47,14 @@
     font-weight: 700;
     font-size: 30px;
     line-height: 20px;
+  }
+  &_idol_list {
+    margin-top: 32px;
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    gap: 24px;
   }
 }
 
@@ -72,20 +92,29 @@
     display: flex;
     align-items: center;
     gap: 40px;
+    justify-content: center;
   }
-  &_list {
-    margin-top: 32px;
-  }
+
   &__container {
     min-height: 183px;
     width: 128px;
   }
   &_list {
+    margin-top: 32px;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 24px;
+
+    &.tablet {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+    &.mobile {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
   }
   &_image {
     width: 128px;
