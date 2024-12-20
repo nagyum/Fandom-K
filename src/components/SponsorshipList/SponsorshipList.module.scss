@@ -19,6 +19,12 @@
   align-items: center;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card_list {
   overflow: hidden;
   max-width: 1200px;
@@ -54,7 +60,7 @@
 }
 
 .card_handleButton:hover {
-  background-color: #545454;
+  background-color: $gray-neutral;
 }
 
 .card_handleButton_img {

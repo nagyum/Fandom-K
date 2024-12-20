@@ -99,8 +99,6 @@ function SponsorshipList({ handleSponsorModal }) {
       </div>
       {error ? (
         <Refresh handleLoad={handleLoadSponsor} height={402} />
-      ) : IsLoading ? (
-        <p className={styles.card_wrap}>로딩중...</p>
       ) : (
         <div className={styles.card_wrap}>
           <div
@@ -115,6 +113,7 @@ function SponsorshipList({ handleSponsorModal }) {
             />
           </div>
           <div className={styles.card_list}>
+            {IsLoading && <p className={styles.loading}>로딩중...</p>}
             <div
               className={styles.card_list_container}
               style={{ transform: style, transition: `${transition}` }}
