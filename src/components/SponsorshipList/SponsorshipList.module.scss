@@ -19,6 +19,12 @@
   align-items: center;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card_list {
   overflow: hidden;
   max-width: 1200px;
@@ -32,7 +38,7 @@
 .card_list_container {
   display: flex;
   gap: 24px;
-  transition: all 1s;
+  // transition: all 1s;
 }
 
 .card_wrap {
@@ -42,7 +48,7 @@
   gap: 40px;
 }
 
-.card_handleButton_l {
+.card_handleButton {
   padding: 30px 15px;
   background-color: #1b1b1b;
   border-radius: 6.67px;
@@ -50,26 +56,55 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: all 1s;
-}
-
-.card_handleButton_r {
-  padding: 30px 15px;
-  background-color: #1b1b1b;
-  border-radius: 6.67px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 
 .card_handleButton:hover {
-  background-color: #545454;
+  background-color: $gray-neutral;
 }
 
 .card_handleButton_img {
   width: 10px;
   height: 20px;
   object-fit: contain;
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .card_list {
+    overflow: scroll;
+  }
+
+  .sponsor_wrap {
+    margin-left: 24px;
+    gap: 24px;
+  }
+
+  .card_list_container {
+    gap: 16px;
+    transition: none;
+  }
+
+  .card_handleButton {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .card_list {
+    overflow: scroll;
+  }
+
+  .sponsor_wrap {
+    margin-left: 24px;
+    gap: 16px;
+  }
+
+  .card_list_container {
+    gap: 8px;
+    transition: none;
+  }
+
+  .card_handleButton {
+    display: none;
+  }
 }
