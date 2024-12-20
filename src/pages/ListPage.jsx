@@ -10,9 +10,7 @@ import VoteModal from "../components/MonthList/components/VoteModal";
 
 import ChargeCreditModal from "../components/Modal/ChargeCreditModal";
 
-
 import Footer from "../components/Footer/Footer";
-
 
 function ListPage() {
   const [modalContents, setModalContents] = useState(); // 1,2,3,4
@@ -70,13 +68,9 @@ function ListPage() {
   };
   //충전 크레딧 업데이트
   const handleCharge = (amount) => {
-    setMyCreditData((prev)=> prev + amount);
+    setMyCreditData((prev) => prev + amount);
     setIsModal(false);
-  }
-
-
-
-
+  };
 
   //모달 팝업 X버튼 클릭시 닫기
   const handleDeleteModal = () => {
@@ -94,11 +88,6 @@ function ListPage() {
       case 1: //후원하기
         return <SponsorshipModal data={sponsorData} />;
       case 2: //투표하기
-
-        return <VoteModal />;
-      case 4: //크레딧 충전
-        return <ChargeCreditModal onCharge={handleCharge} />;
-
         return (
           <VoteModal
             data={voteData}
@@ -106,6 +95,9 @@ function ListPage() {
             gender={gender}
           />
         );
+
+      case 4: //크레딧 충전
+        return <ChargeCreditModal onCharge={handleCharge} />;
 
       default:
         break;
@@ -116,13 +108,15 @@ function ListPage() {
     <div>
       <Header />
 
-      <MyCredit handleMyCreditModal={handleMyCreditModal} myCreditData={myCreditData} />
+      <MyCredit
+        handleMyCreditModal={handleMyCreditModal}
+        myCreditData={myCreditData}
+      />
 
       <MyCredit />
 
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal && (
-
         <ModalWrap
           style={{ opacity: `${modalOpacity}%` }}
           handleDeleteModal={handleDeleteModal}

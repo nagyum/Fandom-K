@@ -18,23 +18,21 @@ function ChargeCreditModal({ onCharge }) {
   return (
     <div>
       <h2>크레딧 충전하기</h2>
-        <button onClick={()=> handleCreditSelect(100)}>
-          <img src={creditIcon} alt="creditImg" /> 100{" "}
-        </button>
-        <button onClick={()=> handleCreditSelect(500)}>
+      <button onClick={() => handleCreditSelect(100)}>
+        <img src={creditIcon} alt="creditImg" /> 100{" "}
+      </button>
+      <button onClick={() => handleCreditSelect(500)}>
         <img src={creditIcon} alt="creditImg" /> 500{" "}
-        </button>
-        <button onClick={()=> handleCreditSelect(1000)}>
+      </button>
+      <button onClick={() => handleCreditSelect(1000)}>
         <img src={creditIcon} alt="creditImg" /> 1000{" "}
+      </button>
+      <div>
+        <p>선택된 금액: {selectedCredit} 크레딧</p>
+        <button onClick={handleCharge} disabled={selectedCredit <= 0}>
+          충전하기
         </button>
-        <div>
-          <p>
-            선택된 금액: {selectedCredit} 크레딧
-          </p>
-          <button onClick={handleCharge} disabled={selectedCredit <= 0}>
-            충전하기
-          </button>
-        </div>
+      </div>
     </div>
   );
 }

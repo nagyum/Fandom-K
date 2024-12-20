@@ -34,7 +34,10 @@ function MyPage() {
         cursor: cursor,
       });
       if (idolData && idolData.list) {
-        setIdolList(idolData.list);
+        const filteredList = idolData.list.filter(
+          (idol) => !favoriteIdolList.some((favIdol) => favIdol.id === idol.id)
+        );
+        setIdolList(filteredList);
         setNextCursor(idolData.nextCursor);
 
         //현재 커서 히스토리에 저장하기.
@@ -52,7 +55,7 @@ function MyPage() {
 
   useEffect(() => {
     fetchIdolList();
-  }, [mode]);
+  }, [mode, favoriteIdolList]);
 
   /** 이전 페이지 누를 때 */
   const handlePrevPage = () => {
@@ -73,8 +76,10 @@ function MyPage() {
   /** x버튼 누를 때 */
   //TODO : localStorage에서 관심있는 아이돌 지워주기.
   // FavoriteIdolList 에서 같은 id 지워주고, localStoage 에 넣어주기.
+  // 지운 아이돌은 다시 idolList에 추가해주기.
   const handleDelete = (id) => {
     setFavoriteIdolList((prev) => prev.filter((idol) => idol.id !== id));
+    const deletedIdol = favoriteIdolList.find((idol) => idol.id === id);
 
     const storedData = localStorage.getItem("favoriteIdol");
     if (storedData) {
@@ -82,6 +87,13 @@ function MyPage() {
       const updateIdols = storedIdols.filter((idol) => idol.id !== id);
       localStorage.setItem("favoriteIdol", JSON.stringify(updateIdols));
     }
+
+    setIdolList((prev) => {
+      if (!prev.some((idol) => idol.id !== id)) {
+        return [...prev, deletedIdol];
+      }
+      return prev;
+    });
   };
 
   /** 이미지 누를 때 클릭핸들러 */
@@ -101,21 +113,36 @@ function MyPage() {
   /** 추가하기 버튼 누를 때 */
   // TODO : localstorage에 관심있는 아이돌 넣어주기
   const handleAddClick = () => {
+    // 클릭한 아이돌데이터 selectedIdolsData에 넣어주고
     const selectedIdolsData = idolList.filter((idol) =>
       selectedIdols.includes(idol.id)
     );
-    localStorage.setItem("favoriteIdol", JSON.stringify(selectedIdolsData));
-    setFavoriteIdolList((prev) => {
-      const newList = [...prev];
-      selectedIdolsData.forEach((idol) => {
-        //배열.some() 메소드로 중복제거하고, 새로운건 추가해주기.
-        if (!newList.some((item) => item.id === idol.id)) {
-          newList.push(idol);
-        }
-      });
+    const storedData = localStorage.getItem("favoriteIdol");
+    const storedIdols = storedData ? JSON.parse(storedData) : [];
 
-      return newList;
+    //combinedIdols에 localstorage에 있던 데이터 넣어주고
+    const combinedIdols = [...storedIdols];
+    // 새롭게 선택된 데이터 넣어주기.
+    selectedIdolsData.forEach((idol) => {
+      if (!combinedIdols.some((item) => item.id === idol.id)) {
+        combinedIdols.push(idol);
+      }
     });
+
+    localStorage.setItem("favoriteIdol", JSON.stringify(combinedIdols));
+
+    setFavoriteIdolList(combinedIdols);
+
+    //TODO : storedIdols에 있는 데이터를 idolList에서 빼주기.
+
+    // combinedIdols에 있는 id와 일치하지 않는 아이돌만 남기기
+    // combinedIdols에 있는 id와 IdolList에 있는 id의 중복이 없는 경우에만 새 아이돌을 추가함.
+    let newIdolList = idolList.filter(
+      (idol) =>
+        !combinedIdols.some((selectedIdol) => selectedIdol.id === idol.id)
+    );
+    setIdolList(newIdolList);
+
     //선택된 아이돌 초기화
     setSelectedIdols([]);
   };
@@ -128,14 +155,18 @@ function MyPage() {
           <h2 className={styles.section__title}>내가 관심있는 아이돌</h2>
           <div className={styles.favorite__container}>
             <div className={styles.favorite__empty}>
-              {/* <img
-                src={logoImage}
-                className={styles.favorite__empty_image}
-                alt="빈 상태 이미지"
-              />
-              <p className={styles.favorite__empty_text}>
-                좋아하는 아이돌을 추가해보세요.
-              </p> */}
+              {favoriteIdolList.length === 0 && (
+                <div className={styles.favorite__empty__container}>
+                  <img
+                    src={logoImage}
+                    className={styles.favorite__empty_image}
+                    alt="빈 상태 이미지"
+                  />
+                  <p className={styles.favorite__empty_text}>
+                    좋아하는 아이돌을 추가해보세요.
+                  </p>
+                </div>
+              )}
               <ul className={`${styles.add_idol_list} ${styles[mode]}`}>
                 {favoriteIdolList.map((idol) => (
                   <li key={idol.id}>

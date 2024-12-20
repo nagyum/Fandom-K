@@ -33,7 +33,7 @@
       opacity: 0.5;
       border-radius: 50%;
       object-fit: cover;
-      pointer-events: none; // 이미지 클릭 방해 제거
+      pointer-events: none; // 이미지 클릭 방해 제거(체크 표시때문에 이미지가 안눌림)
     }
   }
 
