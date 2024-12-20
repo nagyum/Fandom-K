@@ -22,7 +22,6 @@ function ListPage() {
   const [myCreditData, setMyCreditData] = useState();
   const [pageSize, setPageSize] = useState(10);
   const [gender, setGender] = useState("female");
-
   const { mode } = useDevice(); // 모바일/데스크톱 감지
   useScrollTop(); // 스크롤 초기화
 
@@ -57,10 +56,10 @@ function ListPage() {
       setModalOpacity(100);
     }, 0);
   };
+
   //크레딧 충전 모달 팝업 띄우기
   const handleMyCreditModal = () => {
     setIsModal(true);
-
     // setMyCreditData(data);
     setModalContents(4);
     setTimeout(() => {
@@ -111,8 +110,8 @@ function ListPage() {
         handleMyCreditModal={handleMyCreditModal}
         myCreditData={myCreditData}
       />
+      <MyCredit />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
-
       {isModal &&
         (modalContents === 2 && mode === "mobile" ? (
           // VoteModal을 모바일 환경에서 MediaModalWrap으로 감싸기
