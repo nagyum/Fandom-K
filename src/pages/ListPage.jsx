@@ -18,6 +18,7 @@ function ListPage() {
   const [modalOpacity, setModalOpacity] = useState(100); // 모달 투명도
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
+  //크레딧 상태
   const [myCreditData, setMyCreditData] = useState();
   const [pageSize, setPageSize] = useState(10);
   const [gender, setGender] = useState("female");
