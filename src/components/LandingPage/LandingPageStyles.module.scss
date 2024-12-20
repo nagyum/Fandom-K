@@ -1,67 +1,110 @@
-.black-200 {
+
+.background{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.page1 {
   background-color: #02000e;
-  width: 1920px; /* 화면 전체 크기 */
+  width: 100%;
+  max-width: 1920px; /* 화면 전체 크기 */
+  height: 100%;
   height: 1080px; /* 화면 전체 크기 */
   position: relative; /* 이미지 정렬 기준 */
   margin: 0 auto;
+   
+
 }
+
+
+
 
 .brand-orange {
   color: #f96d69;
 }
 
-.h1div {
-  position: absolute; /* 위치 설정 */
-  top: 140px; /* 텍스트 위치 */
-  left: 50%; /* 화면 가운데 정렬 */
-  transform: translateX(-50%); /* 수평 중앙 맞춤 */
-  width: 311px;
+
+.title {
+  position: relative; /* 위치 설정 */
+  justify-content: center; /* 화면 가운데 정렬 */ 
+
   height: auto; /* 텍스트 크기에 맞게 높이 자동 조정 */
   z-index: 3;
+  text-align: center;
   h1 {
     text-align: center;
     font-weight: 700;
     font-size: 26px;
   }
+
+  top: 140px;
+
 }
+
 
 .image-container {
   position: relative;
   margin: 0 auto;
-  width: 1920px; /* 컨테이너 크기 */
-  height: 1080px; /* 컨테이너 크기 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 
-.image-container div {
+
+
+
+.logo {
+  z-index: 2; 
+  width: 509px;  
+  height: 97px;  
+  opacity: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  width: 100%; /* 부모 크기에 맞게 확장 */
-  height: 100%; /* 부모 크기에 맞게 확장 */
-  top: 0;
-  left: 0;
+  top: 231px;
+ 
 }
 
-.image-container img {
-  object-fit: cover; /* 이미지가 비율에 맞게 잘림 */
+.backgroundimg {
+  z-index: 1; 
+  width: 932.4px; 
+  height: 781.2px; 
+  top: 95.4px; 
+  position: absolute;
   display: block;
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
+  opacity: 1; 
 }
 
-.image-container div:nth-child(1) {
-  z-index: 2; /* bgimg1 이미지 아래 */
-  width: 509px; /* bgimg1 크기 */
-  height: 97px; /* bgimg1 크기 */
-  top: 231px; /* bgimg1 위치 */
-  left: 708px;
-  opacity: 1; /* 이미지 표시 */
+.buttondiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
 }
 
-.image-container div:nth-child(2) {
-  z-index: 1; /* logo 이미지 위로 */
-  width: 932.4px; /* logo 크기 */
-  height: 781.2px; /* logo 크기 */
-  top: 95.4px; /* logo 위치 */
-  left: 493.8px;
-  opacity: 1; /* 이미지 표시 */
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 26px;
+  z-index: 500;
+  left: 50%;
+}
+
+.gradient-bar {
+position: absolute;
+width: 187px;
+height: 3091px;
+left: calc(50% - 187px/2 + 0.5px);
+top: 1393px;
+background: linear-gradient(180deg, #030615 0%, #051D31 42.67%, #051E32 53.12%, #051C30 74.27%, #030B1C 100%);
+z-index: 1;
 }

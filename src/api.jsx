@@ -1,4 +1,5 @@
-const BASE_URL = "http://fandom-k-api.vercel.app";
+const BASE_URL = "https://fandom-k-api.vercel.app";
+
 export async function getVoteData({ pageSize = 6 }) {
   const query = `/12-9/idols?pageSize=${pageSize}`;
   const response = await fetch(`${BASE_URL}/${query}`);
@@ -37,9 +38,7 @@ export async function getChartData({ gender, pageSize = 10 }) {
 }
 
 export async function getSponsershipData() {
-  const response = await fetch(
-    `https://fandom-k-api.vercel.app/12-9/donations?pageSize=10`
-  );
+  const response = await fetch(`${BASE_URL}/12-9/donations?pageSize=10`);
   if (!response.ok) {
     throw new Error("후원데이터를 가져오는데 실패했습니다.");
   }
@@ -51,7 +50,10 @@ export async function postDonation({ id, amount }) {
   const response = await fetch(
     `https://fandom-k-api.vercel.app/12-9/donations/${id}/contribute`,
     {
-      method: "POST",
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         amount: amount,
       }),
@@ -59,6 +61,26 @@ export async function postDonation({ id, amount }) {
   );
   if (!response.ok) {
     throw new Error("후원하는데 실패했습니다.");
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function postVote(idolId) {
+  if (!idolId) return;
+
+  const response = await fetch(`${BASE_URL}/12-9/votes`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      idolId,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error("투표하는데 실패했습니다.");
   }
   const data = await response.json();
   return data;

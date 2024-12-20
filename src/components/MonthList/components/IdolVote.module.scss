@@ -1,0 +1,116 @@
+@use "../../../styles/color.scss" as *;
+
+//idolChart에서 사용하는 scss
+.chartContents {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+  width: 477px;
+  height: 70px;
+
+  padding: 40px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.img {
+  width: 60px;
+  height: 60px;
+  top: 5px;
+  left: 5px;
+  gap: 8px;
+  border-radius: 40px;
+  opacity: 0px;
+  object-fit: cover;
+  border: 2px solid $brand-pink;
+}
+
+.chartInfo {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-grow: 1;
+  gap: 10px;
+  .rank {
+    color: $brand-orange;
+  }
+  .miniChart {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  .vote {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.chartGroup {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.chartVoteNum {
+  display: flex;
+  justify-content: flex-end;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.inputBtn {
+  display: none;
+}
+
+.inputBtn + .labelBtn {
+  /* 체크박스 만들기 */
+  width: 16px;
+  height: 16px;
+  border: 3px solid $brand-orange;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  border-radius: 10px;
+  user-select: none; /* 드래그 금지 */
+}
+
+.inputBtn:checked + .labelBtn {
+  /* 체크되었을 때 */
+  background: white;
+}
+
+/* 선택 시 투명한 빨간 오버레이 */
+.selectedOverlay {
+  width: 60px;
+  height: 60px;
+  top: 10px;
+  left: 19px;
+
+  border-radius: 40px;
+
+  object-fit: cover;
+
+  position: absolute;
+
+  background-color: $brand-orange; /* 투명 빨간색 */
+  /* 이미지와 동일한 모서리 둥글게 */
+  // display: none; /* 기본적으로 숨김 */
+  // pointer-events: none; /* 클릭 불가 */
+}
+
+/* 라디오 버튼 선택 시 오버레이 표시 */
+.inputBtn:checked ~ .selectedOverlay {
+  display: block;
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+}
+
+@media (max-width: 767px) {
+  .chartContents {
+    max-width: 390px;
+  }
+}

@@ -15,10 +15,11 @@ function SponsorshipItem({ item, handleSponsorModal }) {
   //버튼 후원가능 상태 표시
   const disable = !item.status;
 
-  //버튼 클릭시 팝업창 띄우기
+  //후원하기 버튼 클릭시 팝업창 띄우기
   const onclickSponsorButton = () => {
     handleSponsorModal(item);
   };
+
   return (
     <div className={styles.card}>
       <div className={styles.card_img_container}>
