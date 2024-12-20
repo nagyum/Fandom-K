@@ -88,6 +88,7 @@ function ListPage() {
     switch (modalContents) {
       case 1:
         return <SponsorshipModal data={sponsorData} />;
+
       case 2:
         return (
           <VoteModal
@@ -98,6 +99,7 @@ function ListPage() {
         );
       case 4:
         return <ChargeCreditModal onCharge={handleCharge} />;
+
       default:
         return null;
     }

@@ -1,9 +1,14 @@
+.outer {
+  overflow-y: auto;
+}
 
-.background{
+.background {
   position: relative;
   display: flex;
   flex-direction: column;
 }
+
+
 .page1 {
   background-color: #02000e;
   width: 100%;
@@ -12,9 +17,13 @@
   height: 1080px; /* 화면 전체 크기 */
   position: relative; /* 이미지 정렬 기준 */
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
    
 
 }
+
 
 
 
@@ -43,12 +52,15 @@
 
 
 .image-container {
-  position: relative;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+position: absolute;
+width: 1080px;
+height: 1080px;
+top: 0px;
+//background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(217, 217, 217, 0.4) 30.73%, rgba(217, 217, 217, 0.6) 51.04%, rgba(217, 217, 217, 0.4) 71.87%, rgba(217, 217, 217, 0) 100%);
+
 
 }
 
@@ -65,10 +77,22 @@
   align-items: center;
   position: absolute;
   top: 231px;
+  cursor: pointer;
  
 }
 
-.backgroundimg {
+.backgroundimg{
+  display: block;
+  justify-content: center;
+  position: absolute;
+  top: 95.4px;
+  width: 932.4px;
+  height: 781.2px;
+  
+  }
+  
+
+/*.backgroundimg {
   z-index: 1; 
   width: 932.4px; 
   height: 781.2px; 
@@ -76,7 +100,7 @@
   position: absolute;
   display: block;
   opacity: 1; 
-}
+}*/
 
 .buttondiv{
   display: flex;
@@ -85,7 +109,8 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 10px;
+  bottom: 120px;
+  cursor: pointer;
 }
 
 .button {
@@ -97,6 +122,7 @@
   line-height: 26px;
   z-index: 500;
   left: 50%;
+  cursor: pointer;
 }
 
 .gradient-bar {

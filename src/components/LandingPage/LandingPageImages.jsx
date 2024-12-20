@@ -7,6 +7,7 @@ const images = {
   screen1: require("../../assets/images/screen1.png"),
   screen2: require("../../assets/images/screen2.png"),
   screen3: require("../../assets/images/screen3.png"),
+  edgevector: require ("../../assets/images/edgevector.png"),
 };
 
 export default images;
