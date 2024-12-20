@@ -11,5 +11,3 @@ https://www.figma.com/design/lccVqOCzq7XCUYztyC7KlQ/%5BAAA%5DFandom-K
 https://fandom-k-api.vercel.app/docs/
 
 ## Fandom-K 홈페이지
-
-https://fandom-k.vercel.app

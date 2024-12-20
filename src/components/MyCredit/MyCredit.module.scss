@@ -1,0 +1,42 @@
+@import "../../styles/color.scss";
+
+.credit_icon {
+  width: 16px;
+  height: 16px;
+}
+.credit_state{
+  border-radius: 8px ;
+  border : 1px solid $white;
+  margin: 10px auto;
+  max-width: 1200px;
+  display:flex;
+  height: 131px;
+  justify-content: space-between;
+  padding: 78px;
+}
+
+.credit_charge_button{
+  background-color: transparent;
+  border:none;
+  color: $brand-orange ;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.credit_state_text{
+  font-size: 24px;
+  font-weight: 700;
+  position: relative;
+  bottom: 20px;
+}
+
+.myCredit_title{
+  font-size: 16px;
+  font-weight: 400;
+  color:rgb(247, 247, 247, 0.6);
+}
+
+.myCredit_state_point{
+  color : rgb(247, 247, 247, 0.87);
+}
