@@ -1,16 +1,4 @@
-const BASE_URL = "http://fandom-k-api.vercel.app";
-
-
-export async function getVoteData({ pageSize = 6 }) {
-  const query = `/12-9/idols?pageSize=${pageSize}`;
-  const response = await fetch(`${BASE_URL}/${query}`);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data: ${response.statusText}`);
-  }
-  const data = await response.json();
-  return data;
-}
-
+const BASE_URL = "https://fandom-k-api.vercel.app";
 //이미지, 순위의 숫자, 이름, 투표수 api ?
 
 export async function getIdolData({ pageSize = 16, cursor = null }) {
@@ -27,10 +15,11 @@ export async function getIdolData({ pageSize = 16, cursor = null }) {
   return data;
 }
 
-export async function getChartData({ gender, pageSize = 10 }) {
+export async function getChartData({ gender, pageSize = 10, nextCursor }) {
   const url = new URL(`12-9/charts/{gender}`, BASE_URL);
   url.searchParams.append("gender", gender);
   url.searchParams.append("pageSize", pageSize);
+  url.searchParams.append("nextCursor", nextCursor);
   const response = await fetch(url.toString());
   if (!response.ok) {
     throw new Error(`Failed to fetch data: ${response.statusText}`);
@@ -48,7 +37,6 @@ export async function getSponsershipData() {
 }
 
 export async function postDonation({ id, amount }) {
-
   const response = await fetch(
     `https://fandom-k-api.vercel.app/12-9/donations/${id}/contribute`,
     {
@@ -71,7 +59,7 @@ export async function postDonation({ id, amount }) {
 export async function postVote(idolId) {
   if (!idolId) return;
 
-  const response = await fetch(`/12-9/votes`, {
+  const response = await fetch(`${BASE_URL}/12-9/votes`, {
     method: "POST",
     headers: {
       accept: "application/json",
