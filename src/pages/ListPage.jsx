@@ -9,7 +9,6 @@ import ModalWrap from "../components/Modal/ModalWrap";
 import MediaModalWrap from "../components/Modal/MediaModalwrap";
 import VoteModal from "../components/MonthList/components/VoteModal";
 import ChargeCreditModal from "../components/Modal/ChargeCreditModal";
-
 import Footer from "../components/Footer/Footer";
 import useDevice from "../hooks/useDevice"; // 미디어 쿼리
 
@@ -23,7 +22,6 @@ function ListPage() {
   const [myCreditData, setMyCreditData] = useState();
   const [pageSize, setPageSize] = useState(10);
   const [gender, setGender] = useState("female");
-
   const { mode } = useDevice(); // 모바일/데스크톱 감지
   useScrollTop(); // 스크롤 초기화
 
@@ -62,7 +60,6 @@ function ListPage() {
   //크레딧 충전 모달 팝업 띄우기
   const handleMyCreditModal = () => {
     setIsModal(true);
-
     // setMyCreditData(data);
     setModalContents(4);
     setTimeout(() => {
@@ -109,16 +106,12 @@ function ListPage() {
   return (
     <div>
       <Header />
-
       <MyCredit
         handleMyCreditModal={handleMyCreditModal}
         myCreditData={myCreditData}
       />
-
       <MyCredit />
-
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
-
       {isModal &&
         (modalContents === 2 && mode === "mobile" ? (
           // VoteModal을 모바일 환경에서 MediaModalWrap으로 감싸기
