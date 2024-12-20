@@ -5,6 +5,7 @@ import IdolVote from "../components/IdolVote";
 import CustomButton from "../../CustomButtom/CustomButton";
 import CreditModal from "../../Modal/LackingCredit";
 import styles from "./VoteModal.module.scss";
+import useCredit from "../../../hooks/useCredit";
 
 function VoteModal({ data, gender, onVoteUpdate }) {
   const [error, setError] = useState(null);
@@ -19,13 +20,15 @@ function VoteModal({ data, gender, onVoteUpdate }) {
     }
   };
 
+  const { credit, subtractCredit } = useCredit();
+
   const handleVoteClick = () => {
     if (!selectedIdolId) {
       alert("아이돌을 먼저 선택해주세요");
       return;
     }
 
-    const userCredits = 10000; // 유저 크레딧
+    const userCredits = credit.toLocaleString(); // 유저 크레딧
     if (userCredits < 1000) {
       setIsCreditModalOpen(true); // 크레딧 부족 시 모달 오픈
     } else {
@@ -37,6 +40,7 @@ function VoteModal({ data, gender, onVoteUpdate }) {
               : idol
           )
         );
+        subtractCredit(1000);
         alert("투표가 완료되었습니다!");
       });
     }
@@ -62,7 +66,7 @@ function VoteModal({ data, gender, onVoteUpdate }) {
     fetchData().then((res) => {
       setIdolList(res?.idols || []);
     });
-  }, [pageSize]);
+  }, [gender, pageSize]);
 
   const sortedIdols = [...idolList].sort((a, b) => b.totalVotes - a.totalVotes);
 
@@ -71,7 +75,7 @@ function VoteModal({ data, gender, onVoteUpdate }) {
       <div>
         <span className={styles.voteTitle}>{modalTitle}</span>
         {idolList?.length > 0 ? (
-          <ul className={styles.scrollbar}>
+          <ul className={styles.contents}>
             {idolList.map((idol, index) => (
               <IdolVote
                 key={idol.id}

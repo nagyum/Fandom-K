@@ -13,6 +13,7 @@ function MonthsList({
   setPageSize,
   gender,
   setGender,
+  isModal,
 }) {
   const [idolList, setIdolList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -62,7 +63,7 @@ function MonthsList({
       setIdolList(res?.idols || []);
       setError(null);
     });
-  }, [gender, pageSize]);
+  }, [gender, pageSize, isModal]);
 
   const sortedIdols = [...idolList].sort((a, b) => b.totalVotes - a.totalVotes);
 

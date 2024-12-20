@@ -6,14 +6,6 @@ import "./styles/global.scss";
 import api from "./api";
 
 function App() {
-  // const handleClick = async () => {
-  //   try {
-  //     const result = await api();
-  //     console.log("API 응답:", result);
-  //   } catch (error) {
-  //     console.error("에러:", error);
-  //   }
-  // };
   return (
     <>
       <BrowserRouter>
@@ -23,7 +15,6 @@ function App() {
           <Route path="mypage" element={<MyPage />} />
         </Routes>
       </BrowserRouter>
-      {/* <button onClick={handleClick}>보내기</button> */}
     </>
   );
 }
