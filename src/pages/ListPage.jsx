@@ -95,17 +95,13 @@ function ListPage() {
         return <SponsorshipModal data={sponsorData} />;
       case 2: //투표하기
 
-        return <VoteModal />;
+        return  <VoteModal
+        data={voteData}
+        setPageSize={setPageSize}
+        gender={gender}
+      />
       case 4: //크레딧 충전
         return <ChargeCreditModal onCharge={handleCharge} />;
-
-        return (
-          <VoteModal
-            data={voteData}
-            setPageSize={setPageSize}
-            gender={gender}
-          />
-        );
 
       default:
         break;
