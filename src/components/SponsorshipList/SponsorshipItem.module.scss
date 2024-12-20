@@ -45,14 +45,16 @@
 .card_button {
   position: absolute;
   bottom: 20px;
-  width: 234px;
+  left: 24px;
+  right: 24px;
   height: 40px;
 }
 
 .card_button_disable {
   position: absolute;
   bottom: 20px;
-  width: 234px;
+  left: 24px;
+  right: 24px;
   height: 40px;
   background: $gray-cool-100;
   cursor: default;

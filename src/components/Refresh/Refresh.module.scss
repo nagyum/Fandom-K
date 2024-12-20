@@ -1,0 +1,19 @@
+.refresh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.refresh_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.refresh_content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
