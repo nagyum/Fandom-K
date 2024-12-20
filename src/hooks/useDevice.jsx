@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useDevice = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth); // 초기값 설정
 
   let mode = "desktop";
 
@@ -14,7 +14,8 @@ const useDevice = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    /*unmount 될때 기존이벤트 제거*/
+
+    // unmount 시 이벤트 제거
     return () => {
       window.removeEventListener("resize", handleResize);
     };
