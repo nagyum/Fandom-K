@@ -1,16 +1,28 @@
+import { useEffect, useState } from "react";
 import Credit from "../../assets/icons/credit.png";
+import useDevice from "../../hooks/useDevice";
 import CustomButton from "../CustomButtom/CustomButton";
 import styles from "./SponsorshipItem.module.scss";
 
 function SponsorshipItem({ item, handleSponsorModal }) {
+  const [cardWidth, setCardWidth] = useState(282);
   //현재 날짜와 마감일의 차이를 일 단위로 출력
   const todayDate = new Date();
   const endDate = new Date(item.deadline);
   const diffTime = endDate.getTime() - todayDate.getTime();
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-  //진행도 바의 width길이 조절 (현재 카드 최대길이 282px)
-  const progress = (item.receivedDonations / item.targetDonation) * 282;
+  const { mode } = useDevice();
+  useEffect(() => {
+    if (mode === "desktop" || mode === "tablet") {
+      setCardWidth(282);
+    } else if (mode === "mobile") {
+      setCardWidth(158);
+    }
+  }, [mode]);
+
+  //진행도 바의 width길이 조절 (현재 카드 최대길이 282px, 158px)
+  const progress = (item.receivedDonations / item.targetDonation) * cardWidth;
 
   //버튼 후원가능 상태 표시
   const disable = !item.status;
