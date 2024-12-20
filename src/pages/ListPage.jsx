@@ -112,22 +112,36 @@ function ListPage() {
         myCreditData={myCreditData}
       />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
-      {isModal && (
-        <ModalWrap
-          style={{ opacity: `${modalOpacity}%` }}
-          handleDeleteModal={handleDeleteModal}
-        >
-          <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
-            <ModalContents modalContents={modalContents} />
-          </div>
-        </ModalWrap>
-      )}
+
+      {isModal &&
+        (modalContents === 2 && mode === "mobile" ? (
+          // VoteModal을 모바일 환경에서 MediaModalWrap으로 감싸기
+          <MediaModalWrap
+            style={{ opacity: `${modalOpacity}%` }}
+            handleDeleteModal={handleDeleteModal}
+          >
+            <div>
+              <ModalContents modalContents={modalContents} />
+            </div>
+          </MediaModalWrap>
+        ) : (
+          // 다른 모든 모달은 ModalWrap 사용
+          <ModalWrap
+            style={{ opacity: `${modalOpacity}%` }}
+            handleDeleteModal={handleDeleteModal}
+          >
+            <div style={{ maxHeight: "100vh", overflowY: "auto" }}>
+              <ModalContents modalContents={modalContents} />
+            </div>
+          </ModalWrap>
+        ))}
       <MonthsList
         handleVoteModal={handleVoteModal}
         pageSize={pageSize}
         setPageSize={setPageSize}
         gender={gender}
         setGender={setGender}
+        isModal={isModal}
       />
       <Footer />
     </div>
