@@ -32,7 +32,7 @@
 .card_list_container {
   display: flex;
   gap: 24px;
-  transition: all 1s;
+  // transition: all 1s;
 }
 
 .card_wrap {
@@ -70,10 +70,12 @@
 
   .sponsor_wrap {
     margin-left: 24px;
+    gap: 24px;
   }
 
   .card_list_container {
     gap: 16px;
+    transition: none;
   }
 
   .card_handleButton {
@@ -88,10 +90,12 @@
 
   .sponsor_wrap {
     margin-left: 24px;
+    gap: 16px;
   }
 
   .card_list_container {
     gap: 8px;
+    transition: none;
   }
 
   .card_handleButton {

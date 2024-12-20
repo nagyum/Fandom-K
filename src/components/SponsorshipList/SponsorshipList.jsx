@@ -1,22 +1,26 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SponsorshipItem from "./SponsorShipItem";
 import styles from "./SponsorshipList.module.scss";
 import { getSponsershipData } from "../../api";
 import leftIcon from "../../assets/icons/lefticon.png";
 import rightIcon from "../../assets/icons/righticon.png";
-import useDevice from "../../hooks/useDevice";
+import useTouchScroll from "../../hooks/useTouchScroll";
 
 function SponsorshipList({ handleSponsorModal }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
   const [IsLoading, setIsloading] = useState(false);
-  const [translateX, setTranslateX] = useState(0);
+  const [translateX, setsTranslateX] = useState(0);
   //버튼 컴포넌트 opacity 애니메이션
   const [leftBtnOpa, setLeftBtnOpa] = useState(0);
   const [rightBtnOpa, setRightBtnOpa] = useState(100);
   //버튼 컴포넌트 pointer 없애기
   const [leftBtnCursor, setLeftBtnCursor] = useState("none");
   const [rightBtnCursor, setRightBtnCursor] = useState("auto");
+  const [transition, setTransition] = useState("none");
+  //터치 스크롤 가능하게 하기
+  const listRef = useRef();
+  useTouchScroll(listRef);
 
   const handleLoadSponsor = async () => {
     try {
@@ -36,6 +40,7 @@ function SponsorshipList({ handleSponsorModal }) {
   // 캐러셀, 282px(카드 크기) + 24px(여백 크기) = 306px씩 이동
   let style = `translateX(${translateX}px)`;
   const onclickLeftButton = () => {
+    setTransition("all 1s");
     if (translateX === 0) {
       return;
     } else if (translateX === -306) {
@@ -44,10 +49,14 @@ function SponsorshipList({ handleSponsorModal }) {
     }
     setRightBtnOpa(100);
     setRightBtnCursor("auto");
-    setTranslateX((pre) => pre + 306);
+    setsTranslateX((pre) => pre + 306);
+    setTimeout(() => {
+      setTransition("none");
+    }, 1000);
   };
 
   const onclickRightButton = () => {
+    setTransition("all 1s");
     if (translateX === -612) {
       return;
     } else if (translateX === -306) {
@@ -56,7 +65,10 @@ function SponsorshipList({ handleSponsorModal }) {
     }
     setLeftBtnOpa(100);
     setLeftBtnCursor("auto");
-    setTranslateX((pre) => pre - 306);
+    setsTranslateX((pre) => pre - 306);
+    setTimeout(() => {
+      setTransition("none");
+    }, 1000);
   };
 
   useEffect(() => {
@@ -85,7 +97,8 @@ function SponsorshipList({ handleSponsorModal }) {
           {error?.message && <span>{error.message}</span>}
           <div
             className={styles.card_list_container}
-            style={{ transform: style }}
+            style={{ transform: style, transition: `${transition}` }}
+            ref={listRef}
           >
             {items.map((item) => {
               return (
