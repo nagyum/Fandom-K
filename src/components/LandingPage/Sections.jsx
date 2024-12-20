@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./SectionsStyles.module.css";
+import styles from "./SectionsStyles.module.scss";
 import "../../styles/color.scss";
 import "../../styles/font.scss";
 
