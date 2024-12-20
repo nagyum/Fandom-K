@@ -24,6 +24,7 @@ function ChargeCreditModal() {
     if(selectedCredit>0){
       addCredit(selectedCredit);//선택한 금액만큼 크레딧 충전
       setSelectedCredit(0); 
+     
     }
   };
   
