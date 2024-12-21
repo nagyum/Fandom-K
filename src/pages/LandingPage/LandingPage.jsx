@@ -64,8 +64,6 @@ function LandingPage() {
                   <CustomButton
                     onClick={handleButtonClick}
                     className={styles.button}
-                    width={477}
-                    height={48}
                   >
                     지금 시작하기
                   </CustomButton>
@@ -74,83 +72,49 @@ function LandingPage() {
             </div>
           </div>
         </motion.div>
-        
-      
-          <div className={styles["gradient-bar"]}></div>
-      
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{
-            ease: "easeInOut",
-            duration: 2,
-            x: { duration: 1 },
-          }}
-        >
-          <div className={styles.page2}>
-          
-            <Section
-              donate="후원하기"
-              title={
-                <>
-                  좋아하는 아이돌에게 <br /> 쉽게 조공해 보세요
-                </>
-              }
-              bgimg={images.bgimg2}
-              screenimg={images.screen1}
-            />
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{
-            ease: "easeInOut",
-            duration: 2,
-            x: { duration: 1 },
-          }}
-        >
-          <div className={styles.page3}>
-            <Section
-              donate="이달의 아티스트"
-              title={
-                <>
-                  내 아티스트에게 1등의 <br /> 영예를 선물하세요
-                </>
-              }
-              bgimg={images.bgimg3}
-              screenimg={images.screen2}
-            />
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{
-            ease: "easeInOut",
-            duration: 2,
-            x: { duration: 1 },
-          }}
-        >
-          <div className={styles.page4}>
-            <Section
-              donate="나만의 아티스트"
-              title={
-                <>
-                  좋아하는 아티스트들의 <br /> 소식을 모아보세요
-                </>
-              }
-              bgimg={images.bgimg4}
-              screenimg={images.screen3}
-            />
-          </div>
-        </motion.div>
-        
+
+       
+
+        <div className={styles.page2}>
+          <Section
+            donate="후원하기"
+            title={
+              <>
+                좋아하는 아이돌에게 <br /> 쉽게 조공해 보세요
+              </>
+            }
+            bgimg={images.bgimg2}
+            screenimg={images.screen1}
+          />
+        </div>
+
+        <div className={styles.page3}>
+          <Section
+            donate="이달의 아티스트"
+            title={
+              <>
+                내 아티스트에게 1등의 <br /> 영예를 선물하세요
+              </>
+            }
+            bgimg={images.bgimg3}
+            screenimg={images.screen2}
+          />
+        </div>
+
+        <div className={styles.page4}>
+          <Section
+            donate="나만의 아티스트"
+            title={
+              <>
+                좋아하는 아티스트들의 <br /> 소식을 모아보세요
+              </>
+            }
+            bgimg={images.bgimg4}
+            screenimg={images.screen3}
+          />
+        </div>
+        <div className={styles["gradient-bar"]}></div>
       </div>
-    
     </EdgeGradient>
   );
 }
