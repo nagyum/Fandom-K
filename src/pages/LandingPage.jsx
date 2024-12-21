@@ -74,18 +74,10 @@ function LandingPage() {
             </div>
           </div>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{
-            ease: "easeInOut",
-            duration: 2,
-            x: { duration: 1 },
-          }}
-        >
+        
+      
           <div className={styles["gradient-bar"]}></div>
-        </motion.div>
+      
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -156,6 +148,7 @@ function LandingPage() {
             />
           </div>
         </motion.div>
+        
       </div>
     
     </EdgeGradient>
