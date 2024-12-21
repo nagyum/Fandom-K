@@ -5,7 +5,7 @@ import CustomButton from "../CustomButtom/CustomButton";
 import { postDonation } from "../../api";
 import useCredit from "../../hooks/useCredit";
 
-function SponsorshipModal({ data, handleDeleteModal }) {
+function SponsorshipModal({ data, handleDeleteModal, notifySponsor }) {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const credit = localStorage.getItem("credit");
@@ -33,9 +33,9 @@ function SponsorshipModal({ data, handleDeleteModal }) {
     }
     try {
       const result = await postDonation({ id: data.id, amount: input });
+      notifySponsor();
       data.receivedDonations = Number(data.receivedDonations) + Number(input);
       subtractCredit(Number(input));
-      alert(`후원되었습니다.`);
       setInput("");
       handleDeleteModal();
     } catch (e) {
@@ -56,49 +56,51 @@ function SponsorshipModal({ data, handleDeleteModal }) {
   }
 
   return (
-    <div className={styles.card}>
-      <h1 className={styles.title}>후원하기</h1>
-      <div className={styles.card_container}>
-        <div className={styles.card_wrap}>
-          <div>
-            <img
-              className={styles.card_img}
-              src={data.idol.profilePicture}
-              alt="아이돌 이미지"
-            />
-            <div className={styles.card_title_container}>
-              <span className={styles.card_subtitle}>{data.subtitle}</span>
-              <h2 className={styles.card_title}>{data.title}</h2>
+    <>
+      <div className={styles.card}>
+        <h1 className={styles.title}>후원하기</h1>
+        <div className={styles.card_container}>
+          <div className={styles.card_wrap}>
+            <div>
+              <img
+                className={styles.card_img}
+                src={data.idol.profilePicture}
+                alt="아이돌 이미지"
+              />
+              <div className={styles.card_title_container}>
+                <span className={styles.card_subtitle}>{data.subtitle}</span>
+                <h2 className={styles.card_title}>{data.title}</h2>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className={styles.credit_container}>
-        <div className={styles.credit_input_container}>
-          <input
-            type="number"
-            className={`${styles.credit_input} ${credit_error}`}
-            placeholder="크레딧 입력"
-            onChange={handleInput}
-            value={input}
-          />
-          <img
-            className={styles.credit_logo}
-            src={creditImg}
-            alt="크레딧 이미지"
-          />
-          {error && <p className={styles.error_mes}>{error}</p>}
+        <div className={styles.credit_container}>
+          <div className={styles.credit_input_container}>
+            <input
+              type="number"
+              className={`${styles.credit_input} ${credit_error}`}
+              placeholder="크레딧 입력"
+              onChange={handleInput}
+              value={input}
+            />
+            <img
+              className={styles.credit_logo}
+              src={creditImg}
+              alt="크레딧 이미지"
+            />
+            {error && <p className={styles.error_mes}>{error}</p>}
+          </div>
         </div>
+        <CustomButton
+          className={submitBtn}
+          width={295}
+          height={42}
+          onClick={onclickCreditBtn}
+        >
+          후원하기
+        </CustomButton>
       </div>
-      <CustomButton
-        className={submitBtn}
-        width={295}
-        height={42}
-        onClick={onclickCreditBtn}
-      >
-        후원하기
-      </CustomButton>
-    </div>
+    </>
   );
 }
 
