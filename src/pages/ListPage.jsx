@@ -87,8 +87,12 @@ function ListPage() {
   function ModalContents({ modalContents }) {
     switch (modalContents) {
       case 1:
-        return <SponsorshipModal data={sponsorData} />;
-
+        return (
+          <SponsorshipModal
+            data={sponsorData}
+            handleDeleteModal={handleDeleteModal}
+          />
+        );
       case 2:
         return (
           <VoteModal
@@ -99,7 +103,6 @@ function ListPage() {
         );
       case 4:
         return <ChargeCreditModal onCharge={handleCharge} />;
-
       default:
         return null;
     }
@@ -112,7 +115,6 @@ function ListPage() {
         handleMyCreditModal={handleMyCreditModal}
         myCreditData={myCreditData}
       />
-      <MyCredit />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal &&
         (modalContents === 2 && mode === "mobile" ? (
