@@ -1,13 +1,13 @@
 import React from "react";
-import "../styles/color.scss";
-import "../styles/font.scss";
-import logonobackground from "../assets/images/logonobackground.svg";
-import styles from "../components/LandingPage/LandingPageStyles.module.scss";
-import Section from "../components/LandingPage/Sections.jsx";
-import images from "../components/LandingPage/LandingPageImages.jsx";
-import CustomButton from "../components/CustomButtom/CustomButton.jsx";
+import "../../styles/color.scss";
+import "../../styles/font.scss";
+import logonobackground from "../../assets/images/logonobackground.svg";
+import styles from "./LandingPageStyles.module.scss";
+import Section from "../../components/LandingPage/Sections.jsx";
+import images from "../../components/LandingPage/LandingPageImages.jsx";
+import CustomButton from "../../components/CustomButtom/CustomButton.jsx";
 import { useNavigate } from "react-router-dom";
-import EdgeGradient from "../components/LandingPage/EdgeGradient.jsx";
+import EdgeGradient from "../../components/LandingPage/EdgeGradient.jsx";
 import { motion } from "framer-motion";
 
 function LandingPage() {
