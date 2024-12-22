@@ -1,7 +1,13 @@
 import { RefObject, useRef, useEffect, useCallback } from "react";
 
 //https://velog.io/@timosean/React-%EB%A7%88%EC%9A%B0%EC%8A%A4%EB%A1%9C-%EB%81%8C%EC%96%B4%EC%84%9C-%EC%8A%A4%ED%81%AC%EB%A1%A4%ED%95%98%EA%B8%B0-Custom-Hook
-const useTouchScroll = (containerRef) => {
+const useTouchScroll = (
+  containerRef,
+  offLeftBtn,
+  onLeftBtn,
+  offRightBtn,
+  onRightBtn
+) => {
   const startX = useRef(0);
   const nowX = useRef(0);
   const endX = useRef(0);
@@ -85,6 +91,29 @@ const useTouchScroll = (containerRef) => {
         containerRef.current.style.transition = `all 0.3s ease`;
         containerX.current =
           containerClientWidth.current - containerScrollWidth.current;
+      }
+      console.log(
+        containerX.current,
+        containerClientWidth.current,
+        containerScrollWidth.current
+      );
+
+      // offRightBtn, onrightBtn
+      if (containerX.current === 0) {
+        offLeftBtn();
+        onRightBtn();
+      } else if (
+        containerClientWidth.current - containerScrollWidth.current <
+        containerX.current
+      ) {
+        onLeftBtn();
+        onRightBtn();
+      } else if (
+        containerClientWidth.current - containerScrollWidth.current >=
+        containerX.current
+      ) {
+        onLeftBtn();
+        offRightBtn();
       }
 
       window.removeEventListener("mousemove", onScrollMove);
