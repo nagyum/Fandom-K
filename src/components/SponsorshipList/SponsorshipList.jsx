@@ -147,7 +147,6 @@ function SponsorshipList({ handleSponsorModal }) {
         <Refresh handleLoad={handleLoadSponsor} height={402} />
       ) : IsLoading ? (
         <div
-          className={styles.card_list_container}
           style={{ display: "flex", gap: "24px", margin: "0 auto" }} // Flexbox로 가로 정렬
         >
           {Array.from({ length: 4 }).map((_, index) => (
@@ -159,7 +158,7 @@ function SponsorshipList({ handleSponsorModal }) {
                 gap: "16px",
               }}
             >
-              <SponsorLoading key={index} width="260px" height="260px" />
+              <SponsorLoading width="260px" height="260px" />
               <div
                 style={{
                   display: "flex",
@@ -167,8 +166,8 @@ function SponsorshipList({ handleSponsorModal }) {
                   gap: "25px",
                 }}
               >
-                <SponsorLoading key={index} width="220px" height="30px" />
-                <SponsorLoading key={index} width="260px" height="5px" />
+                <SponsorLoading width="220px" height="30px" />
+                <SponsorLoading width="260px" height="5px" />
               </div>
             </div>
           ))}
@@ -187,7 +186,6 @@ function SponsorshipList({ handleSponsorModal }) {
             />
           </div>
           <div className={styles.card_list}>
-            {IsLoading && <p className={styles.loading}>로딩중...</p>}
             <div
               className={styles.card_list_container}
               style={{ transform: transform, transition: `${transition}` }}
