@@ -5,10 +5,18 @@ import CustomButton from "../../CustomButtom/CustomButton";
 import LackingCreditModal from "../../Modal/LackingCredit";
 import styles from "./VoteModal.module.scss";
 import useCredit from "../../../hooks/useCredit";
-import { toast, ToastContainer } from "react-toastify";
+// import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // 스타일 추가
 
-function VoteModal({ data, gender, onVoteUpdate, onClose }) {
+function VoteModal({
+  data,
+  gender,
+  onVoteUpdate,
+  onClose,
+  notifyWarn,
+  notifyError,
+  notifySuccess,
+}) {
   const [error, setError] = useState(null);
   const [isCreditModalOpen, setIsCreditModalOpen] = useState(false);
   const [idolList, setIdolList] = useState(data);
@@ -29,7 +37,7 @@ function VoteModal({ data, gender, onVoteUpdate, onClose }) {
 
   const handleVoteClick = () => {
     if (!selectedIdolId) {
-      toast.warn("아이돌을 먼저 선택해주세요");
+      notifyWarn();
       return;
     }
 
@@ -47,12 +55,13 @@ function VoteModal({ data, gender, onVoteUpdate, onClose }) {
             )
           );
           subtractCredit(1000);
-          toast.success(
-            `${selectedIdol.group} ${selectedIdol.name} 투표 완료!`
-          ); // 선택된 아이돌 이름 출력
+          notifySuccess({ group: selectedIdol.group, name: selectedIdol.name });
+          // toast.success(
+          //   `${selectedIdol.group} ${selectedIdol.name} 투표 완료!`
+          // ); // 선택된 아이돌 이름 출력
         })
         .catch((err) => {
-          toast.error("투표에 실패했습니다. 다시 시도해주세요.");
+          notifyError();
         });
     }
   };
@@ -132,7 +141,7 @@ function VoteModal({ data, gender, onVoteUpdate, onClose }) {
       </div>
 
       {/* ToastContainer를 최상단에 위치시키기 */}
-      <ToastContainer position="top-right" autoClose={3000} />
+      {/* <ToastContainer position="top-right" autoClose={3000} /> */}
     </>
   );
 }
