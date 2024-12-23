@@ -31,6 +31,22 @@ function ListPage() {
     toast.success("후원되었습니다.");
   };
 
+  const notifyCharge = () => {
+    toast.success("충전이 완료되었습니다.");
+  };
+
+  const notifyWarn = () => {
+    toast.warn("아이돌을 먼저 선택해주세요");
+  };
+
+  const notifyError = () => {
+    toast.error("투표에 실패했습니다. 다시 시도해주세요.");
+  };
+
+  const notifySuccess = ({ group, name }) => {
+    toast.success(`${group} ${name} 투표 완료!`);
+  };
+
   // 모달이 열릴 때 배경 스크롤 비활성화
   useEffect(() => {
     if (isModal) {
@@ -104,10 +120,18 @@ function ListPage() {
             data={voteData}
             setPageSize={setPageSize}
             gender={gender}
+            notifyWarn={notifyWarn}
+            notifyError={notifyError}
+            notifySuccess={notifySuccess}
           />
         );
       case 4:
-        return <ChargeCreditModal onCharge={handleCharge} />;
+        return (
+          <ChargeCreditModal
+            onCharge={handleCharge}
+            notifyCharge={notifyCharge}
+          />
+        );
       default:
         return null;
     }
@@ -153,6 +177,7 @@ function ListPage() {
         setGender={setGender}
         isModal={isModal}
       />
+      <h1 onClick={notifySponsor}>왜이래</h1>
       <Footer />
       <ToastContainer position="top-right" autoClose={3000} />
     </div>

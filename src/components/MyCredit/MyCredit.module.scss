@@ -1,13 +1,14 @@
 @import "../../styles/color.scss";
 
 .credit_icon {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: auto;
+  vertical-align: bottom; // 높이에서 위치 조정하는방법
 }
-.credit_state {
-  border-radius: 8px;
-  border: 1px solid $white;
-  margin: 10px auto;
+.credit_state{
+  border-radius: 8px ;
+  border : 1px solid $white;
+  margin: 50px auto;
   max-width: 1200px;
   display: flex;
   height: 131px;
@@ -28,15 +29,48 @@
   font-size: 24px;
   font-weight: 700;
   position: relative;
-  bottom: 20px;
+  bottom: 30px;
+
 }
 
 .myCredit_title {
   font-size: 16px;
   font-weight: 400;
   color: rgb(247, 247, 247, 0.6);
+  margin-bottom: 14px;
 }
 
 .myCredit_state_point {
   color: rgb(247, 247, 247, 0.87);
+}
+
+@media (min-width: 376px) and (max-width:767px){
+ 
+  .credit_state {
+    max-width:696px;
+    padding: 64px;
+    margin : 24px;
+}
+}
+
+@media (max-width: 375px){
+  .credit_state{
+    max-width: 327px;
+    height: 87px;
+    padding: 20px;
+  }
+
+  .myCredit_title{
+    font-size: 12px;
+    margin-bottom:8px;
+  }
+  .credit_state_text{
+    font-size:20px;
+    bottom: 2px;
+  }
+  .credit_charge_button{
+    font-size : 13px;
+  }
+
+
 }
