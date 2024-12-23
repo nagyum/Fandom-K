@@ -9,6 +9,7 @@ import rightIcon from "../../assets/icons/righticon.png";
 import plusIcon from "../../assets/icons/plusIcon.png";
 import IdolCard from "../../components/IdolCard/IdolCard";
 import CustomButton from "../../components/CustomButtom/CustomButton";
+import backgroundImg from "../../assets/images/Vector 3.png";
 
 //TODO : 관심있는 아이돌 추가하면, idolList에 추가한만큼 getIdolData..?
 
@@ -155,6 +156,10 @@ function MyPage() {
   return (
     <div>
       <Header />
+      <img
+        style={{ position: "absolute", top: "0", zIndex: "99" }}
+        src={backgroundImg}
+      />
       <main className={styles.mypage__main}>
         <section className={styles.favorite_section}>
           <h2 className={styles.section__title}>내가 관심있는 아이돌</h2>

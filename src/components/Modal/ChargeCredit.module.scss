@@ -1,44 +1,43 @@
 @import "../../styles/color.scss";
 
-.credit_title{
-    font-size: 18px;
-    font-weight: 600;
+.credit_title {
+  font-size: 18px;
+  font-weight: 600;
 }
 
-.charge_credit_icon{
-    width: 11px;
-    height: 16px;
-} 
-
-.credit_choice{
-    width: 295px;
-    height: 62px;
-    border:1px solid $white;
-    border-radius: 8px;
-    background-color: transparent;
-    color:$white;
-    font-size: 20px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    transition:border-color 0.3s, color 0.3s;
-    padding : 20px;
-
-    &.selected {
-       border-color:  $brand-orange; //선택된경우 빨간색테두리
-        color :$brand-orange; // 텍스트및 아이콘도 빨간색으로 
-}
+.charge_credit_icon {
+  width: 11px;
+  height: 16px;
 }
 
+.credit_choice {
+  width: 295px;
+  height: 62px;
+  border: 1px solid $white;
+  border-radius: 8px;
+  background-color: transparent;
+  color: $white;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
+  padding: 20px;
 
-.credit_modal{
-    display:grid;
-    gap:10px;
+  &.selected {
+    border-color: $brand-orange; //선택된경우 빨간색테두리
+    color: $brand-orange; // 텍스트및 아이콘도 빨간색으로
+  }
 }
 
-.charge_button{
-    width: 295px;
-    height: 42px;
+.credit_modal {
+  display: grid;
+  gap: 10px;
+}
+
+.charge_button {
+  width: 295px;
+  height: 42px;
 }

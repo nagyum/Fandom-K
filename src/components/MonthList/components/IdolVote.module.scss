@@ -10,21 +10,10 @@
   margin-top: 10px;
   width: 477px;
   height: 70px;
+  cursor: pointer;
 
   padding: 40px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.img {
-  width: 60px;
-  height: 60px;
-  top: 5px;
-  left: 5px;
-  gap: 8px;
-  border-radius: 40px;
-  opacity: 0px;
-  object-fit: cover;
-  border: 2px solid $brand-pink;
 }
 
 .chartInfo {
@@ -65,48 +54,63 @@
   display: none;
 }
 
-.inputBtn + .labelBtn {
-  /* 체크박스 만들기 */
-  width: 16px;
-  height: 16px;
-  border: 3px solid $brand-orange;
-  display: inline-block;
-  cursor: pointer;
-  vertical-align: middle;
-  border-radius: 10px;
-  user-select: none; /* 드래그 금지 */
-}
-
-.inputBtn:checked + .labelBtn {
-  /* 체크되었을 때 */
-  background: white;
-}
-
-/* 선택 시 투명한 빨간 오버레이 */
-.selectedOverlay {
-  width: 60px;
-  height: 60px;
-  top: 10px;
-  left: 19px;
-
-  border-radius: 40px;
-
-  object-fit: cover;
-
+.click_icon {
   position: absolute;
+  top: 15px;
+  left: 13px;
+  width: 40px;
+  height: 40px;
 
-  background-color: $brand-orange; /* 투명 빨간색 */
-  /* 이미지와 동일한 모서리 둥글게 */
-  // display: none; /* 기본적으로 숨김 */
-  // pointer-events: none; /* 클릭 불가 */
+  pointer-events: none; // 아이콘이 클릭을 방해하지 않도록 함
 }
 
-/* 라디오 버튼 선택 시 오버레이 표시 */
-.inputBtn:checked ~ .selectedOverlay {
-  display: block;
-}
+.add_idol {
+  &_image_container {
+    position: relative; //before 요소의 기준점
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
 
-@media (max-width: 1199px) and (min-width: 768px) {
+    //이미지 컨테이너 위에 원형 오버레이 생성하기.
+    &::before {
+      content: ""; //가상 요소 생성
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, $brand-orange, $brand-pink);
+      opacity: 0; // 기본 상태는 투명
+      border-radius: 50%;
+      object-fit: cover;
+      pointer-events: none; // 이미지 클릭 방해 제거
+      transition: opacity 0.3s ease; // 부드러운 전환 효과 추가// 이미지 클릭 방해 제거(체크 표시때문에 이미지가 안눌림)
+    }
+    &.clicked::before {
+      opacity: 0.5; // 클릭 시 배경 보이기
+    }
+  }
+
+  &_image {
+    width: 60px;
+    height: 60px;
+    top: 5px;
+    left: 5px;
+    gap: 8px;
+    border-radius: 40px;
+    opacity: 0px;
+    object-fit: cover;
+    border: 2px solid $brand-pink;
+  }
+  &_image_clicked {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 60px;
+    height: 60px;
+  }
 }
 
 @media (max-width: 767px) {
