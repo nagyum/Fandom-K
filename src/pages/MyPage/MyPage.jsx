@@ -12,6 +12,7 @@ import CustomButton from "../../components/CustomButtom/CustomButton";
 import Refresh from "../../components/Refresh/Refresh";
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "../../components/Footer/Footer";
+import backgroundImg from "../../assets/images/Vector 3.png";
 
 function MyPage() {
   const { mode } = useDevice();
