@@ -1,10 +1,20 @@
 .teamName {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   margin: 30px;
   padding-top: 15px;
 
   border-top: 1px solid rgba(255, 255, 255, 0.5);
+  max-width: 1360px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.footer_github {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }

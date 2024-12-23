@@ -112,7 +112,7 @@ function ListPage() {
         handleMyCreditModal={handleMyCreditModal}
         myCreditData={myCreditData}
       />
-      <MyCredit />
+
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal &&
         (modalContents === 2 && mode === "mobile" ? (

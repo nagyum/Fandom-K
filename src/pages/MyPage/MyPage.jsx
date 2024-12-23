@@ -9,21 +9,26 @@ import rightIcon from "../../assets/icons/righticon.png";
 import plusIcon from "../../assets/icons/plusIcon.png";
 import IdolCard from "../../components/IdolCard/IdolCard";
 import CustomButton from "../../components/CustomButtom/CustomButton";
-
-//TODO : 관심있는 아이돌 추가하면, idolList에 추가한만큼 getIdolData..?
+import Refresh from "../../components/Refresh/Refresh";
+import { ToastContainer, toast } from "react-toastify";
+import Footer from "../../components/Footer/Footer";
 
 function MyPage() {
   const { mode } = useDevice();
   const [favoriteIdolList, setFavoriteIdolList] = useState([]); //관심있는 아이돌
-  const [idolList, setIdolList] = useState([]); // 전체 아이돌
+  const [idolList, setIdolList] = useState([]); // 관심 아이돌 제외한 아이돌들
   const [cursors, setCursors] = useState([]); // 페이지 커서 히스토리(이전 페이지 저장)
   const [currentPage, setCurrentPage] = useState(0); //현재 페이지
   const [nextCursor, setNextCursor] = useState(null); //다음 페이지 커서
   const [isClicked, setIsClicked] = useState(false);
   const [selectedIdols, setSelectedIdols] = useState([]); // 선택된 아이돌
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0); //스크롤위치고정
 
   /** cursor 없이 호출하면 자동으로 null, cursor와 함께 호출하면 cursor 값 사용 */
   const fetchIdolList = async (cursor = null) => {
+    setIsLoading(true);
     try {
       let pageSize = 16;
       if (mode === "tablet") {
@@ -36,12 +41,20 @@ function MyPage() {
         cursor: cursor,
       });
       if (idolData && idolData.list) {
-        //관심있는 아이돌 제외한 아이돌들 보여주기.
+        //관심있는 아이돌 제외한 아이돌들 보여주고, 이전에 클릭한 selectedIdols가져오기.
+        const storedSelectedIdols = JSON.parse(
+          localStorage.getItem("selectedIdols") || "[]"
+        );
         const filteredList = idolData.list.filter(
-          (idol) => !favoriteIdolList.some((favIdol) => favIdol.id === idol.id)
+          (idol) =>
+            !favoriteIdolList.some((favIdol) => favIdol.id === idol.id) &&
+            !storedSelectedIdols.some(
+              (selectedIdol) => selectedIdol.id === idol.id
+            )
         );
         setIdolList(filteredList);
         setNextCursor(idolData.nextCursor);
+        setError(null);
 
         //현재 커서 히스토리에 저장하기.
         setCursors((prev) => {
@@ -53,6 +66,10 @@ function MyPage() {
     } catch (error) {
       console.error("fetch 실패", error);
       setIdolList([]);
+      setError(error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false); // 데이터 fetching 완료 후 false로 설정
     }
   };
 
@@ -67,11 +84,18 @@ function MyPage() {
       const storedIdols = JSON.parse(storedData);
       setFavoriteIdolList(storedIdols);
     }
+
+    const storedSelectedData = localStorage.getItem("selectedIdols");
+    if (storedSelectedData) {
+      const storedSelectedIdols = JSON.parse(storedSelectedData);
+      setSelectedIdols(storedSelectedIdols.map((idol) => idol.id));
+    }
   }, []);
 
   /** 이전 페이지 누를 때 */
   const handlePrevPage = () => {
     if (currentPage > 0) {
+      setScrollPosition(window.scrollY);
       const prevCursor = cursors[currentPage - 1];
       setCurrentPage(currentPage - 1);
       fetchIdolList(prevCursor);
@@ -80,14 +104,14 @@ function MyPage() {
   /** 다음페이지 누를 때 */
   const handleNextPage = () => {
     if (nextCursor) {
+      setScrollPosition(window.scrollY);
       setCurrentPage(currentPage + 1);
       fetchIdolList(nextCursor);
     }
   };
 
   /** x버튼 누를 때 */
-  //TODO : localStorage에서 관심있는 아이돌 지워주기.
-  // FavoriteIdolList 에서 같은 id 지워주고, localStoage 에 넣어주기.
+
   const handleDelete = (id) => {
     const deletedIdol = favoriteIdolList.find((idol) => idol.id === id);
     setFavoriteIdolList((prev) => prev.filter((idol) => idol.id !== id));
@@ -98,29 +122,52 @@ function MyPage() {
       const updateIdols = storedIdols.filter((idol) => idol.id !== id);
       localStorage.setItem("favoriteIdol", JSON.stringify(updateIdols));
     }
+
+    toast.success("삭제 완료!", {
+      position: "top-right",
+    });
   };
 
   /** 이미지 누를 때 클릭핸들러 */
-  // TODO : 이미지를 클릭할 때 해당아이돌의 배경색이 바뀌게 해야함.
-  // 해당 아이돌의 id를 가져와서 그 아이돌의 상태를 바꿔야함.
+
   const handleClick = (idol) => {
     setSelectedIdols((prev) => {
-      //이미 선택된 아이돌이면
+      const newSelectedIds = prev.includes(idol.id)
+        ? prev.filter((id) => id !== idol.id)
+        : [...prev, idol.id];
+
+      // localStorage에서 기존 선택된 아이돌들 가져오기
+      const storedSelectedIdols = JSON.parse(
+        localStorage.getItem("selectedIdols") || "[]"
+      );
+
       if (prev.includes(idol.id)) {
-        // filter로 제거
-        return prev.filter((id) => id !== idol.id);
+        // 선택 해제하는 경우: localStorage에서도 제거
+        const updatedSelectedIdols = storedSelectedIdols.filter(
+          (storedIdol) => storedIdol.id !== idol.id
+        );
+        localStorage.setItem(
+          "selectedIdols",
+          JSON.stringify(updatedSelectedIdols)
+        );
+      } else {
+        // 선택하는 경우: localStorage에 추가
+        const updatedSelectedIdols = [...storedSelectedIdols, idol];
+        localStorage.setItem(
+          "selectedIdols",
+          JSON.stringify(updatedSelectedIdols)
+        );
       }
-      // 아니면 배열에 추가
-      return [...prev, idol.id];
+
+      return newSelectedIds;
     });
   };
 
   /** 추가하기 버튼 누를 때 */
-  // TODO : localstorage에 관심있는 아이돌 넣어주기
   const handleAddClick = () => {
     // 클릭한 아이돌데이터 selectedIdolsData에 넣어주고
-    const selectedIdolsData = idolList.filter((idol) =>
-      selectedIdols.includes(idol.id)
+    const selectedIdolsData = JSON.parse(
+      localStorage.getItem("selectedIdols") || "[]"
     );
     const storedData = localStorage.getItem("favoriteIdol");
     const storedIdols = storedData ? JSON.parse(storedData) : [];
@@ -149,8 +196,19 @@ function MyPage() {
     setIdolList(newIdolList);
 
     //선택된 아이돌 초기화
+    localStorage.removeItem("selectedIdols");
     setSelectedIdols([]);
+
+    toast.success("추가 완료!", {
+      position: "top-right",
+    });
   };
+
+  useEffect(() => {
+    if (!isLoading && scrollPosition > 0) {
+      window.scrollTo(0, scrollPosition);
+    }
+  }, [isLoading]);
 
   return (
     <div>
@@ -196,60 +254,73 @@ function MyPage() {
           <h2 className={styles.section__title}>
             관심 있는 아이돌을 추가해보세요.
           </h2>
-          <div className={styles.add_idol_wrap}>
-            <button
-              className={styles.card_handleButton}
-              onClick={handlePrevPage}
-              disabled={currentPage === 0}
-            >
-              <img
-                className={styles.card_handleButton_img}
-                src={leftIcon}
-                alt="왼쪽 버튼"
-              />
-            </button>
-            <ul className={`${styles.add_idol_list} ${styles[mode]}`}>
-              {idolList.map((idol) => (
-                <li key={idol.id}>
-                  <IdolCard
-                    imageUrl={idol.profilePicture}
-                    name={idol.name}
-                    group={idol.group}
-                    isbig={true}
-                    onClick={() => handleClick(idol)}
-                    isClicked={selectedIdols.includes(idol.id)}
-                  />
-                </li>
-              ))}
-            </ul>
-            <button
-              className={styles.card_handleButton}
-              onClick={handleNextPage}
-              disabled={!nextCursor}
-            >
-              <img
-                className={styles.card_handleButton_img}
-                src={rightIcon}
-                alt="오른쪽 버튼"
-              />
-            </button>
-          </div>
+          {error ? (
+            <Refresh handleLoad={fetchIdolList} height={402} />
+          ) : !isLoading ? (
+            <div className={styles.add_idol_wrap}>
+              <button
+                className={styles.card_handleButton}
+                onClick={handlePrevPage}
+                disabled={currentPage === 0}
+              >
+                <img
+                  className={styles.card_handleButton_img}
+                  src={leftIcon}
+                  alt="왼쪽 버튼"
+                />
+              </button>
+
+              <ul className={`${styles.add_idol_list} ${styles[mode]}`}>
+                {idolList.map((idol) => (
+                  <li key={idol.id}>
+                    <IdolCard
+                      imageUrl={idol.profilePicture}
+                      name={idol.name}
+                      group={idol.group}
+                      isbig={true}
+                      onClick={() => handleClick(idol)}
+                      isClicked={selectedIdols.includes(idol.id)}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={styles.card_handleButton}
+                onClick={handleNextPage}
+                disabled={!nextCursor}
+              >
+                <img
+                  className={styles.card_handleButton_img}
+                  src={rightIcon}
+                  alt="오른쪽 버튼"
+                />
+              </button>
+            </div>
+          ) : (
+            <div className={styles.add_idol_wrap} style={{ marginTop: 70 }}>
+              로딩중...
+            </div>
+          )}
         </section>
         <section className={styles.add_idol_button_section}>
-          <CustomButton
-            width={255}
-            height={48}
-            isRoundButton={true}
-            onClick={handleAddClick}
-          >
-            <div className={styles.add_idol_button_content}>
-              {" "}
-              <img src={plusIcon} className={styles.add_idol_button_icon} />
-              <span className={styles.add_idol_button_text}>추가하기</span>
-            </div>
-          </CustomButton>
+          {!isLoading && (
+            <CustomButton
+              width={255}
+              height={48}
+              isRoundButton={true}
+              onClick={handleAddClick}
+            >
+              <div className={styles.add_idol_button_content}>
+                {" "}
+                <img src={plusIcon} className={styles.add_idol_button_icon} />
+                <span className={styles.add_idol_button_text}>추가하기</span>
+              </div>
+            </CustomButton>
+          )}
         </section>
       </main>
+      <ToastContainer />
+      <Footer />
     </div>
   );
 }
