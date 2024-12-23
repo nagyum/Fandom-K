@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 function Section({ donate, title, bgimg, screenimg }) {
   return (
     <main>
+
       <div className={styles["background-image"]}>
         <img src={bgimg} alt={title} />
       </div>
@@ -58,6 +59,7 @@ function Section({ donate, title, bgimg, screenimg }) {
 
        
       </div>
+
     </main>
   );
 }

@@ -8,7 +8,6 @@
   flex-direction: column;
 }
 
-
 .page1 {
   background-color: #02000e;
   width: 100%;
@@ -20,22 +19,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-   
-
 }
-
-
-
-
 
 .brand-orange {
   color: #f96d69;
 }
 
-
 .title {
   position: relative; /* 위치 설정 */
-  justify-content: center; /* 화면 가운데 정렬 */ 
+  justify-content: center; /* 화면 가운데 정렬 */
 
   height: auto; /* 텍스트 크기에 맞게 높이 자동 조정 */
   z-index: 3;
@@ -47,50 +39,40 @@
   }
 
   top: 140px;
-
 }
-
 
 .image-container {
-display: flex;
-flex-direction: column;
-align-items: center;
-position: absolute;
-width: 1080px;
-height: 1080px;
-top: 0px;
-//background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(217, 217, 217, 0.4) 30.73%, rgba(217, 217, 217, 0.6) 51.04%, rgba(217, 217, 217, 0.4) 71.87%, rgba(217, 217, 217, 0) 100%);
-
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  width: 1080px;
+  height: 1080px;
+  top: 0px;
+  //background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(217, 217, 217, 0.4) 30.73%, rgba(217, 217, 217, 0.6) 51.04%, rgba(217, 217, 217, 0.4) 71.87%, rgba(217, 217, 217, 0) 100%);
 }
 
-
-
-
 .logo {
-  z-index: 2; 
-  width: 509px;  
-  height: 97px;  
-  opacity: 1; 
+  z-index: 2;
+  width: 509px;
+  height: 97px;
+  opacity: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   top: 231px;
   cursor: pointer;
- 
 }
 
-.backgroundimg{
+.backgroundimg {
   display: block;
   justify-content: center;
   position: absolute;
   top: 95.4px;
   width: 932.4px;
-  height:1000x;
-  
-  }
-  
+  height: 1000x;
+}
 
 /*.backgroundimg {
   z-index: 1; 
@@ -102,7 +84,7 @@ top: 0px;
   opacity: 1; 
 }*/
 
-.buttondiv{
+.buttondiv {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,6 +112,7 @@ top: 0px;
 
 
 .gradient-bar {
+
 position: absolute;
 width: 187px;
 height: 3000px;
@@ -140,8 +123,8 @@ z-index: 2;
 
 } 
 
-@media (max-width: 744px) {
 
+@media (max-width: 744px) {
   .page1 {
     background-color: #02000e;
     width: 100%;
@@ -153,23 +136,16 @@ z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-     
-  
   }
-  
-  
-  
-  
-  
+
   .brand-orange {
     color: #f96d69;
   }
-  
-  
+
   .title {
     position: relative; /* 위치 설정 */
-    justify-content: center; /* 화면 가운데 정렬 */ 
-  
+    justify-content: center; /* 화면 가운데 정렬 */
+
     height: auto; /* 텍스트 크기에 맞게 높이 자동 조정 */
     z-index: 3;
     text-align: center;
@@ -178,53 +154,43 @@ z-index: 2;
       font-weight: 700;
       font-size: 20px;
     }
-  
+
     top: 120px;
-  
   }
-  
-  
+
   .image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  width: 1080px;
-  height: 1080px;
-  top: 0px;
-  //background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(217, 217, 217, 0.4) 30.73%, rgba(217, 217, 217, 0.6) 51.04%, rgba(217, 217, 217, 0.4) 71.87%, rgba(217, 217, 217, 0) 100%);
-  
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 1080px;
+    height: 1080px;
+    top: 0px;
+    //background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(217, 217, 217, 0.4) 30.73%, rgba(217, 217, 217, 0.6) 51.04%, rgba(217, 217, 217, 0.4) 71.87%, rgba(217, 217, 217, 0) 100%);
   }
-  
-  
-  
-  
+
   .logo {
-    z-index: 2; 
-    width: 325.3px;  
-    height: 62px;  
-    opacity: 1; 
+    z-index: 2;
+    width: 325.3px;
+    height: 62px;
+    opacity: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     top: 220px;
     cursor: pointer;
-   
   }
-  
-  .backgroundimg{
+
+  .backgroundimg {
     display: block;
     justify-content: center;
     position: absolute;
     top: 150px;
     width: 713px;
-    height:800px;
-    
-    }
-    
-  
+    height: 800px;
+  }
+
   /*.backgroundimg {
     z-index: 1; 
     width: 932.4px; 
@@ -234,8 +200,8 @@ z-index: 2;
     display: block;
     opacity: 1; 
   }*/
-  
-  .buttondiv{
+
+  .buttondiv {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -245,7 +211,7 @@ z-index: 2;
     bottom: 120px;
     cursor: pointer;
   }
-  
+
   .button {
     display: flex;
     justify-content: center;
@@ -259,30 +225,30 @@ z-index: 2;
     width: 477px;
     height: 48px;
   }
-  
+
   .gradient-bar {
-  /* Rectangle 10 */
+    /* Rectangle 10 */
 
-  position: absolute;
-  width: 117px;
-  height: 2500px;
-  left: calc(50% - 117px/2 + 0.5px);
-  top: 1594px;
+    position: absolute;
+    width: 117px;
+    height: 2500px;
+    left: calc(50% - 117px / 2 + 0.5px);
+    top: 1594px;
 
-  background: linear-gradient(180deg, #030615 0%, #051D31 42.67%, #051E32 53.12%, #051C30 74.27%, #030B1C 100%);
- z-index: 1;
-  border: 2px solid #f96d69; /* 테두리 색상과 두께 */
+    background: linear-gradient(
+      180deg,
+      #030615 0%,
+      #051d31 42.67%,
+      #051e32 53.12%,
+      #051c30 74.27%,
+      #030b1c 100%
+    );
+    z-index: 1;
+    border: 2px solid #f96d69; /* 테두리 색상과 두께 */
   }
-
-
-
-
-
-
-
 }
 
-@media (max-width: 375px){
+@media (max-width: 375px) {
   .page1 {
     background-color: #02000e;
     width: 100%;
@@ -294,23 +260,16 @@ z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-     
-  
   }
-  
-  
-  
-  
-  
+
   .brand-orange {
     color: #f96d69;
   }
-  
-  
+
   .title {
     position: relative; /* 위치 설정 */
-    justify-content: center; /* 화면 가운데 정렬 */ 
-  
+    justify-content: center; /* 화면 가운데 정렬 */
+
     height: auto; /* 텍스트 크기에 맞게 높이 자동 조정 */
     z-index: 3;
     text-align: center;
@@ -319,53 +278,43 @@ z-index: 2;
       font-weight: 400;
       font-size: 20px;
     }
-  
+
     top: 100px;
-  
   }
-  
-  
+
   .image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  width: 456px;
-  height: 456px;
-  top: 0px;
-  //background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(217, 217, 217, 0.4) 30.73%, rgba(217, 217, 217, 0.6) 51.04%, rgba(217, 217, 217, 0.4) 71.87%, rgba(217, 217, 217, 0) 100%);
-  
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 456px;
+    height: 456px;
+    top: 0px;
+    //background: linear-gradient(90deg, rgba(217, 217, 217, 0) 0%, rgba(217, 217, 217, 0.4) 30.73%, rgba(217, 217, 217, 0.6) 51.04%, rgba(217, 217, 217, 0.4) 71.87%, rgba(217, 217, 217, 0) 100%);
   }
-  
-  
-  
-  
+
   .logo {
-    z-index: 2; 
-    width: 236.64px;  
-    height: 45px;  
-    opacity: 1; 
+    z-index: 2;
+    width: 236.64px;
+    height: 45px;
+    opacity: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     top: 191px;
     cursor: pointer;
-   
   }
-  
-  .backgroundimg{
+
+  .backgroundimg {
     display: block;
     justify-content: center;
     position: absolute;
     top: 221px;
     width: 500px;
-    height:450px;
-    
-    }
-    
-  
+    height: 450px;
+  }
+
   /*.backgroundimg {
     z-index: 1; 
     width: 932.4px; 
@@ -375,8 +324,8 @@ z-index: 2;
     display: block;
     opacity: 1; 
   }*/
-  
-  .buttondiv{
+
+  .buttondiv {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -388,7 +337,7 @@ z-index: 2;
     width: 230px;
     height: 48px;
   }
-  
+
   .button {
     display: flex;
     justify-content: center;
@@ -402,26 +351,27 @@ z-index: 2;
     width: 230px;
     height: 48px;
   }
-  
+
   .gradient-bar {
-  /* Rectangle 10 */
+    /* Rectangle 10 */
 
-/* Rectangle 10 */
+    /* Rectangle 10 */
 
-  position: absolute;
-  width: 117px;
-  height: 2133px;
-  left: calc(50% - 117px/2);
-  top: calc(50% - 2133px/2 + 471.5px);
+    position: absolute;
+    width: 117px;
+    height: 2133px;
+    left: calc(50% - 117px / 2);
+    top: calc(50% - 2133px / 2 + 471.5px);
 
-  background: linear-gradient(180deg, #030615 0%, #051D31 42.67%, #051E32 53.12%, #051C30 74.27%, #030B1C 100%);
-  
-  border: 2px solid #f96d69; /* 테두리 색상과 두께 */
+    background: linear-gradient(
+      180deg,
+      #030615 0%,
+      #051d31 42.67%,
+      #051e32 53.12%,
+      #051c30 74.27%,
+      #030b1c 100%
+    );
+
+    border: 2px solid #f96d69; /* 테두리 색상과 두께 */
   }
-
-
-
-
-
-
 }
