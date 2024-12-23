@@ -4,8 +4,11 @@
 .button {
   margin: 0 auto;
   background: linear-gradient(90deg, $brand-orange 0%, $brand-pink 100%);
-  border-radius: 3px;
 
+  transition-duration: 0.3s;
+
+  border-radius: 5px;
+  box-shadow: 0.05rem 0.05rem 0.7rem $gray-neutral;
   border: none;
   color: white;
   padding-left: 64px;
@@ -16,9 +19,10 @@
   &:hover {
     opacity: 0.8;
   }
-
   &:active {
     opacity: 0.6;
+    box-shadow: none;
+    cursor: pointer;
   }
 }
 

@@ -27,7 +27,7 @@
 }
 
 .tab {
-  margin: 0;
+  margin: 0 auto;
   width: 600px;
   height: 42px;
 
@@ -68,6 +68,12 @@
 /* 미디어 쿼리 Tablet: 768px 이상 ~ 1199px 이하 */
 
 @media (max-width: 1199px) and (min-width: 768px) {
+  .chartNav {
+    margin: 0 20px;
+  }
+  .tab {
+    margin: 0 20px;
+  }
   .LankingChart {
     margin: 0 auto;
     width: 100%;
@@ -78,6 +84,12 @@
 }
 
 @media (max-width: 767px) {
+  .tab {
+    margin: 0 20px;
+  }
+  .chartNav {
+    margin: 0 20px;
+  }
   .LankingChart {
     margin: 0 auto;
     width: 100%;
