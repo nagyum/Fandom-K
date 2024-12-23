@@ -3,7 +3,7 @@ import credit from "../../assets/icons/credit.png";
 import CustomButton from "../CustomButtom/CustomButton";
 import styles from "./LackingCredit.module.scss";
 
-function CreditModal({ isOpen, onClose }) {
+function LackingCreditModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
@@ -19,4 +19,4 @@ function CreditModal({ isOpen, onClose }) {
   );
 }
 
-export default CreditModal;
+export default LackingCreditModal;

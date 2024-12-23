@@ -213,6 +213,10 @@ function MyPage() {
   return (
     <div>
       <Header />
+      <img
+        style={{ position: "absolute", top: "0", zIndex: "99" }}
+        src={backgroundImg}
+      />
       <main className={styles.mypage__main}>
         <section className={styles.favorite_section}>
           <h2 className={styles.section__title}>내가 관심있는 아이돌</h2>

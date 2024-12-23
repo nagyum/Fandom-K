@@ -11,6 +11,8 @@ import VoteModal from "../components/MonthList/components/VoteModal";
 import ChargeCreditModal from "../components/Modal/ChargeCreditModal";
 import Footer from "../components/Footer/Footer";
 import useDevice from "../hooks/useDevice"; // 미디어 쿼리
+import backgroundImg from "../assets/images/Vector 3.png";
+import "react-toastify/dist/ReactToastify.css"; // 스타일 추가
 import { toast, ToastContainer } from "react-toastify";
 
 function ListPage() {
@@ -19,7 +21,6 @@ function ListPage() {
   const [modalOpacity, setModalOpacity] = useState(100); // 모달 투명도
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
-  //크레딧 상태
   const [myCreditData, setMyCreditData] = useState();
   const [pageSize, setPageSize] = useState(10);
   const [gender, setGender] = useState("female");
@@ -62,10 +63,9 @@ function ListPage() {
     }, 0);
   };
 
-  //크레딧 충전 모달 팝업 띄우기
+  // 크레딧 충전 모달 팝업 띄우기
   const handleMyCreditModal = () => {
     setIsModal(true);
-    // setMyCreditData(data);
     setModalContents(4);
     setTimeout(() => {
       setModalOpacity(100);
@@ -78,7 +78,7 @@ function ListPage() {
     setIsModal(false);
   };
 
-  //모달 팝업 X버튼 클릭시 닫기
+  // 모달 팝업 X버튼 클릭시 닫기
   const handleDeleteModal = () => {
     setModalOpacity(0);
     setTimeout(() => {
@@ -87,7 +87,6 @@ function ListPage() {
       setVoteData(null);
     }, 200);
   };
-
   // 모달 내용 선택
   function ModalContents({ modalContents }) {
     switch (modalContents) {
@@ -116,6 +115,8 @@ function ListPage() {
 
   return (
     <div>
+      {/* 배경 설정 */}
+      <img style={{ position: "absolute", zIndex: "99" }} src={backgroundImg} />
       <Header />
       <MyCredit
         handleMyCreditModal={handleMyCreditModal}
@@ -139,7 +140,7 @@ function ListPage() {
             style={{ opacity: `${modalOpacity}%` }}
             handleDeleteModal={handleDeleteModal}
           >
-            <div style={{ maxHeight: "100vh", overflowY: "auto" }}>
+            <div style={{ maxHeight: "80vh", overflowY: "auto" }}>
               <ModalContents modalContents={modalContents} />
             </div>
           </ModalWrap>

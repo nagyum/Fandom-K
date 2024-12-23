@@ -3,7 +3,7 @@ import style from "./Refresh.module.scss";
 import logoImg from "../../assets/images/logoImage.svg";
 
 //height: 차지할 면적 높이
-function Refresh({ handleLoad, height }) {
+function Refresh({ handleLoad = () => {}, height }) {
   const onclickRefreshBtn = () => {
     handleLoad();
   };
