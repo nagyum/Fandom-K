@@ -6,12 +6,13 @@ import leftIcon from "../../assets/icons/lefticon.png";
 import rightIcon from "../../assets/icons/righticon.png";
 import useTouchScroll from "../../hooks/useTouchScroll";
 import Refresh from "../Refresh/Refresh";
+import SponsorLoading from "./SponsorLoading";
 
 function SponsorshipList({ handleSponsorModal }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
   const [IsLoading, setIsloading] = useState(false);
-  const [translateX, setsTranslateX] = useState(0);
+  // const [translateX, setsTranslateX] = useState(0);
   //버튼 컴포넌트 opacity 애니메이션
   const [leftBtnOpa, setLeftBtnOpa] = useState(0);
   const [rightBtnOpa, setRightBtnOpa] = useState(100);
@@ -21,9 +22,6 @@ function SponsorshipList({ handleSponsorModal }) {
   //버튼 컴포넌트 클릭시 애니메이션 추가
   const [transition, setTransition] = useState("none");
   const [btnIsLoading, setBtnIsLoading] = useState(false);
-  //터치 스크롤 가능하게 하기
-  const listRef = useRef();
-  useTouchScroll(listRef);
 
   const handleLoadSponsor = async () => {
     try {
@@ -41,24 +39,29 @@ function SponsorshipList({ handleSponsorModal }) {
   };
 
   // 캐러셀, 282px(카드 크기) + 24px(여백 크기) = 306px씩 이동
-  let style = `translateX(${translateX}px)`;
+  let transform = `translateX(0px)`;
   const onclickLeftButton = () => {
-    //버튼 중복클릭 막기
-    if (btnIsLoading) {
+    const result = getTranslateX();
+    console.log(result);
+    if (btnIsLoading || result === 0) {
       return;
     }
     setBtnIsLoading(true);
     setTransition("all 1s");
-    //첫 페이지에서 버튼 클릭 막기
-    if (translateX === 0) {
-      return;
-    } else if (translateX === -306) {
-      setLeftBtnOpa(0);
-      setLeftBtnCursor("none");
+    if (Math.abs(result) % 306 === 0) {
+      onRightBtn();
+      if (result + 306 === 0) {
+        offLeftBtn();
+      }
+      setTranslateX(result + 306);
+    } else {
+      onRightBtn();
+      const count = Math.floor(Math.abs(result) / 306);
+      if (count === 0) {
+        offLeftBtn();
+      }
+      setTranslateX(count * -306);
     }
-    setRightBtnOpa(100);
-    setRightBtnCursor("auto");
-    setsTranslateX((pre) => pre + 306);
     setTimeout(() => {
       setTransition("none");
       setBtnIsLoading(false);
@@ -66,27 +69,70 @@ function SponsorshipList({ handleSponsorModal }) {
   };
 
   const onclickRightButton = () => {
-    //버튼 중복클릭 막기
-    if (btnIsLoading) {
+    const result = getTranslateX();
+    console.log(result);
+    if (btnIsLoading || result === -612) {
       return;
     }
     setBtnIsLoading(true);
     setTransition("all 1s");
-    //마지막 페이지에서 버튼 클릭 막기
-    if (translateX === -612) {
-      return;
-    } else if (translateX === -306) {
-      setRightBtnOpa(0);
-      setRightBtnCursor("none");
+    if (Math.abs(result) % 306 === 0) {
+      onLeftBtn();
+      if (result - 306 <= -612) {
+        offRightBtn();
+      }
+      setTranslateX(result - 306);
+    } else {
+      onLeftBtn();
+      if (result - 306 <= -612) {
+        offRightBtn();
+      }
+      const count = Math.ceil(Math.abs(result) / 306);
+      setTranslateX(count * -306);
     }
-    setLeftBtnOpa(100);
-    setLeftBtnCursor("auto");
-    setsTranslateX((pre) => pre - 306);
     setTimeout(() => {
       setTransition("none");
       setBtnIsLoading(false);
     }, 1000);
   };
+
+  const offLeftBtn = () => {
+    setLeftBtnOpa(0);
+    setLeftBtnCursor("none");
+  };
+
+  const onLeftBtn = () => {
+    setLeftBtnOpa(100);
+    setLeftBtnCursor("auto");
+  };
+
+  const offRightBtn = () => {
+    setRightBtnOpa(0);
+    setRightBtnCursor("none");
+  };
+
+  const onRightBtn = () => {
+    setRightBtnOpa(100);
+    setRightBtnCursor("auto");
+  };
+
+  //터치 스크롤 가능하게 하기
+  const listRef = useRef();
+  console.log(listRef.current);
+  useTouchScroll(listRef, offLeftBtn, onLeftBtn, offRightBtn, onRightBtn);
+
+  const getTranslateX = useCallback(() => {
+    return parseInt(
+      getComputedStyle(listRef.current).transform.split(/[^\-0-9]+/g)[5]
+    );
+  }, [listRef]);
+
+  const setTranslateX = useCallback(
+    (x) => {
+      listRef.current.style.transform = `translateX(${x}px)`;
+    },
+    [listRef]
+  );
 
   useEffect(() => {
     handleLoadSponsor();
@@ -99,6 +145,34 @@ function SponsorshipList({ handleSponsorModal }) {
       </div>
       {error ? (
         <Refresh handleLoad={handleLoadSponsor} height={402} />
+      ) : IsLoading ? (
+        <div
+          className={styles.card_list_container}
+          style={{ display: "flex", gap: "24px", margin: "0 auto" }} // Flexbox로 가로 정렬
+        >
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "16px",
+              }}
+            >
+              <SponsorLoading key={index} width="260px" height="260px" />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "25px",
+                }}
+              >
+                <SponsorLoading key={index} width="220px" height="30px" />
+                <SponsorLoading key={index} width="260px" height="5px" />
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
         <div className={styles.card_wrap}>
           <div
@@ -116,7 +190,7 @@ function SponsorshipList({ handleSponsorModal }) {
             {IsLoading && <p className={styles.loading}>로딩중...</p>}
             <div
               className={styles.card_list_container}
-              style={{ transform: style, transition: `${transition}` }}
+              style={{ transform: transform, transition: `${transition}` }}
               ref={listRef}
             >
               {items.map((item) => {

@@ -8,7 +8,7 @@ import useCredit from "../../../hooks/useCredit";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // 스타일 추가
 
-function VoteModal({ data, gender, onVoteUpdate }) {
+function VoteModal({ data, gender, onVoteUpdate, onClose }) {
   const [error, setError] = useState(null);
   const [isCreditModalOpen, setIsCreditModalOpen] = useState(false);
   const [idolList, setIdolList] = useState(data);
@@ -34,7 +34,7 @@ function VoteModal({ data, gender, onVoteUpdate }) {
     }
 
     if (credit < 1000) {
-      setIsCreditModalOpen(true); // 크레딧 부족 시 CreditModal 열기
+      setIsCreditModalOpen(true); // 크레딧 부족 시 LackingCreditModal 열기
     } else {
       const selectedIdol = idolList.find((idol) => idol.id === selectedIdolId); // 선택된 아이돌 찾기
       postVote(selectedIdolId)
@@ -130,6 +130,8 @@ function VoteModal({ data, gender, onVoteUpdate }) {
           </ul>
         )}
       </div>
+
+      {/* ToastContainer를 최상단에 위치시키기 */}
       <ToastContainer position="top-right" autoClose={3000} />
     </>
   );

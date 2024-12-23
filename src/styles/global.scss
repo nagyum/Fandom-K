@@ -15,3 +15,15 @@ body {
   user-select: none;
   //드래그 방지
 }
+
+//스크롤바 없앰
+*::-webkit-scrollbar {
+  width: 7px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #fe5493;
+}
+*::-webkit-scrollbar-button {
+  display: none;
+}
