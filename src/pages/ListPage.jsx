@@ -83,9 +83,6 @@ function ListPage() {
       setVoteData(null);
     }, 200);
   };
-
-  // 투표 모달이 닫힐 때 호출될 콜백
-
   // 모달 내용 선택
   function ModalContents({ modalContents }) {
     switch (modalContents) {
