@@ -45,6 +45,7 @@
 .credit_input_container {
   position: relative;
   display: flex;
+  flex-direction: column;
 }
 
 .credit_input {
@@ -92,9 +93,15 @@ input::-webkit-inner-spin-button {
 .error_mes {
   font-size: 12px;
   color: #ff2626;
+  position: absolute;
+  bottom: -18px;
 }
 
 .button_disable {
   background: $gray-cool-100;
   cursor: default;
+}
+
+.button_disable:hover {
+  opacity: 1;
 }
