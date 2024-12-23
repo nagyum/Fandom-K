@@ -16,7 +16,7 @@ function Section({ donate, title, bgimg, screenimg }) {
           transition={{
             ease: "easeInOut",
             duration: 2,
-            x: { duration: 1 },
+          
           }}
             style={{
               zIndex: 2,

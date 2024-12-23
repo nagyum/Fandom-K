@@ -28,7 +28,7 @@ function LandingPage() {
           transition={{
             ease: "easeInOut",
             duration: 2,
-            x: { duration: 1 },
+           
           }}
         >
           <div className={styles.page1}>
@@ -113,7 +113,23 @@ function LandingPage() {
             screenimg={images.screen3}
           />
         </div>
-        <div className={styles["gradient-bar"]}></div>
+        <motion.div
+          className={styles["gradient-bar"]}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{
+            ease: "easeInOut",
+            duration: 2,
+          
+          }}
+            style={{
+              zIndex: 0,
+            }}
+          
+        > 
+        {/*<div className={styles["gradient-bar"]}></div>*/}
+        </motion.div>
       </div>
     </EdgeGradient>
   );
