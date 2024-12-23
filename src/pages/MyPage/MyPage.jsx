@@ -217,6 +217,7 @@ function MyPage() {
       <img
         style={{ position: "absolute", top: "0", zIndex: "99" }}
         src={backgroundImg}
+        alt="배경그라데이션"
       />
       <main className={styles.mypage__main}>
         <section className={styles.favorite_section}>
