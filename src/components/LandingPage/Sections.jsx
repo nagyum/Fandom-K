@@ -36,18 +36,7 @@ function Section({ donate, title, bgimg, screenimg }) {
         </motion.div>
 
 
-        <motion.div
-          className={styles["gradient-bar"]}
-          initial={{ opacity: 0, y: 0 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{
-            ease: "easeInOut",
-            duration: 2,
-          }}
-        >
-         
-        </motion.div>
+       
       </div>
     </main>
   );

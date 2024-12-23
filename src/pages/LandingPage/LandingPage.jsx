@@ -21,6 +21,23 @@ function LandingPage() {
   return (
     <EdgeGradient>
       <div>
+      <motion.div
+          className={styles["gradient-bar"]}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{
+            ease: "easeInOut",
+            duration: 10,
+          
+          }}  
+          style={{
+            background: "linear-gradient(180deg, #030615 0%, #051D31 42.67%, #051E32 53.12%, #051C30 74.27%, #030B1C 100%)",
+            zIndex: "2",
+          }}
+        > 
+        <div className={styles["gradient-bar"]}></div>
+      </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -28,9 +45,9 @@ function LandingPage() {
           transition={{
             ease: "easeInOut",
             duration: 2,
-           
           }}
         >
+
           <div className={styles.page1}>
             <div className={styles.background}>
               <div className={styles.page1}>
@@ -113,24 +130,7 @@ function LandingPage() {
             screenimg={images.screen3}
           />
         </div>
-        <motion.div
-          className={styles["gradient-bar"]}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{
-            ease: "easeInOut",
-            duration: 10,
-          
-          }}  
-          style={{
-            background: "linear-gradient(180deg, #030615 0%, #051D31 42.67%, #051E32 53.12%, #051C30 74.27%, #030B1C 100%)",
-            zIndex: "2",
-          }}
-        > 
-        <div className={styles["gradient-bar"]}></div>
-      </motion.div>
-
+        
       </div>
     </EdgeGradient>
   );
