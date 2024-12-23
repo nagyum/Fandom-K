@@ -21,15 +21,17 @@
     width: 128px;
     height: 128px;
     margin-bottom: 8px;
+    border: 2px solid $brand-orange;
+    border-radius: 50%;
 
     //이미지 컨테이너 위에 원형 오버레이 생성하기.
     &::before {
       content: ""; //가상 요소 생성
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 10;
+      left: 10;
+      width: 115px;
+      height: 115px;
       background: linear-gradient(to bottom, $brand-orange, $brand-pink);
       opacity: 0.5;
       border-radius: 50%;
@@ -39,25 +41,42 @@
     }
   }
 
-  &_image {
+  &_image_box {
+    width: 128px;
+    height: 128px;
+    margin-bottom: 8px;
+    border: 2px solid $brand-orange;
     border-radius: 50%;
-    object-fit: cover;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &.big {
       width: 128px;
       height: 128px;
-      display: block; //클릭했을 때 이미지 높이 차 방지.
     }
     &.small {
       width: 100px;
       height: 100px;
     }
   }
+  &_image {
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    &.big {
+      width: 115px;
+      height: 115px;
+    }
+    &.small {
+      width: 86.14px;
+      height: 86.14px;
+    }
+  }
   &_image_clicked {
     border-radius: 50%;
     object-fit: cover;
-    width: 128px;
-    height: 128px;
+    width: 115px;
+    height: 115px;
     cursor: pointer;
   }
 

@@ -28,7 +28,6 @@ function LandingPage() {
           transition={{
             ease: "easeInOut",
             duration: 2,
-           
           }}
         >
           <div className={styles.page1}>
@@ -72,8 +71,6 @@ function LandingPage() {
             </div>
           </div>
         </motion.div>
-
-       
 
         <div className={styles.page2}>
           <Section
@@ -121,14 +118,12 @@ function LandingPage() {
           transition={{
             ease: "easeInOut",
             duration: 2,
-          
           }}
-            style={{
-              zIndex: 0,
-            }}
-          
-        > 
-        {/*<div className={styles["gradient-bar"]}></div>*/}
+          style={{
+            zIndex: 0,
+          }}
+        >
+          {/*<div className={styles["gradient-bar"]}></div>*/}
         </motion.div>
       </div>
     </EdgeGradient>
