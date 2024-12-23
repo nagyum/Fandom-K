@@ -12,8 +12,8 @@ import ChargeCreditModal from "../components/Modal/ChargeCreditModal";
 import Footer from "../components/Footer/Footer";
 import useDevice from "../hooks/useDevice"; // 미디어 쿼리
 import backgroundImg from "../assets/images/Vector 3.png";
-import { toast } from "react-toastify"; // Toast 추가
 import "react-toastify/dist/ReactToastify.css"; // 스타일 추가
+import { toast, ToastContainer } from "react-toastify";
 
 function ListPage() {
   const [modalContents, setModalContents] = useState(); // 모달 타입
@@ -26,6 +26,10 @@ function ListPage() {
   const [gender, setGender] = useState("female");
   const { mode } = useDevice(); // 모바일/데스크톱 감지
   useScrollTop(); // 스크롤 초기화
+
+  const notifySponsor = () => {
+    toast.success("후원되었습니다.");
+  };
 
   // 모달이 열릴 때 배경 스크롤 비활성화
   useEffect(() => {
@@ -87,7 +91,13 @@ function ListPage() {
   function ModalContents({ modalContents }) {
     switch (modalContents) {
       case 1:
-        return <SponsorshipModal data={sponsorData} />;
+        return (
+          <SponsorshipModal
+            data={sponsorData}
+            handleDeleteModal={handleDeleteModal}
+            notifySponsor={notifySponsor}
+          />
+        );
       case 2:
         return (
           <VoteModal
@@ -144,6 +154,7 @@ function ListPage() {
         isModal={isModal}
       />
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }
