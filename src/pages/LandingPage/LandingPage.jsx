@@ -120,11 +120,12 @@ function LandingPage() {
           viewport={{ once: false }}
           transition={{
             ease: "easeInOut",
-            duration: 2,
+            duration: 10,
           
           }}  
           style={{
             background: "linear-gradient(180deg, #030615 0%, #051D31 42.67%, #051E32 53.12%, #051C30 74.27%, #030B1C 100%)",
+            zIndex: "2",
           }}
         > 
         <div className={styles["gradient-bar"]}></div>
