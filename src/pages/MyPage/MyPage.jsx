@@ -22,7 +22,6 @@ function MyPage() {
   const [cursors, setCursors] = useState([]); // 페이지 커서 히스토리(이전 페이지 저장)
   const [currentPage, setCurrentPage] = useState(0); //현재 페이지
   const [nextCursor, setNextCursor] = useState(null); //다음 페이지 커서
-  const [isClicked, setIsClicked] = useState(false);
   const [selectedIdols, setSelectedIdols] = useState([]); // 선택된 아이돌
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -115,7 +114,6 @@ function MyPage() {
   /** x버튼 누를 때 */
 
   const handleDelete = (id) => {
-    const deletedIdol = favoriteIdolList.find((idol) => idol.id === id);
     setFavoriteIdolList((prev) => prev.filter((idol) => idol.id !== id));
 
     const storedData = localStorage.getItem("favoriteIdol");
@@ -343,7 +341,7 @@ function MyPage() {
           )}
         </section>
         <section className={styles.add_idol_button_section}>
-          {!isLoading && (
+          {!isLoading && !error && (
             <CustomButton
               width={255}
               height={48}
