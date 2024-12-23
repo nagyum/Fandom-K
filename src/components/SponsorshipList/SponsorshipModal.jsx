@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import creditImg from "../../assets/icons/credit.png";
 import styles from "./SponsorshipModal.module.scss";
 import CustomButton from "../CustomButtom/CustomButton";
@@ -42,7 +42,7 @@ function SponsorshipModal({ data, handleDeleteModal, notifySponsor }) {
       setError("서버 오류로 후원에 실패했습니다.");
       return;
     } finally {
-      //로딩 false
+      //로딩
     }
     //금액 후원 후 모달창 닫기
   };
