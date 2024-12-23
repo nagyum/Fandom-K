@@ -2,7 +2,7 @@ import Header from "../../components/Header/Header";
 import logoImage from "../../assets/images/logoImage.svg";
 import useDevice from "../../hooks/useDevice";
 import styles from "./MyPage.module.scss";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getIdolData } from "../../api";
 import leftIcon from "../../assets/icons/lefticon.png";
 import rightIcon from "../../assets/icons/righticon.png";
@@ -13,6 +13,7 @@ import Refresh from "../../components/Refresh/Refresh";
 import { ToastContainer, toast } from "react-toastify";
 import Footer from "../../components/Footer/Footer";
 import backgroundImg from "../../assets/images/Vector 3.png";
+import MyPageLoading from "./MyPageLoading";
 
 function MyPage() {
   const { mode } = useDevice();
@@ -25,18 +26,18 @@ function MyPage() {
   const [selectedIdols, setSelectedIdols] = useState([]); // 선택된 아이돌
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0); //스크롤위치고정
+
+  let pageSize = 16;
+  if (mode === "tablet") {
+    pageSize = 8;
+  } else if (mode === "mobile") {
+    pageSize = 6;
+  }
 
   /** cursor 없이 호출하면 자동으로 null, cursor와 함께 호출하면 cursor 값 사용 */
   const fetchIdolList = async (cursor = null) => {
     setIsLoading(true);
     try {
-      let pageSize = 16;
-      if (mode === "tablet") {
-        pageSize = 8;
-      } else if (mode === "mobile") {
-        pageSize = 6;
-      }
       const idolData = await getIdolData({
         pageSize: pageSize,
         cursor: cursor,
@@ -69,13 +70,15 @@ function MyPage() {
       setIdolList([]);
       setError(error);
       setIsLoading(false);
+      setSelectedIdols([]);
+      localStorage.removeItem("selectedIdols");
     } finally {
       setIsLoading(false); // 데이터 fetching 완료 후 false로 설정
     }
   };
 
   useEffect(() => {
-    fetchIdolList();
+    fetchIdolList(cursors[currentPage] || null);
   }, [mode, favoriteIdolList]);
 
   // 렌더링시 favoriteIdolList에 localStorage값 넣어주기.
@@ -96,7 +99,6 @@ function MyPage() {
   /** 이전 페이지 누를 때 */
   const handlePrevPage = () => {
     if (currentPage > 0) {
-      setScrollPosition(window.scrollY);
       const prevCursor = cursors[currentPage - 1];
       setCurrentPage(currentPage - 1);
       fetchIdolList(prevCursor);
@@ -105,7 +107,6 @@ function MyPage() {
   /** 다음페이지 누를 때 */
   const handleNextPage = () => {
     if (nextCursor) {
-      setScrollPosition(window.scrollY);
       setCurrentPage(currentPage + 1);
       fetchIdolList(nextCursor);
     }
@@ -205,17 +206,11 @@ function MyPage() {
     });
   };
 
-  useEffect(() => {
-    if (!isLoading && scrollPosition > 0) {
-      window.scrollTo(0, scrollPosition);
-    }
-  }, [isLoading]);
-
   return (
     <div>
       <Header />
       <img
-        style={{ position: "absolute", top: "0", zIndex: "99" }}
+        style={{ position: "absolute", top: "0", zIndex: "-1" }}
         src={backgroundImg}
       />
       <main className={styles.mypage__main}>
@@ -302,8 +297,48 @@ function MyPage() {
               </button>
             </div>
           ) : (
-            <div className={styles.add_idol_wrap} style={{ marginTop: 70 }}>
-              로딩중...
+            /** 여기 skeleton UI 구현 */
+            <div className={styles.add_idol_wrap}>
+              <button className={styles.card_handleButton} disabled={true}>
+                <img
+                  className={styles.card_handleButton_img}
+                  src={leftIcon}
+                  alt="왼쪽 버튼"
+                />
+              </button>
+
+              <ul className={`${styles.add_idol_list} ${styles[mode]}`}>
+                {[
+                  ...Array(mode === "mobile" ? 6 : mode === "tablet" ? 8 : 16),
+                ].map((_, index) => (
+                  <li
+                    key={`skeleton-${index}`}
+                    className={styles.add_idol__container}
+                  >
+                    <div className={styles.idol_card_skeleton}>
+                      <div className={styles.skeleton_image}>
+                        <MyPageLoading width="128px" height="128px" />
+                      </div>
+                      <div className={styles.add_idol_p__container}>
+                        <div className={styles.skeleton_name}>
+                          <MyPageLoading width="80px" height="16px" />
+                        </div>
+                        <div className={styles.skeleton_group}>
+                          <MyPageLoading width="80px" height="14px" />
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <button className={styles.card_handleButton} disabled={true}>
+                <img
+                  className={styles.card_handleButton_img}
+                  src={rightIcon}
+                  alt="오른쪽 버튼"
+                />
+              </button>
             </div>
           )}
         </section>

@@ -19,6 +19,7 @@ body {
 //스크롤바 없앰
 *::-webkit-scrollbar {
   width: 7px;
+  height: 4px;
 }
 
 *::-webkit-scrollbar-thumb {
