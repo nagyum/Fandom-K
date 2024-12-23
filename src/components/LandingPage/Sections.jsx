@@ -10,7 +10,6 @@ function Section({ donate, title, bgimg, screenimg }) {
       <div className={styles["background-image"]}>
         <img src={bgimg} alt={title} />
       </div>
-
       <div className={styles.section}>
         <motion.div
           className={styles.motiondiv}
@@ -20,6 +19,7 @@ function Section({ donate, title, bgimg, screenimg }) {
           transition={{
             ease: "easeInOut",
             duration: 2,
+          //y: {duration: 0.5},
           }}
         >
           <div className={styles.headerdiv}>
@@ -34,6 +34,8 @@ function Section({ donate, title, bgimg, screenimg }) {
             </div>
           </div>
         </motion.div>
+
+
         <motion.div
           className={styles["gradient-bar"]}
           initial={{ opacity: 0, y: 0 }}

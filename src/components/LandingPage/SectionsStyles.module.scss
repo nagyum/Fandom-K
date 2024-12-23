@@ -67,7 +67,7 @@ main {
 .background-image img {
   object-fit: cover;
   width: 1200px;
-  width: 70%;
+  width: 60%;
   height: 1200px;
   height: 70%;
   z-index: 1;
@@ -106,7 +106,7 @@ main {
     #030b1c 100%
   );
   z-index: 1;
-  border: 2px solid #f96d69; /* 테두리 색상과 두께 */
+ // border: 2px solid #f96d69; /* 테두리 색상과 두께 */
 }
 
 @media (max-width: 375px) {
