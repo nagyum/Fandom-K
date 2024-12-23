@@ -127,6 +127,8 @@ top: 0px;
   height: 48px;
 }
 
+
+
 .gradient-bar {
 position: absolute;
 width: 187px;
@@ -134,7 +136,7 @@ height: 3091px;
 left: calc(50% - 187px/2 + 0.5px);
 top: 1393px;
 background: linear-gradient(180deg, #030615 0%, #051D31 42.67%, #051E32 53.12%, #051C30 74.27%, #030B1C 100%);
-
+z-index: 2;
 border: 2px solid #f96d69; /* 테두리 색상과 두께 */
 }
 

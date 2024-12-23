@@ -72,7 +72,7 @@ function LandingPage() {
             </div>
           </div>
         </motion.div>
-
+        
        
 
         <div className={styles.page2}>
@@ -122,14 +122,14 @@ function LandingPage() {
             ease: "easeInOut",
             duration: 2,
           
+          }}  
+          style={{
+            background: "linear-gradient(180deg, #030615 0%, #051D31 42.67%, #051E32 53.12%, #051C30 74.27%, #030B1C 100%)",
           }}
-            style={{
-              zIndex: 0,
-            }}
-          
         > 
-        {/*<div className={styles["gradient-bar"]}></div>*/}
-        </motion.div>
+        <div className={styles["gradient-bar"]}></div>
+      </motion.div>
+
       </div>
     </EdgeGradient>
   );

@@ -18,9 +18,15 @@ main{
 
 }
 
-
+.headerdiv{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .section-header {
-    position: absolute;
+    position: relative;
     width: 311px;
     height: 93px;
     top: 160px;
@@ -33,12 +39,16 @@ main{
 }
 
 .section-header p {
+    position: absolute;
     color: #D2C030;
     font-weight: 500;
     text-align: center;
     font-size: 16px;
     margin-bottom: 8px;
     z-index: 5;
+    display: flex;
+    top: -30px;
+
 }
 
 .section-header h1{
@@ -75,10 +85,10 @@ main{
 .background-image img {
     object-fit: cover; 
     width: 1200px;
-    width: 100%;
+    width: 70%;
     height: 1200px;
-    height: 100%;
-    z-index: 0;
+    height: 70%;
+    z-index: 1;
     position: absolute; /* 컨테이너를 기준으로 위치 조정 */
     top: 50%; /* 수직으로 가운데 */
     left: 50%; /* 수평으로 가운데 */
@@ -95,7 +105,7 @@ main{
   
 
   position: absolute;
-  top: 53%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 4; /* 위로 배치 */
