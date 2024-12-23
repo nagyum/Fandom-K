@@ -5,9 +5,9 @@ import CustomButton from "../CustomButtom/CustomButton";
 import styles from "./ChargeCredit.module.scss";
 import choiceCredit from "../../assets/icons/Radio.png";
 import redRadio from "../../assets/icons/redRadio.png";
+// import { ToastContainer, toast } from "react-toastify";
 
-
-function ChargeCreditModal({notifyCharge}) {
+function ChargeCreditModal({ notifyCharge }) {
   const [selectedCredit, setSelectedCredit] = useState(0); //크레딧의 현재상태표시
   const { addCredit } = useCredit();
 
@@ -98,7 +98,7 @@ function ChargeCreditModal({notifyCharge}) {
           충전하기
         </CustomButton>
       </div>
-    
+      {/* <ToastContainer position="top-right" /> */}
     </div>
   );
 }
