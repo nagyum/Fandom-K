@@ -47,7 +47,6 @@ function VoteModal({ data, gender, onVoteUpdate, onClose }) {
             )
           );
           subtractCredit(1000);
-
           toast.success(
             `${selectedIdol.group} ${selectedIdol.name} 투표 완료!`
           ); // 선택된 아이돌 이름 출력
@@ -84,7 +83,7 @@ function VoteModal({ data, gender, onVoteUpdate, onClose }) {
 
   return (
     <>
-      <div>
+      <div style={{ position: "relative" }}>
         <span className={styles.voteTitle}>{modalTitle}</span>
         {isCreditModalOpen ? (
           // CreditModal이 열려 있을 때 기존 모달 숨기기
