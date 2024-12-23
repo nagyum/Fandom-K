@@ -2,10 +2,27 @@ import React from "react";
 import styles from "./SectionsStyles.module.scss";
 import "../../styles/color.scss";
 import "../../styles/font.scss";
+import { motion } from "framer-motion";
 
 function Section({ donate, title, bgimg, screenimg }) {
   return (
     <main>
+      
+      <motion.div
+          className={styles.motiondiv}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{
+            ease: "easeInOut",
+            duration: 2,
+          
+          }}
+            style={{
+              zIndex: 2,
+            }}
+          
+        > 
       <div className={styles.section}>
         <div className={styles["section-header"]}>
           <p>{donate}</p>
@@ -20,6 +37,7 @@ function Section({ donate, title, bgimg, screenimg }) {
           </div>
         </div>
       </div>
+      </motion.div>
     </main>
   );
 }
