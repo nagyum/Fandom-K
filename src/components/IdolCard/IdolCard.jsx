@@ -31,13 +31,19 @@ function IdolCard({
           />
         </div>
       ) : (
-        <img
-          src={imageUrl}
-          className={`${styles.add_idol_image} ${
+        <div
+          className={`${styles.add_idol_image_box} ${
             isbig ? styles.big : styles.small
           }`}
-          onClick={onClick}
-        />
+        >
+          <img
+            src={imageUrl}
+            className={`${styles.add_idol_image} ${
+              isbig ? styles.big : styles.small
+            }`}
+            onClick={onClick}
+          />
+        </div>
       )}
       {/** onDelete prop 받을때만 X 아이콘 뜨게 */}
       {onDelete && (
