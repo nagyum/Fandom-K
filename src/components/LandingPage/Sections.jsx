@@ -14,7 +14,7 @@ function Section({ donate, title, bgimg, screenimg }) {
         
           <motion.div
             className={styles.motiondiv}
-            initial={{ opacity: 0.7, y: 50 }}
+            initial={{ opacity: 0.5, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
             transition={{
@@ -34,7 +34,7 @@ function Section({ donate, title, bgimg, screenimg }) {
          </motion.div>
           <motion.div
             className={styles.motiondiv}
-            initial={{ opacity: 0.7, y: 50 }}
+            initial={{ opacity: 0.5, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
             transition={{
