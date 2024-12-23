@@ -30,6 +30,12 @@ function ListPage() {
   const notifySponsor = () => {
     toast.success("후원되었습니다.");
   };
+  const notifyCharge = () =>{
+    toast.success("충전이 완료되었습니다.")
+  };
+  const notifyVote = () =>{
+    toast.success("투표가 완료되었습니다.")
+  }
 
   // 모달이 열릴 때 배경 스크롤 비활성화
   useEffect(() => {
@@ -104,10 +110,12 @@ function ListPage() {
             data={voteData}
             setPageSize={setPageSize}
             gender={gender}
+            handleDeleteModal={handleDeleteModal}
+            notifyVote={notifyVote}
           />
         );
       case 4:
-        return <ChargeCreditModal onCharge={handleCharge} />;
+        return <ChargeCreditModal onCharge={handleCharge} handleDeleteModal={handleDeleteModal} notifyCharge={notifyCharge}/>;
       default:
         return null;
     }
@@ -121,6 +129,7 @@ function ListPage() {
       <MyCredit
         handleMyCreditModal={handleMyCreditModal}
         myCreditData={myCreditData}
+        
       />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal &&
