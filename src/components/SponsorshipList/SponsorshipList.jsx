@@ -117,6 +117,7 @@ function SponsorshipList({ handleSponsorModal }) {
 
   //터치 스크롤 가능하게 하기
   const listRef = useRef();
+  console.log(listRef.current);
   useTouchScroll(listRef, offLeftBtn, onLeftBtn, offRightBtn, onRightBtn);
 
   const getTranslateX = useCallback(() => {
