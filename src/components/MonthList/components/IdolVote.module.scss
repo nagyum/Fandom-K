@@ -73,6 +73,8 @@
     width: 60px;
     height: 60px;
     margin-bottom: 8px;
+    border: 2px solid $brand-orange;
+    border-radius: 50%;
 
     //이미지 컨테이너 위에 원형 오버레이 생성하기.
     &::before {
@@ -92,6 +94,16 @@
     &.clicked::before {
       opacity: 0.5; // 클릭 시 배경 보이기
     }
+  }
+  &_image_box {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 8px;
+    border: 2px solid $brand-orange;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &_image {
