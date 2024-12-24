@@ -33,7 +33,7 @@ function MonthsList({
 
   const handleTabClick = (selectedGender) => {
     setGender(selectedGender);
-    setPageSize(pageSize);
+    setPageSize(mode === "desktop" || (mode === "mobile" && "tablet") ? 10 : 5);
   };
 
   const handleMore = () => {
