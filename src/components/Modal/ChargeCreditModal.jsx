@@ -7,7 +7,7 @@ import choiceCredit from "../../assets/icons/Radio.png";
 import redRadio from "../../assets/icons/redRadio.png";
 // import { ToastContainer, toast } from "react-toastify";
 
-function ChargeCreditModal({ notifyCharge }) {
+function ChargeCreditModal({ notifyCharge, onClose }) {
   const [selectedCredit, setSelectedCredit] = useState(0); //크레딧의 현재상태표시
   const { addCredit } = useCredit();
 
@@ -15,12 +15,18 @@ function ChargeCreditModal({ notifyCharge }) {
   const handleCreditSelect = (amount) => {
     setSelectedCredit(amount);
   };
-
-  const handleCharge = () => {
+// 현재 ChargeCreditModal에서 상태를 업데이트하면서 동시에 
+// 부모 컴포넌트(MyCredit)의 상태를 간접적으로 업데이트하는 부분에서 충돌이 생김
+// 그래서 렌더링 완료 후 실행하도록, 비동기로 처리하게 해줌.
+  const handleCharge = async () => {
     if (selectedCredit > 0) {
-      addCredit(selectedCredit); //선택한 금액만큼 크레딧 충전
-      setSelectedCredit(0);
-      notifyCharge();
+      await new Promise((resolve) => {
+        addCredit(selectedCredit); // 크레딧 추가
+        resolve(); // 상태 업데이트를 비동기로 처리
+      });
+      notifyCharge(); // 알림 표시
+      setSelectedCredit(0); // 선택된 크레딧 초기화
+      onClose(); // 모달 닫기
     }
   };
 

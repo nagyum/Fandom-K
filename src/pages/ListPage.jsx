@@ -30,11 +30,10 @@ function ListPage() {
   const notifySponsor = () => {
     toast.success("후원되었습니다.");
   };
-
-  const notifyCharge = () => {
-    toast.success("충전이 완료되었습니다.");
+  const notifyCharge = () =>{
+    toast.success("충전이 완료되었습니다.")
   };
-
+ 
   const notifyWarn = () => {
     toast.warn("아이돌을 먼저 선택해주세요");
   };
@@ -130,6 +129,7 @@ function ListPage() {
           <ChargeCreditModal
             onCharge={handleCharge}
             notifyCharge={notifyCharge}
+            onClose={handleDeleteModal}
           />
         );
       default:
@@ -140,11 +140,12 @@ function ListPage() {
   return (
     <div>
       {/* 배경 설정 */}
-      <img style={{ position: "absolute", zIndex: "99" }} src={backgroundImg} />
+      <img style={{ position: "absolute", zIndex: "99" }} src={backgroundImg} alt="배경그라데이션" />
       <Header />
       <MyCredit
         handleMyCreditModal={handleMyCreditModal}
         myCreditData={myCreditData}
+        
       />
       <SponsorshipList handleSponsorModal={handleSponsorModal} />
       {isModal &&
