@@ -2,7 +2,7 @@ import Header from "../../components/Header/Header";
 import logoImage from "../../assets/images/logoImage.svg";
 import useDevice from "../../hooks/useDevice";
 import styles from "./MyPage.module.scss";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getIdolData } from "../../api";
 import leftIcon from "../../assets/icons/lefticon.png";
 import rightIcon from "../../assets/icons/righticon.png";
@@ -22,7 +22,7 @@ function MyPage() {
   const [cursors, setCursors] = useState([]); // 페이지 커서 히스토리(이전 페이지 저장)
   const [currentPage, setCurrentPage] = useState(0); //현재 페이지
   const [nextCursor, setNextCursor] = useState(null); //다음 페이지 커서
-  const [isClicked, setIsClicked] = useState(false);
+  
   const [selectedIdols, setSelectedIdols] = useState([]); // 선택된 아이돌
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -115,7 +115,6 @@ function MyPage() {
   /** x버튼 누를 때 */
 
   const handleDelete = (id) => {
-    const deletedIdol = favoriteIdolList.find((idol) => idol.id === id);
     setFavoriteIdolList((prev) => prev.filter((idol) => idol.id !== id));
 
     const storedData = localStorage.getItem("favoriteIdol");
@@ -353,7 +352,7 @@ function MyPage() {
             >
               <div className={styles.add_idol_button_content}>
                 {" "}
-                <img src={plusIcon} className={styles.add_idol_button_icon} />
+                <img src={plusIcon} className={styles.add_idol_button_icon} alt="플러스아이콘"/>
                 <span className={styles.add_idol_button_text}>추가하기</span>
               </div>
             </CustomButton>

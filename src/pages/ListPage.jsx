@@ -129,6 +129,7 @@ function ListPage() {
           <ChargeCreditModal
             onCharge={handleCharge}
             notifyCharge={notifyCharge}
+            onClose={handleDeleteModal}
           />
         );
       default:
