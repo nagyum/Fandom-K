@@ -177,7 +177,6 @@ function ListPage() {
         setGender={setGender}
         isModal={isModal}
       />
-      <h1 onClick={notifySponsor}>왜이래</h1>
       <Footer />
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
