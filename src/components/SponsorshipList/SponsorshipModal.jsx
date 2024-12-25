@@ -16,6 +16,8 @@ function SponsorshipModal({ data, handleDeleteModal, notifySponsor }) {
     setInput(e.target.value);
     if (Number(e.target.value) > Number(credit)) {
       setError("갖고 있는 크레딧보다 더 많이 후원할 수 없어요");
+    } else if (Number(e.target.value) <= 0) {
+      setError("올바른 값을 입력해주세요");
     } else {
       setError("");
     }
@@ -26,6 +28,9 @@ function SponsorshipModal({ data, handleDeleteModal, notifySponsor }) {
     setError("");
     if (input === "") {
       setError(`크레딧을 입력해주세요.`);
+      return;
+    } else if (Number(input) <= 0) {
+      setError("올바른 값을 입력해주세요");
       return;
     } else if (Number(input) > Number(credit)) {
       setError("갖고 있는 크레딧보다 더 많이 후원할 수 없어요");
