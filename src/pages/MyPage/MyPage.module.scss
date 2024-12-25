@@ -184,3 +184,28 @@
     opacity: 0.6;
   }
 }
+
+.add_idol_list {
+  &.mobile {
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    li {
+      flex-shrink: 0; // 아이템이 찌그러지지 않도록
+    }
+  }
+}
+
+// 버튼 숨기기
+@media (max-width: 768px) {
+  .card_handleButton {
+    display: none !important;
+  }
+}
