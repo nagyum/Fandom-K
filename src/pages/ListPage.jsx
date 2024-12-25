@@ -22,15 +22,18 @@ function ListPage() {
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
   const [myCreditData, setMyCreditData] = useState();
-  const [pageSize, setPageSize] = useState(10);
   const [gender, setGender] = useState("female");
   const { mode } = useDevice(); // 모바일/데스크톱 감지
   useScrollTop(); // 스크롤 초기화
 
+  let pageSize = 10;
+  if (mode === "tablet" || mode === "mobile") {
+    pageSize = 5;
+  }
+
   const notifySponsor = () => {
     toast.success("후원되었습니다.");
   };
-
   const notifyCharge = () => {
     toast.success("충전이 완료되었습니다.");
   };
@@ -118,7 +121,6 @@ function ListPage() {
         return (
           <VoteModal
             data={voteData}
-            setPageSize={setPageSize}
             gender={gender}
             notifyWarn={notifyWarn}
             notifyError={notifyError}
@@ -130,6 +132,7 @@ function ListPage() {
           <ChargeCreditModal
             onCharge={handleCharge}
             notifyCharge={notifyCharge}
+            onClose={handleDeleteModal}
           />
         );
       default:
@@ -140,7 +143,11 @@ function ListPage() {
   return (
     <div>
       {/* 배경 설정 */}
-      <img style={{ position: "absolute", zIndex: "99" }} src={backgroundImg} />
+      <img
+        style={{ position: "absolute", zIndex: "99" }}
+        src={backgroundImg}
+        alt="배경그라데이션"
+      />
       <Header />
       <MyCredit
         handleMyCreditModal={handleMyCreditModal}
@@ -172,7 +179,6 @@ function ListPage() {
       <MonthsList
         handleVoteModal={handleVoteModal}
         pageSize={pageSize}
-        setPageSize={setPageSize}
         gender={gender}
         setGender={setGender}
         isModal={isModal}

@@ -210,7 +210,7 @@ function MyPage() {
     <div>
       <Header />
       <img
-        style={{ position: "absolute", top: "0", zIndex: "-1" }}
+        style={{ position: "absolute", top: "0", zIndex: "99" }}
         src={backgroundImg}
       />
       <main className={styles.mypage__main}>
