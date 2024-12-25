@@ -1,29 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 const useDevice = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth); // 초기값 설정
+  const [mode, setMode] = useState("desktop"); // mode 상태 추가
 
-  let mode = "desktop";
-
-  if (windowWidth < 1200 && windowWidth >= 768) mode = "tablet";
-  else if (windowWidth < 768) mode = "mobile";
-
+  // 화면 크기 변경에 따라 mode 업데이트
   useEffect(() => {
-    const handleResize = (event) => {
-      setWindowWidth(event.target.innerWidth);
+    const updateMode = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setMode("mobile");
+      } else if (width < 1200) {
+        setMode("tablet");
+      } else {
+        setMode("desktop");
+      }
     };
 
-    window.addEventListener("resize", handleResize);
+    // 윈도우 리사이즈 이벤트 리스너
+    window.addEventListener("resize", updateMode);
+    updateMode(); // 초기값 설정
 
-    // unmount 시 이벤트 제거
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", updateMode);
     };
-  }, []);
+  }, [windowWidth]); // windowWidth 값이 바뀔 때마다 실행
 
-  return {
-    mode,
-  };
+  return { mode };
 };
 
 export default useDevice;

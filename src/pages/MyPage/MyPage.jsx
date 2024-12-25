@@ -2,7 +2,7 @@ import Header from "../../components/Header/Header";
 import logoImage from "../../assets/images/logoImage.svg";
 import useDevice from "../../hooks/useDevice";
 import styles from "./MyPage.module.scss";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { getIdolData } from "../../api";
 import leftIcon from "../../assets/icons/lefticon.png";
 import rightIcon from "../../assets/icons/righticon.png";
@@ -22,10 +22,53 @@ function MyPage() {
   const [cursors, setCursors] = useState([]); // 페이지 커서 히스토리(이전 페이지 저장)
   const [currentPage, setCurrentPage] = useState(0); //현재 페이지
   const [nextCursor, setNextCursor] = useState(null); //다음 페이지 커서
-  
+
   const [selectedIdols, setSelectedIdols] = useState([]); // 선택된 아이돌
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [displayIdolList, setDisplayIdolList] = useState([]);
+
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  const isTouchDevice = () =>
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+  const handleStart = (e) => {
+    if (isTouchDevice()) {
+      touchStartX.current = e.touches[0].clientX;
+    } else {
+      touchStartX.current = e.clientX; // 마우스 이벤트의 경우
+    }
+    touchEndX.current = null;
+  };
+
+  const handleMove = (e) => {
+    if (isTouchDevice()) {
+      touchEndX.current = e.touches[0].clientX;
+    } else {
+      touchEndX.current = e.clientX; // 마우스 이벤트의 경우
+    }
+  };
+
+  const handleEnd = () => {
+    if (!touchStartX.current || touchEndX.current === null) return;
+
+    const difference = touchStartX.current - touchEndX.current;
+    const threshold = window.innerWidth * 0.1; // 화면 너비의 20%로 설정
+
+    console.log("Difference:", difference, "Threshold:", threshold);
+
+    if (difference > threshold && nextCursor) {
+      handleNextPage(); // 다음 페이지
+    } else if (difference < -threshold && currentPage > 0) {
+      handlePrevPage(); // 이전 페이지
+    }
+
+    // 초기화
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
 
   let pageSize = 16;
   if (mode === "tablet") {
@@ -33,6 +76,26 @@ function MyPage() {
   } else if (mode === "mobile") {
     pageSize = 6;
   }
+
+  const getIdolList = useCallback(async () => {
+    let myPageSize = pageSize;
+    let cursor = null;
+
+    if (idolList.length > 0) {
+      myPageSize = myPageSize - 1;
+      cursor = idolList[0].id;
+    }
+    const idolData = await getIdolData({
+      pageSize: myPageSize,
+      cursor: cursor,
+    });
+
+    if (idolList.length > 0) {
+      setDisplayIdolList([idolList[0], ...idolData.list]);
+    } else {
+      setDisplayIdolList([...idolData.list]);
+    }
+  }, [idolList, pageSize]);
 
   /** cursor 없이 호출하면 자동으로 null, cursor와 함께 호출하면 cursor 값 사용 */
   const fetchIdolList = async (cursor = null) => {
@@ -81,6 +144,10 @@ function MyPage() {
     fetchIdolList(cursors[currentPage] || null);
   }, [mode, favoriteIdolList]);
 
+  useEffect(() => {
+    getIdolList();
+  }, [getIdolList, favoriteIdolList]);
+
   // 렌더링시 favoriteIdolList에 localStorage값 넣어주기.
   useEffect(() => {
     const storedData = localStorage.getItem("favoriteIdol");
@@ -95,6 +162,32 @@ function MyPage() {
       setSelectedIdols(storedSelectedIdols.map((idol) => idol.id));
     }
   }, []);
+
+  useEffect(() => {
+    if (mode === "mobile") {
+      if (isTouchDevice()) {
+        window.addEventListener("touchstart", handleStart);
+        window.addEventListener("touchmove", handleMove);
+        window.addEventListener("touchend", handleEnd);
+      }
+    } else {
+      window.addEventListener("mousedown", handleStart);
+      window.addEventListener("mousemove", (e) => {
+        if (e.buttons === 1) handleMove(e);
+      });
+      window.addEventListener("mouseup", handleEnd);
+    }
+
+    return () => {
+      // 모든 이벤트 리스너 제거
+      window.removeEventListener("touchstart", handleStart);
+      window.removeEventListener("touchmove", handleMove);
+      window.removeEventListener("touchend", handleEnd);
+      window.removeEventListener("mousedown", handleStart);
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mouseup", handleEnd);
+    };
+  }, [mode]); // mode를 종속성 배열에 추가
 
   /** 이전 페이지 누를 때 */
   const handlePrevPage = () => {
@@ -115,13 +208,21 @@ function MyPage() {
   /** x버튼 누를 때 */
 
   const handleDelete = (id) => {
+    const deletedIdol = favoriteIdolList.find((idol) => idol.id === id);
+
     setFavoriteIdolList((prev) => prev.filter((idol) => idol.id !== id));
 
+    setDisplayIdolList((prev) => [
+      deletedIdol,
+      ...prev.filter((idol) => idol.id !== deletedIdol.id),
+    ]);
+
+    // localStorage 업데이트
     const storedData = localStorage.getItem("favoriteIdol");
     if (storedData) {
       const storedIdols = JSON.parse(storedData);
-      const updateIdols = storedIdols.filter((idol) => idol.id !== id);
-      localStorage.setItem("favoriteIdol", JSON.stringify(updateIdols));
+      const updatedStoredIdols = storedIdols.filter((idol) => idol.id !== id);
+      localStorage.setItem("favoriteIdol", JSON.stringify(updatedStoredIdols));
     }
 
     toast.success("삭제 완료!", {
@@ -258,20 +359,32 @@ function MyPage() {
             <Refresh handleLoad={fetchIdolList} height={402} />
           ) : !isLoading ? (
             <div className={styles.add_idol_wrap}>
-              <button
-                className={styles.card_handleButton}
-                onClick={handlePrevPage}
-                disabled={currentPage === 0}
-              >
-                <img
-                  className={styles.card_handleButton_img}
-                  src={leftIcon}
-                  alt="왼쪽 버튼"
-                />
-              </button>
+              {mode !== "mobile" && (
+                <button
+                  className={styles.card_handleButton}
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 0}
+                >
+                  <img
+                    className={styles.card_handleButton_img}
+                    src={leftIcon}
+                    alt="왼쪽 버튼"
+                  />
+                </button>
+              )}
 
-              <ul className={`${styles.add_idol_list} ${styles[mode]}`}>
-                {idolList.map((idol) => (
+              <ul
+                className={`${styles.add_idol_list} ${styles[mode]}`}
+                onTouchStart={handleStart}
+                onTouchMove={handleMove}
+                onTouchEnd={handleEnd}
+                onMouseDown={handleStart} // 마우스 이벤트 추가
+                onMouseMove={(e) => {
+                  if (e.buttons === 1) handleMove(e); // 마우스를 누르고 이동할 때만 처리
+                }}
+                onMouseUp={handleEnd}
+              >
+                {displayIdolList.map((idol) => (
                   <li key={idol.id}>
                     <IdolCard
                       imageUrl={idol.profilePicture}
@@ -284,17 +397,19 @@ function MyPage() {
                   </li>
                 ))}
               </ul>
-              <button
-                className={styles.card_handleButton}
-                onClick={handleNextPage}
-                disabled={!nextCursor}
-              >
-                <img
-                  className={styles.card_handleButton_img}
-                  src={rightIcon}
-                  alt="오른쪽 버튼"
-                />
-              </button>
+              {mode !== "mobile" && (
+                <button
+                  className={styles.card_handleButton}
+                  onClick={handleNextPage}
+                  disabled={!nextCursor}
+                >
+                  <img
+                    className={styles.card_handleButton_img}
+                    src={rightIcon}
+                    alt="오른쪽 버튼"
+                  />
+                </button>
+              )}
             </div>
           ) : (
             /** 여기 skeleton UI 구현 */
@@ -343,7 +458,7 @@ function MyPage() {
           )}
         </section>
         <section className={styles.add_idol_button_section}>
-          {!isLoading && (
+          {!isLoading && !error && (
             <CustomButton
               width={255}
               height={48}
@@ -352,7 +467,11 @@ function MyPage() {
             >
               <div className={styles.add_idol_button_content}>
                 {" "}
-                <img src={plusIcon} className={styles.add_idol_button_icon} alt="플러스아이콘"/>
+                <img
+                  src={plusIcon}
+                  className={styles.add_idol_button_icon}
+                  alt="플러스아이콘"
+                />
                 <span className={styles.add_idol_button_text}>추가하기</span>
               </div>
             </CustomButton>
