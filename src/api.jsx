@@ -19,7 +19,9 @@ export async function getChartData({ gender, pageSize = 10, nextCursor }) {
   const url = new URL(`12-9/charts/{gender}`, BASE_URL);
   url.searchParams.append("gender", gender);
   url.searchParams.append("pageSize", pageSize);
-  url.searchParams.append("nextCursor", nextCursor);
+  if (nextCursor) {
+    url.searchParams.append("cursor", nextCursor);
+  }
   const response = await fetch(url.toString());
   if (!response.ok) {
     throw new Error(`Failed to fetch data: ${response.statusText}`);
