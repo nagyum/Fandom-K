@@ -43,12 +43,19 @@ const useTouchScroll = (
   // 스크롤이 종료된 위치도 고려하여 계산해야 하기 때문에 컨테이너 요소의 translateX 위치를 가져와야 합니다.
   // window 객체에 내장된 API인 getComputedStyle 메서드를 사용하면 요소가 가진 CSS의 속성 값을 얻을 수 있는데,
   // transform의 경우 x, y, z의 값을 모두 반환하므로 정규표현식을 통해 필요한 x의 값만 얻도록 했습니다.
-  const getTranslateX = useCallback(() => {
-    return parseInt(
-      getComputedStyle(containerRef.current).transform.split(/[^\-0-9]+/g)[5]
-    );
-  }, [containerRef]);
+  // const getTranslateX = useCallback(() => {
+  //   return parseInt(
+  //     getComputedStyle(containerRef.current).transform.split(/[^\-0-9]+/g)[5]
+  //   );
+  // }, [containerRef]);
 
+  const getTranslateX = useCallback(() => {
+    if (!containerRef.current) return 0;
+
+    const style = getComputedStyle(containerRef.current);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    return matrix.m41 || 0; // transform matrix의 x 값
+  }, [containerRef]);
   // 스크롤 됨에 따라 요소의 위치를 조정해야 하기 때문에, 간편하게 함수로 만들어 재사용했습니다.
   const setTranslateX = useCallback(
     (x) => {
