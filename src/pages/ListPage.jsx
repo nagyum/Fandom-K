@@ -34,6 +34,7 @@ function ListPage() {
   const notifySponsor = () => {
     toast.success("후원되었습니다.");
   };
+
   const notifyCharge = () => {
     toast.success("충전이 완료되었습니다.");
   };
@@ -143,11 +144,7 @@ function ListPage() {
   return (
     <div>
       {/* 배경 설정 */}
-      <img
-        style={{ position: "absolute", zIndex: "99" }}
-        src={backgroundImg}
-        alt="배경그라데이션"
-      />
+      <img style={{ position: "absolute", zIndex: "99" }} src={backgroundImg} />
       <Header />
       <MyCredit
         handleMyCreditModal={handleMyCreditModal}

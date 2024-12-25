@@ -1,7 +1,7 @@
 import styles from "./MyCredit.module.scss";
 import useCredit from "../../hooks/useCredit";
 import creditIcon from "../../assets/icons/credit.png";
-import { useEffect } from "react";
+
 
 function MyCredit({ handleMyCreditModal }) {
   //크레딧 모달을 띄우기 위한 함수
