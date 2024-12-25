@@ -73,6 +73,7 @@
     width: 60px;
     height: 60px;
     margin-bottom: 8px;
+    border-radius: 50%;
 
     //이미지 컨테이너 위에 원형 오버레이 생성하기.
     &::before {

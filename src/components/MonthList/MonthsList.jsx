@@ -5,61 +5,40 @@ import chartIMG from "../../assets/icons/Chart.svg";
 import styles from "./MonthsList.module.scss";
 import IdolChart from "./components/IdolChart";
 import ListLoading from "./components/ListLoading";
-import useDevice from "../../hooks/useDevice";
 import Refresh from "../Refresh/Refresh";
 
-function MonthsList({
-  handleVoteModal,
-  pageSize,
-  setPageSize,
-  gender,
-  setGender,
-  isModal,
-}) {
+function MonthsList({ handleVoteModal, pageSize, gender, setGender, isModal }) {
   const [idolList, setIdolList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [nextCursor, setNextCursor] = useState(null); //더보기 커서
+  const [nextCursor, setNextCursor] = useState(null); // 다음 커서
 
-  const { mode } = useDevice();
-
-  useEffect(() => {
-    if (mode === "tablet" || mode === "mobile") {
-      setPageSize(5);
-    } else if (mode === "desktop") {
-      setPageSize(10);
-    }
-  }, [mode, setPageSize]);
-
-  const handleTabClick = (selectedGender) => {
-    setGender(selectedGender);
-    setPageSize(pageSize);
-  };
-
-  const handleMore = () => {
-    setPageSize((prevPageSize) => prevPageSize * 2);
-  };
-
-  const onclickVoteBtn = () => {
-    handleVoteModal(sortedIdols);
-  };
-
-  const fetchData = async () => {
+  const fetchData = async (cursor = null) => {
     setLoading(true);
     try {
-      const data = await getChartData({ gender, pageSize });
-      setIdolList(data?.idols || []);
+      const data = await getChartData({ gender, pageSize, nextCursor });
+      if (!data) return;
+
+      setIdolList((prev) => [...prev, ...(data?.idols || [])]);
+      setNextCursor(data?.nextCursor || null); // 다음 커서 업데이트
       setError(null);
     } catch (err) {
-      console.error("데이터를 가져오는 데 실패했습니다:", err);
-      setError("데이터를 가져오는 데 실패했습니다.");
+      setError("데이터를 불러오는 중 오류가 발생했습니다.");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleMore = () => {
+    if (nextCursor) {
+      fetchData(nextCursor); // 현재 커서를 사용해 데이터 요청
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    setIdolList([]); // 기존 데이터 초기화
+    setNextCursor(null); // 커서 초기화
+    fetchData(); // 초기 데이터 로드
   }, [gender, pageSize, isModal]);
 
   const sortedIdols = [...idolList].sort((a, b) => b.totalVotes - a.totalVotes);
@@ -72,7 +51,7 @@ function MonthsList({
           className={styles.chartBtn}
           width={128}
           height={32}
-          onClick={onclickVoteBtn}
+          onClick={() => handleVoteModal(sortedIdols)}
         >
           <img src={chartIMG} />
           <span>차트 투표하기</span>
@@ -83,7 +62,7 @@ function MonthsList({
           className={`${styles.tab} ${
             gender === "female" ? styles.activeTab : ""
           }`}
-          onClick={() => handleTabClick("female")}
+          onClick={() => setGender("female")}
         >
           이달의 여자 아이돌
         </button>
@@ -91,7 +70,7 @@ function MonthsList({
           className={`${styles.tab} ${
             gender === "male" ? styles.activeTab : ""
           }`}
-          onClick={() => handleTabClick("male")}
+          onClick={() => setGender("male")}
         >
           이달의 남자 아이돌
         </button>
@@ -109,14 +88,7 @@ function MonthsList({
           <ul className={styles.LankingChart}>
             {Array.from({ length: pageSize }).map((_, index) => (
               <li key={index}>
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "16px" }}
-                >
-                  <ListLoading width="50px" height="50px" />
-                  <div>
-                    <ListLoading width="100px" height="16px" />
-                  </div>
-                </div>
+                <ListLoading width="50px" height="50px" />
               </li>
             ))}
           </ul>
@@ -124,7 +96,7 @@ function MonthsList({
           <ul className={styles.LankingChart}>
             {sortedIdols.map((idol, index) => (
               <IdolChart
-                key={`${idol.id}-${index}`}
+                key={idol.id}
                 rank={index + 1}
                 imgUrl={idol.profilePicture}
                 group={idol.group}
@@ -135,7 +107,7 @@ function MonthsList({
           </ul>
         )}
 
-        {sortedIdols.length >= pageSize && !loading && !error && (
+        {nextCursor && !loading && !error && (
           <div className={styles.moreBtn}>
             <CustomButton isMoreButton onClick={handleMore}>
               더보기

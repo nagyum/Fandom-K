@@ -22,10 +22,14 @@ function ListPage() {
   const [sponsorData, setSponsorData] = useState();
   const [voteData, setVoteData] = useState();
   const [myCreditData, setMyCreditData] = useState();
-  const [pageSize, setPageSize] = useState(10);
   const [gender, setGender] = useState("female");
   const { mode } = useDevice(); // 모바일/데스크톱 감지
   useScrollTop(); // 스크롤 초기화
+
+  let pageSize = 10;
+  if (mode === "tablet" || mode === "mobile") {
+    pageSize = 5;
+  }
 
   const notifySponsor = () => {
     toast.success("후원되었습니다.");
@@ -118,7 +122,6 @@ function ListPage() {
         return (
           <VoteModal
             data={voteData}
-            setPageSize={setPageSize}
             gender={gender}
             notifyWarn={notifyWarn}
             notifyError={notifyError}
@@ -130,6 +133,7 @@ function ListPage() {
           <ChargeCreditModal
             onCharge={handleCharge}
             notifyCharge={notifyCharge}
+            onClose={handleDeleteModal}
           />
         );
       default:
@@ -172,12 +176,10 @@ function ListPage() {
       <MonthsList
         handleVoteModal={handleVoteModal}
         pageSize={pageSize}
-        setPageSize={setPageSize}
         gender={gender}
         setGender={setGender}
         isModal={isModal}
       />
-      <h1 onClick={notifySponsor}>왜이래</h1>
       <Footer />
       <ToastContainer position="top-right" autoClose={3000} />
     </div>

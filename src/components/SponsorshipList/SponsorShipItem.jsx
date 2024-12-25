@@ -22,7 +22,12 @@ function SponsorshipItem({ item, handleSponsorModal }) {
   }, [mode]);
 
   //진행도 바의 width길이 조절 (현재 카드 최대길이 282px, 158px)
-  const progress = (item.receivedDonations / item.targetDonation) * cardWidth;
+  let progress = 0;
+  if (cardWidth < (item.receivedDonations / item.targetDonation) * cardWidth) {
+    progress = cardWidth;
+  } else {
+    progress = (item.receivedDonations / item.targetDonation) * cardWidth;
+  }
 
   //버튼 후원가능 상태 표시
   const disable = !item.status;
