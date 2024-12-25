@@ -2,15 +2,21 @@ import useDevice from "../../hooks/useDevice";
 import logoImage from "../../assets/images/logoImage.svg";
 import userImage from "../../assets/images/userImage.png";
 import styles from "./Header.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Header() {
   const { mode } = useDevice();
   const navigate = useNavigate();
+  const location = useLocation();
 
   /* 로고 클릭시 실행되는 함수*/
   const handleLogoClick = () => {
-    navigate("/list");
+    // 현재 페이지가 이미 /list라면 새로고침
+    if (location.pathname === "/list") {
+      window.location.reload();
+    } else {
+      navigate("/list");
+    }
   };
 
   /** 프로필 클릭시 실행되는 함수 */
