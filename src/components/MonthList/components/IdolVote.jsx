@@ -14,7 +14,6 @@ export default function IdolVote({
   onSelect,
   isClicked, // 선택 여부
 }) {
-  const BASE_URL = "https://fandom-k-api.vercel.app";
   const handleComponentClick = () => {
     // 라디오 버튼 선택 상태 업데이트
     const radioButton = document.getElementById(`ckb-${rank}`);
@@ -48,7 +47,7 @@ export default function IdolVote({
                       ? styles.add_idol_image_clicked
                       : styles.add_idol_image
                   }
-                  src={`${BASE_URL}${imgUrl}`}
+                  src={imgUrl}
                   alt={`${group}-이미지`}
                 />
               </div>
