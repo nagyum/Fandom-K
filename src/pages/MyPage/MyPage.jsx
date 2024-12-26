@@ -57,8 +57,6 @@ function MyPage() {
     const difference = touchStartX.current - touchEndX.current;
     const threshold = window.innerWidth * 0.1; // 화면 너비의 20%로 설정
 
-    console.log("Difference:", difference, "Threshold:", threshold);
-
     if (difference > threshold && nextCursor) {
       handleNextPage(); // 다음 페이지
     } else if (difference < -threshold && currentPage > 0) {
@@ -310,7 +308,7 @@ function MyPage() {
     <div>
       <Header />
       <img
-        style={{ position: "absolute", top: "0", zIndex: "3" }}
+        style={{ position: "absolute", top: "0", zIndex: "9" }}
         src={backgroundImg}
         alt="배경그라데이션"
       />

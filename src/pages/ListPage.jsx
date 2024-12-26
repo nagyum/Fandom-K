@@ -23,13 +23,10 @@ function ListPage() {
   const [voteData, setVoteData] = useState();
   const [myCreditData, setMyCreditData] = useState();
   const [gender, setGender] = useState("female");
+  const [pageSize, setPageSize] = useState(10);
+
   const { mode } = useDevice(); // 모바일/데스크톱 감지
   useScrollTop(); // 스크롤 초기화
-
-  let pageSize = 10;
-  if (mode === "tablet" || mode === "mobile") {
-    pageSize = 5;
-  }
 
   const notifySponsor = () => {
     toast.success("후원되었습니다.");
@@ -179,6 +176,7 @@ function ListPage() {
         gender={gender}
         setGender={setGender}
         isModal={isModal}
+        setPageSize={setPageSize}
       />
       <Footer />
       <ToastContainer position="top-right" autoClose={3000} />
