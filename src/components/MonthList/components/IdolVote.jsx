@@ -40,17 +40,16 @@ export default function IdolVote({
                 style={{ opacity: isClicked ? 1 : 0 }} // 선택 상태에 따라 아이콘 표시
               />
               {/* 프로필 이미지 */}
-              <div className={`${styles.add_idol_image_box}`}>
-                <img
-                  className={
-                    isClicked
-                      ? styles.add_idol_image_clicked
-                      : styles.add_idol_image
-                  }
-                  src={imgUrl}
-                  alt={`${group}-이미지`}
-                />
-              </div>
+
+              <img
+                className={
+                  isClicked
+                    ? styles.add_idol_image_clicked
+                    : styles.add_idol_image
+                }
+                src={imgUrl}
+                alt={`${group}-이미지`}
+              />
             </div>
           </div>
           <div className={styles.chartInfo}>
